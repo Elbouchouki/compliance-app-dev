@@ -34,8 +34,10 @@ const LangSwitch = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-3xl">
-          <Image src={currentLang?.icon} alt={currentLang?.text} width={24} height={24} />
+        <Button variant="outline" size="icon" className="text-muted-foreground bg-navbar-gray" >
+          <p className="text-xs">
+            {currentLang.key.toUpperCase()}
+          </p>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col gap-2" align={langStore?.rtl === true ? "start" : "end"}>

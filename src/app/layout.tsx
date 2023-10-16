@@ -33,7 +33,7 @@ export default async function RootLayout({
           <TRPCProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <TooltipProvider>
-                <main className='w-screen h-screen dark:bg-secondary/40'>{children}</main>
+                <main className='w-screen h-screen'>{children}</main>
               </TooltipProvider>
             </ThemeProvider>
           </TRPCProvider>

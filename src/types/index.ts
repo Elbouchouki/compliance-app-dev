@@ -359,6 +359,7 @@ export type Dictionnary = {
   profile: string,
   settings: string,
   logout: string,
+  helpSupport: string,
   connectedAs: string,
   quickLinks: string,
   home: string,

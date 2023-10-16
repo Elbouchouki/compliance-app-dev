@@ -2,7 +2,7 @@ import { Icons } from "@/components/icons";
 import { SidebarItem } from "@/types";
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
-    title: "Home",
+    title: "Dashboard",
     icon: Icons.home,
     path: "/",
     key: "home",
@@ -112,27 +112,34 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     path: "/tenant-users",
   },
   {
-    key: "help",
-    title: "Help",
+    key: "helpSupport",
+    title: "Help & Support",
     icon: Icons.help,
-    path: "/help",
-  },
-  {
-    key: "knowledgeBase",
-    title: "Knowledge Base",
-    icon: Icons.knowledgeBase,
-    path: "/knowledge-base",
-  },
-  // {
-  //   key: "questionnaires",
-  //   title: "Questionnaires",
-  //   icon: Icons.questionnaires,
-  //   path: "/questionnaires",
-  // },
-  {
-    key: "fqa",
-    title: "FQA",
-    icon: Icons.fqa,
-    path: "/fqa",
+    children: [
+      {
+        key: "help",
+        title: "Help",
+        icon: Icons.help,
+        path: "/help",
+      },
+      {
+        key: "knowledgeBase",
+        title: "Knowledge Base",
+        icon: Icons.knowledgeBase,
+        path: "/knowledge-base",
+      },
+      // {
+      //   key: "questionnaires",
+      //   title: "Questionnaires",
+      //   icon: Icons.questionnaires,
+      //   path: "/questionnaires",
+      // },
+      {
+        key: "fqa",
+        title: "FQA",
+        icon: Icons.fqa,
+        path: "/fqa",
+      }
+    ]
   }
 ]

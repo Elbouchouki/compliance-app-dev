@@ -14,6 +14,10 @@ module.exports = {
     },
     extend: {
       colors: {
+        navbar: {
+          DEFAULT: "hsl(var(--navbar))",
+          gray: "hsl(var(--navbar-gray))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

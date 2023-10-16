@@ -13,7 +13,7 @@ import { SIDEBAR_ITEMS } from "@/constants/sidebar.config"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { SidebarItem } from "@/types"
+import { Dictionnary, SidebarItem } from "@/types"
 import { Icons } from "@/components/icons"
 import { useState } from "react"
 import { motion } from "framer-motion"
@@ -30,6 +30,7 @@ const HamburgerCollapsedItem = ({ item }: { item: SidebarItem }) => {
   const [opened, setOpened] = useState(
     item.children?.some(child => child.path === pathname)
   )
+  const dict = langStore?.getDictionary()
 
   const Icon = item.icon as React.ElementType
 
@@ -52,7 +53,9 @@ const HamburgerCollapsedItem = ({ item }: { item: SidebarItem }) => {
           "ml-2 mr-0": langStore?.rtl
         })} />
         <span className="text-sm font-semibold">
-          {item.title}
+          {
+            dict ? (dict[item.key as keyof Dictionnary] as string) : item.title
+          }
         </span>
         <Icons.chevronDown className={cn("w-4 h-4 ml-auto transition-all", {
           "transform rotate-180": opened,
@@ -94,7 +97,7 @@ const HamburgerItem = (
 
   const pathname = usePathname()
   const langStore = useStore(useLangStore, state => state)
-
+  const dict = langStore?.getDictionary()
   if (item.children && item.children.length > 0) {
     return <HamburgerCollapsedItem item={item} />
   }
@@ -115,7 +118,9 @@ const HamburgerItem = (
           })} /> : null
         }
         <span className="text-sm font-semibold">
-          {item.title}
+          {
+            dict ? (dict[item.key as keyof Dictionnary] as string) : item.title
+          }
         </span>
       </Link>
     </SheetClose>

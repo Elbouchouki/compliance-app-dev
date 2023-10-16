@@ -132,7 +132,7 @@ export default function Home() {
   const dict = langStore?.getDictionary()
 
   return (
-    <PageWrapper className='flex flex-col w-full h-full gap-6' >
+    <PageWrapper className='flex flex-col w-full h-full gap-6 ' >
       <div className="flex flex-col w-full gap-2 py-2 border-b sm:flex-row ">
         <div className={cn("flex flex-row grow items-center ", {
           "flex-row-reverse": langStore?.rtl

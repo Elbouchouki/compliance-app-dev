@@ -23,6 +23,20 @@ import useLangStore from "@/store/langagueStore"
 import { Icons } from "../icons"
 import { Separator } from "../ui/separator"
 import { Dictionnary } from "@/types"
+import AppLogo from "../app-logo"
+
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+import { usePathname } from "next/navigation"
 
 
 const SearchButton = () => {
@@ -33,10 +47,9 @@ const SearchButton = () => {
       <div>
         <Button
           size="icon"
-          variant="ghost"
-          className="rounded-3xl"
+          variant="outline"
         >
-          <Search className="w-5 h-5 text-muted-foreground " />
+          <Search className="w-5 h-5 text-muted-foreground bg-navbar-gray" />
         </Button>
       </div>
     </DialogTrigger>
@@ -130,14 +143,41 @@ const SearchButton = () => {
   </Dialog>
 }
 
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  )
+})
+ListItem.displayName = "ListItem"
+
 
 const Navbar = () => {
 
-  const sidebarStore = useStore(useSidebarStore, state => state)
   const langStore = useStore(useLangStore, state => state)
+  const dict = langStore?.getDictionary()
+  const pathname = usePathname()
 
   return (
-    <nav className={cn("flex items-center justify-center w-full h-16 gap-4 px-4 py-1 border-b flex-none", {
+    <nav className={cn("flex items-center justify-center w-full h-16 gap-4 px-4 xl:px-8 py-1 flex-none bg-navbar border-b-[3px] border-b-primary-foreground", {
       "flex-row-reverse": langStore?.rtl
     })}>
       <div className={cn("flex items-center justify-start gap-2 grow", {
@@ -146,19 +186,71 @@ const Navbar = () => {
         <div className="xl:hidden">
           <Hamburger />
         </div>
-        <Button className="hidden xl:flex" variant="ghost" size="icon" onClick={sidebarStore?.toggle}>
-          {
-            sidebarStore?.opened ?
-              <AlignLeft className="w-6 h-6 text-muted-foreground " />
-              :
-              <Icons.hamburger className="w-6 h-6 text-muted-foreground " />
-          }
-        </Button>
-        <SearchButton />
+        <AppLogo />
+      </div>
+      <div className="w-full justify-center hidden xl:flex">
+        <NavigationMenu>
+          <NavigationMenuList className={cn({
+            "flex-row-reverse": langStore?.rtl
+          })}>
+            {
+              SIDEBAR_ITEMS.map((item, index) => {
+                if (item.children && item.children.length > 0)
+                  return (
+                    <NavigationMenuItem key={index} >
+                      <NavigationMenuTrigger className={cn("bg-navbar text-muted-foreground hover:text-primary-foreground  hover:bg-primary data-[state=open]:text-primary-foreground data-[state=open]:bg-primary focus:text-primary-foreground focus:bg-primary dark:hover:text-primary-foreground dark:hover:bg-muted-foreground/10 dark:data-[state=open]:text-primary-foreground dark:data-[state=open]:bg-muted-foreground/10 dark:focus:text-primary-foreground dark:focus:bg-muted-foreground/10", {
+                        "text-primary-foreground bg-primary hover:text-primary-foreground/80 hover:bg-primary/80 dark:text-primary-foreground dark:bg-muted-foreground/10 dark:hover:text-primary-foreground/80 dark:hover:bg-muted-foreground/10": item.children.some(child => { return child.path === pathname })
+                      }, {
+                        "flex-row-reverse ml-0 mr-1": langStore?.rtl
+                      })}>
+                        {
+                          dict ? (dict[item.key as keyof Dictionnary] as string) : item.title
+                        }
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        {
+                          (item.children && item.children.length > 0) ? (
+                            <ul className="grid gap-3 p-4 w-[400px]  md:w-[500px]  lg:w-[600px] md:grid-cols-2">
+                              {
+                                item.children.map((child, i) => (
+                                  <ListItem href={child.path as string} title={
+                                    dict ? (dict[child.key as keyof Dictionnary] as string) : item.title
+                                  } key={i}
+                                    className={cn({
+                                      "text-right": langStore?.rtl
+                                    })}
+                                  >
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil velit laudantium quo ipsum numquam quod incidunt amet fuga est necessitatibus quidem sed, iste odio unde suscipit! Autem labore voluptatem laboriosam?
+                                  </ListItem>
+                                ))
+                              }
+                            </ul>
+                          ) : null
+                        }
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                  )
+
+                return <Link href={item.path as string} legacyBehavior passHref key={index}>
+                  <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-navbar text-muted-foreground hover:text-primary-foreground  hover:bg-primary data-[state=open]:text-primary-foreground data-[state=open]:bg-primary focus:text-primary-foreground focus:bg-primary  dark:hover:text-primary-foreground dark:hover:bg-muted-foreground/10 dark:data-[state=open]:text-primary-foreground dark:data-[state=open]:bg-muted-foreground/10 dark:focus:text-primary-foreground dark:focus:bg-muted-foreground/10", {
+                    "text-primary-foreground bg-primary hover:text-primary-foreground/80 hover:bg-primary/80 dark:text-primary-foreground dark:bg-muted-foreground/10 dark:hover:text-primary-foreground/80 dark:hover:bg-muted-foreground/10": item.path === pathname
+                  })}>
+                    {
+                      dict ? (dict[item.key as keyof Dictionnary] as string) : item.title
+                    }
+                  </NavigationMenuLink>
+                </Link>
+
+
+              })
+            }
+          </NavigationMenuList>
+        </NavigationMenu>
       </div>
       <div className={cn("flex flex-row items-center gap-4", {
         "flex-row-reverse": langStore?.rtl
       })}>
+        <SearchButton />
         <ThemeToggle />
         <LangSwitch />
         <UserNav />

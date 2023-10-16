@@ -1,5 +1,5 @@
 "use client"
-import Sidebar from '@/components/layout/sidebar'
+// import Sidebar from '@/components/layout/sidebar'
 import Navbar from '@/components/layout/navbar'
 import { useStore } from '@/hooks/use-store'
 import useLangStore from '@/store/langagueStore'
@@ -16,10 +16,10 @@ export default function RootLayout({
       "flex-row-reverse": langStore?.rtl
     })}
     >
-      <Sidebar />
-      <div className='flex flex-col w-full grow overflow-x-hidden'>
+      {/* <Sidebar /> */}
+      <div className='flex flex-col w-full grow overflow-x-hidden '>
         <Navbar />
-        <div className='px-1 mx-3 my-4 overflow-y-scroll md:mx-5 grow no-scrollbar'>
+        <div className='px-1 my-2 py-2 md:py-6 overflow-y-scroll mx-3 md:mx-10 xl:mx-28 grow no-scrollbar'>
           {children}
         </div>
       </div>
