@@ -1,0 +1,30 @@
+[
+  {
+    "id": "rs1",
+    "value": "Avoidance"
+  },
+  {
+    "id": "rs2",
+    "value": "Mitigation"
+  },
+  {
+    "id": "rs3",
+    "value": "Transfer"
+  },
+  {
+    "id": "rs4",
+    "value": "Acceptance"
+  },
+  {
+    "id": "rs5",
+    "value": "Triggered"
+  },
+  {
+    "id": "rs6",
+    "value": "Closed"
+  },
+  {
+    "id": "rs7",
+    "value": "Other"
+  }
+]

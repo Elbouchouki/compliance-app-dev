@@ -1,0 +1,30 @@
+[
+  {
+    "id": "c1",
+    "value": "Business & Strategic"
+  },
+  {
+    "id": "c2",
+    "value": "Environmental & Tornadoes"
+  },
+  {
+    "id": "c3",
+    "value": "Project"
+  },
+  {
+    "id": "c4",
+    "value": "Compliance"
+  },
+  {
+    "id": "c5",
+    "value": "Financial"
+  },
+  {
+    "id": "c6",
+    "value": "Operational & Infrastructure"
+  },
+  {
+    "id": "c7",
+    "value": "External"
+  }
+]

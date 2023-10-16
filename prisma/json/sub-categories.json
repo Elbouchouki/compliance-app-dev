@@ -1,0 +1,256 @@
+[
+    {
+      "id": "s1",
+      "value": "Commercial",
+      "categoryId": "c1"
+    }, {
+      "id": "s2",
+      "value": "Reputation",
+      "categoryId": "c1"
+    }, {
+      "id": "s3",
+      "value": "Stakeholder",
+      "categoryId": "c1"
+    }, {
+      "id": "s4",
+      "value": "Technology & Obsolescence",
+      "categoryId": "c1"
+    }, {
+      "id": "s5",
+      "value": "Lawsuit",
+      "categoryId": "c1"
+    }, {
+      "id": "s6",
+      "value": "Product Recall",
+      "categoryId": "c1"
+    }, {
+      "id": "s7",
+      "value": "Negative Publicity",
+      "categoryId": "c1"
+    },
+    {
+      "id": "s8",
+      "value": "Hurricanes & Tornadoes",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s9",
+      "value": "High Winds",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s10",
+      "value": "Plate Tectonics",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s11",
+      "value": "Earthquake",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s12",
+      "value": "Building Strength",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s13",
+      "value": "Asteroids",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s14",
+      "value": "Volcanoes",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s15",
+      "value": "Radioactive Decay",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s16",
+      "value": "Radiation",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s17",
+      "value": "Asbestos",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s18",
+      "value": "Ground Water",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s19",
+      "value": "Sea Level",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s20",
+      "value": "Coastal Erosion",
+      "categoryId": "c2"
+    },
+    {
+      "id": "s21",
+      "value": "Scope Risks",
+      "categoryId": "c3"
+    },
+    {
+      "id": "s22",
+      "value": "Schedule Risks",
+      "categoryId": "c3"
+    },
+    {
+      "id": "s23",
+      "value": "Resource Risks",
+      "categoryId": "c3"
+    },
+    {
+      "id": "s24",
+      "value": "Stakeholder Risks",
+      "categoryId": "c3"
+    },
+    {
+      "id": "s25",
+      "value": "Legal",
+      "categoryId": "c4"
+    },
+    {
+      "id": "s26",
+      "value": "Regulatory",
+      "categoryId": "c4"
+    },
+    {
+      "id": "s27",
+      "value": "Environmental",
+      "categoryId": "c4"
+    },
+    {
+      "id": "s28",
+      "value": "Ethical",
+      "categoryId": "c4"
+    },
+    {
+      "id": "s29",
+      "value": "Workplace Health & Safety",
+      "categoryId": "c4"
+    },
+    {
+      "id": "s30",
+      "value": "Corrupt Practice",
+      "categoryId": "c4"
+    },
+    {
+      "id": "s31",
+      "value": "Social Responsibility",
+      "categoryId": "c4"
+    },
+    {
+      "id": "s32",
+      "value": "Quality",
+      "categoryId": "c4"
+    },
+    {
+      "id": "s33",
+      "value": "Process",
+      "categoryId": "c4"
+    },
+    {
+      "id": "s34",
+      "value": "Budget",
+      "categoryId": "c5"
+    },
+    {
+      "id": "s35",
+      "value": "Cost",
+      "categoryId": "c5"
+    },
+    {
+      "id": "s36",
+      "value": "Funding",
+      "categoryId": "c5"
+    },
+    {
+      "id": "s37",
+      "value": "Economic",
+      "categoryId": "c5"
+    },
+    {
+      "id": "s38",
+      "value": "Credit",
+      "categoryId": "c5"
+    },
+    {
+      "id": "s39",
+      "value": "Insurance",
+      "categoryId": "c5"
+    },
+    {
+      "id": "s40",
+      "value": "Pension",
+      "categoryId": "c5"
+    },
+    {
+      "id": "s41",
+      "value": "Market",
+      "categoryId": "c6"
+    },
+    {
+      "id": "s42",
+      "value": "People",
+      "categoryId": "c6"
+    },
+    {
+      "id": "s43",
+      "value": "Systems & Equipment",
+      "categoryId": "c6"
+    },
+    {
+      "id": "s44",
+      "value": "Legal & Compliance",
+      "categoryId": "c6"
+    },
+    {
+      "id": "s45",
+      "value": "Security",
+      "categoryId": "c6"
+    },
+    {
+      "id": "s46",
+      "value": "Project",
+      "categoryId": "c6"
+    },
+    {
+      "id": "s47",
+      "value": "External Events",
+      "categoryId": "c6"
+    },
+    {
+      "id": "s48",
+      "value": "Business Processes",
+      "categoryId": "c6"
+    },
+    {
+      "id": "s49",
+      "value": "Political",
+      "categoryId": "c7"
+    },
+    {
+      "id": "s50",
+      "value": "Natural Disaster",
+      "categoryId": "c7"
+    },
+    {
+      "id": "s51",
+      "value": "Market",
+      "categoryId": "c7"
+    },
+    {
+      "id": "s52",
+      "value": "Technological",
+      "categoryId": "c7"
+    }
+]

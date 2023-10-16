@@ -1,0 +1,101 @@
+[
+  {
+    "name": "Cybersecurity & Privacy Governance"
+  },
+  {
+    "name": "Artificial & Autonomous Technologies"
+  },
+  {
+    "name": "Asset Management"
+  },
+  {
+    "name": "Business Continuity & Disaster RecoveryBusiness Continuity & Disaster Recovery"
+  },
+  {
+    "name": "Capacity & Performance Planning"
+  },
+  {
+    "name": "Change Management"
+  },
+  {
+    "name": "Cloud Security"
+  },
+  {
+    "name": "Compliance"
+  },
+  {
+    "name": "Configuration Management"
+  },
+  {
+    "name": "Continuous Monitoring"
+  },
+  {
+    "name": "Cryptographic Protections"
+  },
+  {
+    "name": "Data Classification & Handling"
+  },
+  {
+    "name": "Embedded Technology"
+  },
+  {
+    "name": "Endpoint Security"
+  },
+  {
+    "name": "Human Resources Security"
+  },
+  {
+    "name": "Identification & Authentication"
+  },
+  {
+    "name": "Incident Response"
+  },
+  {
+    "name": "Information Assurance"
+  },
+  {
+    "name": "Maintenance"
+  },
+  {
+    "name": "Mobile Device Management"
+  },
+  {
+    "name": "Network Security"
+  },
+  {
+    "name": "Physical & Environmental Security"
+  },
+  {
+    "name": "Privacy"
+  },
+  {
+    "name": "Project & Resource Management"
+  },
+  {
+    "name": "Risk Management"
+  },
+  {
+    "name": "Secure Engineering & Architecture"
+  },
+  {
+    "name": "Security Operations"
+  },
+  {
+    "name": "Security Awareness & Training"
+  },
+  {
+    "name": "Technology Development & Acquisition"
+  },
+  {
+    "name": "Third-Party Management"
+  },
+  {
+    "name": "Threat Management"
+  },
+  {
+    "name": "Vulnerability & Patch Management"
+  },
+  {
+    "name": "Web Security"
+  }
+]

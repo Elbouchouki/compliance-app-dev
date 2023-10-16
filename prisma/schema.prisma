@@ -1,0 +1,238 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // provider = "mysql" //dev
+  url      = env("DATABASE_URL")
+}
+
+model Tag {
+  id         String   @id @default(uuid())
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  userId     String?
+  Risk       Risk[]
+}
+
+model Label {
+  id         String   @id @default(uuid())
+  key        String
+  value      String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  userId     String?
+}
+
+model Evidence {
+  id          String   @id @default(uuid())
+  name        String
+  reference   String?
+  description String?  @db.VarChar(1000)
+  content     String?  @db.VarChar(1000)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model Policy {
+  id          String   @id @default(uuid())
+  reference   String?
+  name        String
+  description String?  @db.VarChar(1000)
+  content     String?  @db.VarChar(1000)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  userId      String?
+}
+
+model Tenant {
+  id            String  @id @default(uuid())
+  reference     String?
+  contact_email String
+  name          String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  userId     String?
+}
+
+model Framework {
+  id                     String    @id @default(uuid())
+  name                   String
+  description            String    @db.VarChar(1000)
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @updatedAt
+  additional_information String?   @db.VarChar(1000)
+  controls               Control[]
+}
+
+model MaturityLevel {
+  id          String   @id @default(uuid())
+  label       String
+  value       String
+  description String   @db.VarChar(1000)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  color       String
+
+  controlTargets   ControlAssessmentScope[] @relation("ControlTarget")
+  controlMaturitys ControlAssessmentScope[] @relation("ControlMaturity")
+}
+
+model AssessmentObjectives {
+  id                               String                             @id @default(uuid())
+  objective                        String                             @db.VarChar(1000)
+  controlId                        String
+  created_at                       DateTime                           @default(now())
+  updated_at                       DateTime                           @updatedAt
+  controls                         ControlAssessmentObjective[]
+  ControlAssessmentScopeObjectives ControlAssessmentScopeObjectives[]
+}
+
+model ControlAssessmentObjective {
+  assessmentObjectiveId String
+  assessmentObjective   AssessmentObjectives @relation(fields: [assessmentObjectiveId], references: [id])
+  controlId             String
+  control               Control              @relation(fields: [controlId], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([assessmentObjectiveId, controlId])
+}
+
+model Control {
+  id          String @id @default(uuid())
+  name        String
+  category    String
+  description String @db.VarChar(1000)
+  methods     String @db.VarChar(1000)
+  question    String @db.VarChar(1000)
+  weight      Int
+  group       String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  userId     String?
+
+  frameworkId                      String?
+  Framework                        Framework?                         @relation(fields: [frameworkId], references: [id])
+  assessments                      ControlAssessmentObjective[]
+  ControlAssessmentScope           ControlAssessmentScope[]
+  ControlAssessmentScopeObjectives ControlAssessmentScopeObjectives[]
+}
+
+model ControlAssessmentScopeObjectives {
+  assessmentScopeId     String
+  assessmentScope       AssessmentScope      @relation(fields: [assessmentScopeId], references: [id])
+  assessmentObjectiveId String
+  assessmentObjective   AssessmentObjectives @relation(fields: [assessmentObjectiveId], references: [id])
+  controlId             String
+  control               Control              @relation(fields: [controlId], references: [id])
+
+  choices     String
+  explination String @db.VarChar(1000)
+
+  @@id([assessmentScopeId, assessmentObjectiveId, controlId])
+}
+
+model ControlAssessmentScope {
+  assessmentScopeId String
+  assessmentScope   AssessmentScope @relation(fields: [assessmentScopeId], references: [id])
+  controlId         String
+  control           Control         @relation(fields: [controlId], references: [id])
+
+  remediationPlanText String? @db.VarChar(1000)
+  notesText           String? @db.VarChar(1000)
+  policiesText        String? @db.VarChar(1000)
+  proceduresText      String? @db.VarChar(1000)
+  standardsText       String? @db.VarChar(1000)
+
+  maturityFilter   String?
+  targetMaturity   MaturityLevel? @relation("ControlTarget", fields: [targetMaturityId], references: [id])
+  targetMaturityId String?
+  maturity         MaturityLevel? @relation("ControlMaturity", fields: [maturityId], references: [id])
+  maturityId       String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([assessmentScopeId, controlId])
+}
+
+model AssessmentScope {
+  id                               String                             @id @default(uuid())
+  name                             String
+  description                      String?                            @db.VarChar(1000)
+  reportingFrom                    DateTime
+  reportingTo                      DateTime
+  status                           String?
+  type                             String?
+  userId                           String?
+  created_at                       DateTime                           @default(now())
+  updated_at                       DateTime                           @updatedAt
+  ControlAssessmentScope           ControlAssessmentScope[]
+  ControlAssessmentScopeObjectives ControlAssessmentScopeObjectives[]
+}
+
+model Risk {
+  id                    String               @id @default(uuid())
+  dateRaised            DateTime             @default(now())
+  updatedDate           DateTime             @updatedAt
+  riskName              String
+  description           String               @db.VarChar(1000)
+  consequences          String               @db.VarChar(1000)
+  affectedAsset         String
+  category              Category             @relation(fields: [categoryId], references: [id])
+  categoryId            String
+  subcategory           subCategory          @relation(fields: [subCategoryId], references: [id])
+  subCategoryId         String
+  riskStatus            RiskStatus           @relation(fields: [riskStatusId], references: [id])
+  riskStatusId          String
+  impact                Int
+  likelihood            Int
+  owner                 String
+  RiskAssessmentScope   RiskAssessmentScope? @relation(fields: [riskAssessmentScopeId], references: [id])
+  riskAssessmentScopeId String?
+  userId                String?
+  tag                   Tag?                 @relation(fields: [tagId], references: [id])
+  tagId                 String?
+}
+
+model Category {
+  id          String        @id @default(uuid())
+  value       String
+  subCategory subCategory[]
+  Risk        Risk[]
+}
+
+model subCategory {
+  id         String    @id @default(uuid())
+  value      String
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+  Risk       Risk[]
+}
+
+model RiskStatus {
+  id    String @id @default(uuid())
+  value String
+  Risk  Risk[]
+}
+
+model RiskAssessmentScope {
+  id            String   @id @default(uuid())
+  name          String
+  description   String   @db.VarChar(1000)
+  reportingFrom DateTime
+  reportingTo   DateTime
+  status        String
+  type          String
+  risks         Risk[]
+  userId        String?
+}

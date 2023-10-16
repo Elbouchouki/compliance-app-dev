@@ -1,0 +1,1276 @@
+[
+  {
+    "id": 1,
+    "ref": "E-GOV-01",
+    "name": "Security & Privacy Program Management",
+    "description": "Charter - Cybersecurity Program",
+    "content": "Documented evidence of a corporate-level (C-Level) organization and resourcing for a cybersecurity & privacy governance program."
+  },
+  {
+    "id": 2,
+    "ref": "E-GOV-02",
+    "name": "Security & Privacy Program Management",
+    "description": "Charter - Privacy Program",
+    "content": "Documented evidence of an executive steering committee, or advisory board, that is formed to perform oversight of privacy management decisions and is comprised of key cybersecurity, technology, risk, privacy and business executives."
+  },
+  {
+    "id": 3,
+    "ref": "E-GOV-03",
+    "name": "Security & Privacy Program Management",
+    "description": "Charter - Cybersecurity Steering Committee",
+    "content": "Documented evidence of an executive steering committee, or advisory board, that is formed to perform oversight of cybersecurity management decisions and is comprised of key cybersecurity, technology, risk, privacy and business executives."
+  },
+  {
+    "id": 4,
+    "ref": "E-GOV-04",
+    "name": "Security & Privacy Program Management",
+    "description": "Charter - Privacy Steering Committee",
+    "content": "Documented evidence of an executive steering committee, or advisory board, that is formed to perform oversight of privacy management decisions and is comprised of key cybersecurity, technology, risk, privacy and business executives."
+  },
+  {
+    "id": 5,
+    "ref": "E-GOV-05",
+    "name": "Security & Privacy Program Management",
+    "description": "Charter - Audit Committee",
+    "content": "Documented evidence of an executive steering committee, or advisory board, that is formed to perform oversight of internal and external audit management decisions and is comprised of key cybersecurity, technology, risk, privacy and business executives."
+  },
+  {
+    "id": 6,
+    "ref": "E-GOV-06",
+    "name": "Security & Privacy Program Management",
+    "description": "Charter - Risk Committee",
+    "content": "Documented evidence of an executive steering committee, or advisory board, that is formed to perform oversight of risk management decisions and is comprised of key cybersecurity, technology, risk, privacy and business executives."
+  },
+  {
+    "id": 7,
+    "ref": "E-GOV-07",
+    "name": "Security & Privacy Program Management",
+    "description": "Charter - Data Management Board (DMB)",
+    "content": "Documented evidence of the organization's Data Management Board (DMB) charter and mission."
+  },
+  {
+    "id": 8,
+    "ref": "E-GOV-08",
+    "name": "Security & Privacy Program Management",
+    "description": "Cybersecurity & Privacy Policies",
+    "content": "Documented evidence of an appropriately-scoped cybersecurity and privacy policies. Policies are high-level statements of management intent from an organization�s executive leadership that are designed to influence decisions and guide the organization to achieve the desired outcomes. Policies are enforced by standards and further implemented by procedures to establish actionable and accountable requirements."
+  },
+  {
+    "id": 9,
+    "ref": "E-GOV-09",
+    "name": "Security & Privacy Program Management",
+    "description": "Cybersecurity & Privacy Standards",
+    "content": "Documented evidence of an appropriately-scoped cybersecurity and privacy standards. Standards are mandatory requirements regarding processes, actions and configurations. Standards are intended to be granular and prescriptive to ensure systems, applications and processes are designed and operated to include appropriate cybersecurity and privacy protections"
+  },
+  {
+    "id": 10,
+    "ref": "E-GOV-10",
+    "name": "Security & Privacy Program Management",
+    "description": "Cybersecurity & Privacy Controls",
+    "content": "Documented evidence of an appropriately-scoped cybersecurity and privacy controls. Controls are technical, administrative or physical safeguards. Controls are the nexus used to manage risks through preventing, detecting or lessening the ability of a particular threat from negatively impacting business processes. Controls directly map to standards, since control testing is designed to measure specific aspects of how standards are actually implemented."
+  },
+  {
+    "id": 11,
+    "ref": "E-GOV-11",
+    "name": "Security & Privacy Program Management",
+    "description": "Cybersecurity & Privacy Procedures",
+    "content": "Documented evidence of an appropriate appropriately-scoped cybersecurity and privacy procedures. Procedures are a documented set of steps necessary to perform a specific task or process in conformance with an applicable standard. Procedures help address the question of how the organization actually operationalizes a policy, standard or control. The result of a procedure is intended to satisfy a specific control. Procedures are also commonly referred to as �control activities.�"
+  },
+  {
+    "id": 12,
+    "ref": "E-GOV-12",
+    "name": "Security & Privacy Program Management",
+    "description": "Cybersecurity & Privacy Policies & Standards Reviews",
+    "content": "Documented evidence of a periodic review process for the organization's cybersecurity and privacy policies and standards to identify necessary updates."
+  },
+  {
+    "id": 13,
+    "ref": "E-GOV-13",
+    "name": "Security & Privacy Program Management",
+    "description": "Measures of Performance (Metrics)",
+    "content": "Documented evidence of formal measure of performance that are used to track the health of the cybersecurity and privacy program (e.g., metrics, KPIs, KRIs)."
+  },
+  {
+    "id": 14,
+    "ref": "E-AST-01",
+    "name": "Asset Management",
+    "description": "IT Asset Management (ITAM)",
+    "content": "Documented evidence of an IT Asset Management (ITAM) program."
+  },
+  {
+    "id": 15,
+    "ref": "E-AST-02",
+    "name": "Asset Management",
+    "description": "Asset Scoping Guidance",
+    "content": "Documented evidence of an asset scoping guidance. This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on defining in-scope systems, applications, services, processes and third-parties."
+  },
+  {
+    "id": 16,
+    "ref": "E-AST-03",
+    "name": "Asset Management",
+    "description": "Asset Disposal Evidence",
+    "content": "Documented evidence of a Vulnerability & Patch Management Program (VPMP). This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on organizational practices that support existing policies and standards."
+  },
+  {
+    "id": 17,
+    "ref": "E-AST-04",
+    "name": "Asset Management",
+    "description": "Asset Inventories - Hardware",
+    "content": "Documented evidence of an inventory of the organization's technology hardware assets."
+  },
+  {
+    "id": 18,
+    "ref": "E-AST-05",
+    "name": "Asset Management",
+    "description": "Asset Inventories - Software",
+    "content": "Documented evidence of an inventory of the organization's software assets."
+  },
+  {
+    "id": 19,
+    "ref": "E-AST-06",
+    "name": "Asset Management",
+    "description": "Asset Inventories - Cloud Service Provider (CSP)",
+    "content": "Documented evidence of an inventory of the organization's cloud-based services (e.g., SaaS, IaaS, PaaS, etc.)."
+  },
+  {
+    "id": 20,
+    "ref": "E-AST-07",
+    "name": "Asset Management",
+    "description": "Cyber-Physical Systems (CPS)",
+    "content": "Documented evidence of an inventory of the organization's physical assets that process functions based on software and networks."
+  },
+  {
+    "id": 21,
+    "ref": "E-AST-08",
+    "name": "Asset Management",
+    "description": "Asset Inventories - Sensitive / Regulated Data",
+    "content": "Documented evidence of an inventory of the organization's sensitive/regulated data (including systems where sensitive/regulated data is stored, processed and/or transmitted)."
+  },
+  {
+    "id": 22,
+    "ref": "E-AST-09",
+    "name": "Asset Management",
+    "description": "Computer Lifecycle Plan (CLP)",
+    "content": "Documented evidence of a Computer Lifecycle Plan (CLP) that describes how the life of technology assets is managed."
+  },
+  {
+    "id": 23,
+    "ref": "E-AST-10",
+    "name": "Asset Management",
+    "description": "Prohibited Equipment List (PEM)",
+    "content": "Documented evidence of equipment identified by Federal Acquisition Regulation (FAR) section 889 prohibitions for certain telecommunications equipment."
+  },
+  {
+    "id": 24,
+    "ref": "E-AST-11",
+    "name": "Asset Management",
+    "description": "Data Retention Program",
+    "content": "Documented evidence of a formal data retention program that governs the retention and destruction of data types."
+  },
+  {
+    "id": 25,
+    "ref": "E-AST-12",
+    "name": "Asset Management",
+    "description": "Secure Baseline Configurations Reviews",
+    "content": "Documented evidence of a review process to ensure Secure Baseline Configurations (SBC) are current and applicable."
+  },
+  {
+    "id": 26,
+    "ref": "E-AST-13",
+    "name": "Asset Management",
+    "description": "Secure Baseline Configurations - Cloud-Based Services",
+    "content": "Documented evidence of secure baseline configurations for all deployed types of cloud-based services or applications."
+  },
+  {
+    "id": 27,
+    "ref": "E-AST-14",
+    "name": "Asset Management",
+    "description": "Secure Baseline Configurations - Databases",
+    "content": "Documented evidence of secure baseline configurations for all deployed types of databases."
+  },
+  {
+    "id": 28,
+    "ref": "E-AST-15",
+    "name": "Asset Management",
+    "description": "Secure Baseline Configurations - Embedded Technologies",
+    "content": "Documented evidence of secure baseline configurations for all deployed types of embedded technologies."
+  },
+  {
+    "id": 29,
+    "ref": "E-AST-16",
+    "name": "Asset Management",
+    "description": "Secure Baseline Configurations - Major Applications",
+    "content": "Documented evidence of secure baseline configurations for all deployed types of major applications."
+  },
+  {
+    "id": 30,
+    "ref": "E-AST-17",
+    "name": "Asset Management",
+    "description": "Secure Baseline Configurations - Minor Applications",
+    "content": "Documented evidence of secure baseline configurations for all deployed types of minor applications."
+  },
+  {
+    "id": 31,
+    "ref": "E-AST-18",
+    "name": "Asset Management",
+    "description": "Secure Baseline Configurations - Mobile Devices",
+    "content": "Documented evidence of secure baseline configurations for all deployed types of mobile devices."
+  },
+  {
+    "id": 32,
+    "ref": "E-AST-19",
+    "name": "Asset Management",
+    "description": "Secure Baseline Configurations - Network Devices",
+    "content": "Documented evidence of secure baseline configurations for all deployed types of network devices."
+  },
+  {
+    "id": 33,
+    "ref": "E-AST-20",
+    "name": "Asset Management",
+    "description": "Secure Baseline Configurations - Server Class Systems",
+    "content": "Documented evidence of secure baseline configurations for all deployed types of server-class operating systems."
+  },
+  {
+    "id": 34,
+    "ref": "E-AST-21",
+    "name": "Asset Management",
+    "description": "Secure Baseline Configurations - Workstation Class Systems",
+    "content": "Documented evidence of secure baseline configurations for all deployed types of workstation-class operating systems."
+  },
+  {
+    "id": 35,
+    "ref": "E-AST-22",
+    "name": "Asset Management",
+    "description": "Provenance",
+    "content": "Documented evidence of that tracks the origin, development, ownership, location and changes to systems, system components and associated data."
+  },
+  {
+    "id": 36,
+    "ref": "E-AST-23",
+    "name": "Asset Management",
+    "description": "Geolocation Inventory",
+    "content": "Documented evidence of designated internal and third-party facilities where organizational data is stored, transmitted and/or processed."
+  },
+  {
+    "id": 37,
+    "ref": "E-AST-24",
+    "name": "Asset Management",
+    "description": "Asset Categorization",
+    "content": "Documented evidence of a methodology to categorize technology assets (e.g., criticality and data classification considerations)"
+  },
+  {
+    "id": 38,
+    "ref": "E-BCM-01",
+    "name": "Business Continuity",
+    "description": "Continuity of Operations Plan (COOP)",
+    "content": "Documented evidence of a Continuity of Operations Plan (COOP). This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on organizational practices that support existing policies and standards."
+  },
+  {
+    "id": 39,
+    "ref": "E-BCM-02",
+    "name": "Business Continuity",
+    "description": "Recovery Time Objectives (RTOs)",
+    "content": "Documented evidence of Recovery Time Objectives (RTOs) that guide Continuity of Operations Plan (COOP)-related operations."
+  },
+  {
+    "id": 40,
+    "ref": "E-BCM-03",
+    "name": "Business Continuity",
+    "description": "Recovery Time Objectives (RTOs)",
+    "content": "Documented evidence of Recovery Point Objectives (RPOs) that guide Continuity of Operations Plan (COOP)-related operations."
+  },
+  {
+    "id": 41,
+    "ref": "E-BCM-04",
+    "name": "Business Continuity",
+    "description": "COOP Root Cause Analysis (RCA)",
+    "content": "Documented evidence of a Root Cause Analysis (RCA) from any Continuity of Operations Plan (COOP)-related training, testing or incident."
+  },
+  {
+    "id": 42,
+    "ref": "E-BCM-05",
+    "name": "Business Continuity",
+    "description": "COOP Updates",
+    "content": "Documented evidence of a periodic review process for the organization's Continuity of Operations Plan (COOP) to identify necessary updates."
+  },
+  {
+    "id": 43,
+    "ref": "E-BCM-06",
+    "name": "Business Continuity",
+    "description": "COOP Testing",
+    "content": "Documented evidence of a Continuity of Operations Plan (COOP)-related testing activity."
+  },
+  {
+    "id": 44,
+    "ref": "E-BCM-07",
+    "name": "Business Continuity",
+    "description": "COOP Training",
+    "content": "Documented evidence of a Continuity of Operations Plan (COOP)-related training activity."
+  },
+  {
+    "id": 45,
+    "ref": "E-BCM-08",
+    "name": "Business Continuity",
+    "description": "COOP Criticality Analysis",
+    "content": "Documented evidence of a Continuity of Operations Plan (COOP)-related criticality analysis."
+  },
+  {
+    "id": 46,
+    "ref": "E-BCM-09",
+    "name": "Business Continuity",
+    "description": "COOP Dependency Analysis",
+    "content": "Documented evidence of a Continuity of Operations Plan (COOP)-related dependency analysis for applications, systems, services, facilities, stakeholders and third-parties."
+  },
+  {
+    "id": 47,
+    "ref": "E-BCM-10",
+    "name": "Business Continuity",
+    "description": "Backups",
+    "content": "Documented evidence of a Continuity of Operations Plan (COOP)-related data backup scheme that demonstrates the methods of data backup (including protection measures) for all data types to ensure business continuity requirements."
+  },
+  {
+    "id": 48,
+    "ref": "E-BCM-11",
+    "name": "Business Continuity",
+    "description": "Backups - Local",
+    "content": "Documented evidence of event logs for the on-site / local data backup solution."
+  },
+  {
+    "id": 49,
+    "ref": "E-BCM-12",
+    "name": "Business Continuity",
+    "description": "Backups - Remote",
+    "content": "Documented evidence of event logs for the off-site / remote data backup solution."
+  },
+  {
+    "id": 50,
+    "ref": "E-BCM-13",
+    "name": "Business Continuity",
+    "description": "Backups - Recovery",
+    "content": "Documented evidence of a Continuity of Operations Plan (COOP)-related criticality analysis for applications, systems, services, facilities, stakeholders and third-parties."
+  },
+  {
+    "id": 51,
+    "ref": "E-CHG-01",
+    "name": "Change Management",
+    "description": "Business Impact Analysis (BIA)",
+    "content": "Documented evidence of a Business Impact Analysis (BIA) for proposed changes."
+  },
+  {
+    "id": 52,
+    "ref": "E-CHG-02",
+    "name": "Change Management",
+    "description": "Charter - Change Control Board (CCB)",
+    "content": "Documented evidence of the organization's Change Control Board (CCB) charter and mission."
+  },
+  {
+    "id": 53,
+    "ref": "E-CHG-03",
+    "name": "Change Management",
+    "description": "Change Control Board (CCB) Minutes",
+    "content": "Documented evidence of Change Control Board (CCB) meeting minutes"
+  },
+  {
+    "id": 54,
+    "ref": "E-CHG-04",
+    "name": "Change Management",
+    "description": "Evidence of Cybersecurity / Privacy Reviews",
+    "content": "Documented evidence of Change Control Board (CCB) meeting-related cybersecurity and/or privacy reviews for proposed change(s)."
+  },
+  {
+    "id": 55,
+    "ref": "E-CPL-01",
+    "name": "Compliance",
+    "description": "Statutory, Regulatory & Contractual Obligations",
+    "content": "Documented evidence of applicable statutory, regulatory and/or contractual obligations for cybersecurity and privacy controls."
+  },
+  {
+    "id": 56,
+    "ref": "E-CPL-02",
+    "name": "Compliance",
+    "description": "Defined Compliance Scope (DCS)",
+    "content": "Documented evidence of a formal scoping document that identifies applicable statutory, regulatory and/or contractual obligations for the organization. Defines the affected Lines of Business (LOB), internal / external stakeholders and facilities for the specific scope of compliance obligations."
+  },
+  {
+    "id": 57,
+    "ref": "E-CPL-03",
+    "name": "Compliance",
+    "description": "Controls Responsibility Matrix (CRM)",
+    "content": "Documented evidence of a Controls Responsibility Matrix (CRM), or similar documentation, that identifies the stakeholder involved in executing assigned controls (e.g., Responsible, Accountable, Supportive, Consulted & Informed (RASCI) matrix)."
+  },
+  {
+    "id": 58,
+    "ref": "E-CPL-04",
+    "name": "Compliance",
+    "description": "Internal Audit (IA)",
+    "content": "Documented evidence of an Internal Audit (IA) capability."
+  },
+  {
+    "id": 59,
+    "ref": "E-CPL-05",
+    "name": "Compliance",
+    "description": "Internal Audit (IA) Findings",
+    "content": "Documented evidence of a centrally-managed and prioritized repository Internal Audit (IA) findings."
+  },
+  {
+    "id": 60,
+    "ref": "E-CPL-06",
+    "name": "Compliance",
+    "description": "Manufacturer Disclosure Statement for Medical Device Security (MDS2)",
+    "content": "Documented Manufacturer Disclosure Statement for Medical Device Security (MDS2) that communicates information about medical device security and privacy characteristics to current device owners and potential buyers. [note MDS2 is specific to medical device manufacturers]"
+  },
+  {
+    "id": 61,
+    "ref": "E-CPL-07",
+    "name": "Compliance",
+    "description": "Control Assessments",
+    "content": "Documented evidence of internal or third-party control assessments to provide governance oversight of cybersecurity and privacy controls."
+  },
+  {
+    "id": 62,
+    "ref": "E-CPL-08",
+    "name": "Compliance",
+    "description": "Functional Review of Cybersecurity Controls",
+    "content": "Documented evidence of control testing to ensure cybersecurity controls function as expected."
+  },
+  {
+    "id": 63,
+    "ref": "E-CPL-09",
+    "name": "Compliance",
+    "description": "Non-Compliance Oversight Reporting",
+    "content": "Documented evidence of governance oversight reporting of non-compliance to the organization's executive leadership."
+  },
+  {
+    "id": 64,
+    "ref": "E-CRY-01",
+    "name": "Cryptographic Protections",
+    "description": "FIPS-Validated Certificates",
+    "content": "Documented evidence of FIPS-validated cryptographic modules. [note FIPS-validated cryptography is specific to US government contractors for NIST SP 800-171 & CMMC compliance]"
+  },
+  {
+    "id": 65,
+    "ref": "E-DCH-01",
+    "name": "Data Protection",
+    "description": "Data Classification Scheme",
+    "content": "Documented evidence of an organization-specific data classification scheme."
+  },
+  {
+    "id": 66,
+    "ref": "E-DCH-02",
+    "name": "Data Protection",
+    "description": "Data Handling Practices",
+    "content": "Documented evidence of an organization-specific data handling practices (e.g., guidance specific the data classification scheme)."
+  },
+  {
+    "id": 67,
+    "ref": "E-DCH-03",
+    "name": "Data Protection",
+    "description": "Network Diagram - Global System View (GSV)",
+    "content": "Documented evidence of a high-level network diagram that provides a conceptual, logical depiction of the network(s) to describe the interconnections of the systems/applications/services, including internal and external interfaces."
+  },
+  {
+    "id": 68,
+    "ref": "E-DCH-04",
+    "name": "Data Protection",
+    "description": "Network Diagram - Low Level",
+    "content": "Documented evidence of a low-level network diagram that provides a detailed, logical depiction of assets on the network(s)."
+  },
+  {
+    "id": 69,
+    "ref": "E-DCH-05",
+    "name": "Data Protection",
+    "description": "Data Flow Diagram (DFD)",
+    "content": "Documented evidence of a Data Flow Diagram (DFD) that accurately identifies where sensitive/regulated data is stored, transmitted and/or processed."
+  },
+  {
+    "id": 70,
+    "ref": "E-DCH-06",
+    "name": "Data Protection",
+    "description": "Third-Party Inventories",
+    "content": "Documented evidence of an inventory of Third-Party Service Providers (TSP), contractors, vendors, etc. that directly or indirectly impact the organization's data, systems, applications, services and/or processes."
+  },
+  {
+    "id": 71,
+    "ref": "E-DCH-07",
+    "name": "Data Protection",
+    "description": "Media Sanitization Documentation",
+    "content": "Documented evidence of media sanitization actions."
+  },
+  {
+    "id": 72,
+    "ref": "E-DCH-08",
+    "name": "Data Protection",
+    "description": "Authorization Documentation",
+    "content": "Documented evidence of that identifies authorized users and processes acting on behalf of authorized users."
+  },
+  {
+    "id": 73,
+    "ref": "E-SAT-01",
+    "name": "Education",
+    "description": "Continuing Professional Education (CPE)",
+    "content": "Documented evidence of Continuing Professional Education (CPE) requirements for cybersecurity and privacy personnel."
+  },
+  {
+    "id": 74,
+    "ref": "E-SAT-02",
+    "name": "Education",
+    "description": "Initial User Training",
+    "content": "Documented evidence of initial user training for cybersecurity and/or privacy topics."
+  },
+  {
+    "id": 75,
+    "ref": "E-SAT-03",
+    "name": "Education",
+    "description": "Practical Exercises",
+    "content": "Documented evidence of practical user training exercises for cybersecurity and/or privacy topics (e.g., phishing exercise)."
+  },
+  {
+    "id": 76,
+    "ref": "E-SAT-04",
+    "name": "Education",
+    "description": "Recurring User Training",
+    "content": "Documented evidence of recurring (e.g., annual) user training for cybersecurity and/or privacy topics."
+  },
+  {
+    "id": 77,
+    "ref": "E-SAT-05",
+    "name": "Education",
+    "description": "Role-Based Training",
+    "content": "Documented evidence of specialized user training for privileged users, executives, individuals who handle sensitive/regulated data, etc."
+  },
+  {
+    "id": 78,
+    "ref": "E-MON-01",
+    "name": "Event Log Monitoring",
+    "description": "Evidence of Log Review Processes",
+    "content": "Documented evidence of centralized collection and review/analysis of security event logs."
+  },
+  {
+    "id": 79,
+    "ref": "E-MON-02",
+    "name": "Event Log Monitoring",
+    "description": "Malware Activity",
+    "content": "Documented evidence of malware activity being logged and included as part of the centralized event log collection and review/analysis process."
+  },
+  {
+    "id": 80,
+    "ref": "E-MON-03",
+    "name": "Event Log Monitoring",
+    "description": "Privileged User Oversight",
+    "content": "Documented evidence of malware activity being logged and included as part of the centralized event log collection and review/analysis process."
+  },
+  {
+    "id": 81,
+    "ref": "E-MON-04",
+    "name": "Event Log Monitoring",
+    "description": "Rogue Devices",
+    "content": "Documented evidence of rogue device identification is included as part of the centralized event log collection and review/analysis process."
+  },
+  {
+    "id": 82,
+    "ref": "E-MON-05",
+    "name": "Event Log Monitoring",
+    "description": "Security Events",
+    "content": "Documented evidence of security-relevant activities being logged and included as part of the centralized event log collection and review/analysis process."
+  },
+  {
+    "id": 83,
+    "ref": "E-HRS-01",
+    "name": "Human Resources",
+    "description": "Defined Cybersecurity & Privacy Roles",
+    "content": "Documented evidence of a discrete roles for cybersecurity and privacy functions (e.g., position categorization)."
+  },
+  {
+    "id": 84,
+    "ref": "E-HRS-02",
+    "name": "Human Resources",
+    "description": "Assigned Roles - Application Developers",
+    "content": "List of employed or contract personnel assigned to application development roles."
+  },
+  {
+    "id": 85,
+    "ref": "E-HRS-03",
+    "name": "Human Resources",
+    "description": "Assigned Roles - Cybersecurity Staff",
+    "content": "List of employed or contract personnel assigned to cybersecurity roles."
+  },
+  {
+    "id": 86,
+    "ref": "E-HRS-04",
+    "name": "Human Resources",
+    "description": "Assigned Roles - Privacy Staff",
+    "content": "List of employed or contract personnel assigned to privacy roles."
+  },
+  {
+    "id": 87,
+    "ref": "E-HRS-05",
+    "name": "Human Resources",
+    "description": "Role Assignment - CISO",
+    "content": "Documented evidence of a formal role assignment to the Chief Information Security Officer (CISO) position."
+  },
+  {
+    "id": 88,
+    "ref": "E-HRS-06",
+    "name": "Human Resources",
+    "description": "Role Assignment - COO",
+    "content": "Documented evidence of a formal role assignment to the Chief Operations Officer (COO) position."
+  },
+  {
+    "id": 89,
+    "ref": "E-HRS-07",
+    "name": "Human Resources",
+    "description": "Role Assignment - CIO",
+    "content": "Documented evidence of a formal role assignment to the Chief Information Officer (CIO) position."
+  },
+  {
+    "id": 90,
+    "ref": "E-HRS-08",
+    "name": "Human Resources",
+    "description": "Role Assignment - CPO",
+    "content": "Documented evidence of a formal role assignment to the Chief Privacy Officer (CPO) position."
+  },
+  {
+    "id": 91,
+    "ref": "E-HRS-09",
+    "name": "Human Resources",
+    "description": "Role Assignment - CRO",
+    "content": "Documented evidence of a formal role assignment to the Chief Risk Officer (CRO) position."
+  },
+  {
+    "id": 92,
+    "ref": "E-HRS-10",
+    "name": "Human Resources",
+    "description": "Role Assignment - DPO",
+    "content": "Documented evidence of a formal role assignment to Data Protection Officer (DPO) positions."
+  },
+  {
+    "id": 93,
+    "ref": "E-HRS-11",
+    "name": "Human Resources",
+    "description": "Role Assignment - Sensitive / Regulated Data",
+    "content": "Documented evidence of a formal role assignment to personnel who are cleared to handle sensitive/regulated data."
+  },
+  {
+    "id": 94,
+    "ref": "E-HRS-12",
+    "name": "Human Resources",
+    "description": "Role Review",
+    "content": "Documented evidence of a formal review process to ensure personnel roles currently reflect business needs."
+  },
+  {
+    "id": 95,
+    "ref": "E-HRS-13",
+    "name": "Human Resources",
+    "description": "Defined Cybersecurity & Privacy Responsibilities",
+    "content": "Documented evidence of a role-based cybersecurity and privacy responsibilities to ensure personnel are both educated on the role and are responsible for the associated control execution."
+  },
+  {
+    "id": 96,
+    "ref": "E-HRS-14",
+    "name": "Human Resources",
+    "description": "Responsibilities Review",
+    "content": "Documented evidence of a formal review process to ensure assigned responsibilities currently reflect business needs for the assigned role."
+  },
+  {
+    "id": 97,
+    "ref": "E-HRS-15",
+    "name": "Human Resources",
+    "description": "Organization Chart",
+    "content": "Current and accurate organization chart that depicts logical staff hierarchies."
+  },
+  {
+    "id": 98,
+    "ref": "E-HRS-16",
+    "name": "Human Resources",
+    "description": "Access Agreements",
+    "content": "Documented evidence of personnel management practices protecting sensitive/regulated data through formal access agreements."
+  },
+  {
+    "id": 99,
+    "ref": "E-HRS-17",
+    "name": "Human Resources",
+    "description": "Background Checks",
+    "content": "Documented evidence of personnel screening practices, which centers around some form of formalized background check process."
+  },
+  {
+    "id": 100,
+    "ref": "E-HRS-18",
+    "name": "Human Resources",
+    "description": "Provisioning Checklist (Onboarding)",
+    "content": "Documented evidence of personnel management practices to formally onboard personnel into their assigned roles."
+  },
+  {
+    "id": 101,
+    "ref": "E-HRS-19",
+    "name": "Human Resources",
+    "description": "Deprovisioning Checklist (Offboarding)",
+    "content": "Documented evidence of personnel management practices to formally offboard personnel from their assigned roles due to employment termination or role change."
+  },
+  {
+    "id": 102,
+    "ref": "E-HRS-20",
+    "name": "Human Resources",
+    "description": "Non-Disclosure Agreements (NDAs)",
+    "content": "Documented evidence of the use of Non-Disclosure Agreements (NDAs) that restricts unauthorized sharing of sensitive/regulated data."
+  },
+  {
+    "id": 103,
+    "ref": "E-HRS-21",
+    "name": "Human Resources",
+    "description": "Position Competency Requirements",
+    "content": "Documented evidence of personnel management practices to define minimum competency requirements for cybersecurity & privacy-related roles."
+  },
+  {
+    "id": 104,
+    "ref": "E-HRS-22",
+    "name": "Human Resources",
+    "description": "Rules of Behavior",
+    "content": "Documented evidence of personnel management practices to define \"acceptable use\" or \"rules of behavior\" criteria that specify acceptable and unacceptable user behaviors."
+  },
+  {
+    "id": 105,
+    "ref": "E-HRS-23",
+    "name": "Human Resources",
+    "description": "Critical Cybersecurity & Privacy Skills",
+    "content": "Documented evidence of personnel management practices to formally identify critical cybersecurity skills needed to support business operations."
+  },
+  {
+    "id": 106,
+    "ref": "E-HRS-24",
+    "name": "Human Resources",
+    "description": "Critical Cybersecurity & Privacy Skill Gaps",
+    "content": "Documented evidence of personnel management practices to formally identify critical cybersecurity skill gaps."
+  },
+  {
+    "id": 107,
+    "ref": "E-HRS-25",
+    "name": "Human Resources",
+    "description": "Separation of Duties (SoD)",
+    "content": "Documented evidence of personnel management practices to implement and maintain Separation of Duties (SoD) to prevent potential inappropriate activity without collusion."
+  },
+  {
+    "id": 108,
+    "ref": "E-HRS-26",
+    "name": "Human Resources",
+    "description": "Vital Cybersecurity & Privacy Staff",
+    "content": "Documented evidence of personnel management practices to formally identify vital cybersecurity & privacy personnel."
+  },
+  {
+    "id": 109,
+    "ref": "E-IAM-01",
+    "name": "Identity & Access Management",
+    "description": "Access Permission Review",
+    "content": "Documented evidence of periodic access permission reviews."
+  },
+  {
+    "id": 110,
+    "ref": "E-IAM-02",
+    "name": "Identity & Access Management",
+    "description": "Defined Roles (RBAC)",
+    "content": "Documented evidence of defined access control-specific roles (e.g., Role Based Access Control (RBAC))."
+  },
+  {
+    "id": 111,
+    "ref": "E-IAM-03",
+    "name": "Identity & Access Management",
+    "description": "Privileged User Inventory",
+    "content": "Documented evidence of an inventory of privileged users across systems, applications and services (internal and external)."
+  },
+  {
+    "id": 112,
+    "ref": "E-IRO-01",
+    "name": "Incident Response",
+    "description": "Incident Response Program (IRP)",
+    "content": "Documented evidence of a Incident Response Plan (IRP). This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on organizational practices that support existing policies and standards."
+  },
+  {
+    "id": 113,
+    "ref": "E-IRO-02",
+    "name": "Incident Response",
+    "description": "Indicators of Compromise (IOC)",
+    "content": "Documented evidence of defined Indicators of Compromise (IOC)."
+  },
+  {
+    "id": 114,
+    "ref": "E-IRO-03",
+    "name": "Incident Response",
+    "description": "Incident Tracking",
+    "content": "Documented evidence of a centralized repository to track cybersecurity and privacy incidents."
+  },
+  {
+    "id": 115,
+    "ref": "E-IRO-04",
+    "name": "Incident Response",
+    "description": "IRP Testing",
+    "content": "Documented evidence of an Incident Response Plan (IRP)-related testing activity."
+  },
+  {
+    "id": 116,
+    "ref": "E-IRO-05",
+    "name": "Incident Response",
+    "description": "Table Top Exercises",
+    "content": "Documented evidence of \"table top\" exercises that test incident response practices."
+  },
+  {
+    "id": 117,
+    "ref": "E-IRO-06",
+    "name": "Incident Response",
+    "description": "IRP Training",
+    "content": "Documented evidence of an Incident Response Plan (IRP)-related training activity."
+  },
+  {
+    "id": 118,
+    "ref": "E-IRO-07",
+    "name": "Incident Response",
+    "description": "IRP Updates",
+    "content": "Documented evidence of a periodic review process for the organization's Incident Response Plan (IRP) to identify necessary updates."
+  },
+  {
+    "id": 119,
+    "ref": "E-IRO-08",
+    "name": "Incident Response",
+    "description": "Root Cause Analysis (RCA)",
+    "content": "Documented evidence of a Root Cause Analysis (RCA) from any Incident Response Plan (IRP)-related training, testing or incident."
+  },
+  {
+    "id": 120,
+    "ref": "E-IAO-01",
+    "name": "Information Assurance",
+    "description": "Information Assurance Program (IAP)",
+    "content": "Documented evidence of a Information Assurance Program (IAP). This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on organizational practices that support existing policies and standards."
+  },
+  {
+    "id": 121,
+    "ref": "E-IAO-02",
+    "name": "Information Assurance",
+    "description": "Artificial Intelligence Test, Evaluation, Validation & Verification (AI TEVV)",
+    "content": "Documented evidence of Artificial Intelligence Test, Evaluation, Validation & Verification (AI TEVV) practices to enable AI-related testing, identification of incidents and information sharing."
+  },
+  {
+    "id": 122,
+    "ref": "E-MNT-01",
+    "name": "Maintenance",
+    "description": "Maintenance - Authorized Maintenance Personnel",
+    "content": "Documented evidence of personnel who have designated maintenance roles."
+  },
+  {
+    "id": 123,
+    "ref": "E-MNT-02",
+    "name": "Maintenance",
+    "description": "Maintenance Plan",
+    "content": "Documented evidence of a Maintenance Plan. This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on organizational practices that support existing policies and standards."
+  },
+  {
+    "id": 124,
+    "ref": "E-MNT-03",
+    "name": "Maintenance",
+    "description": "Patch Management",
+    "content": "Documented evidence of maintenance activities for systems, applications and services management (e.g., patch management)."
+  },
+  {
+    "id": 125,
+    "ref": "E-MNT-04",
+    "name": "Maintenance",
+    "description": "Infrastructure Maintenance",
+    "content": "Documented evidence of maintenance activities for the organization's infrastructure and supporting systems."
+  },
+  {
+    "id": 126,
+    "ref": "E-NET-01",
+    "name": "Network Security",
+    "description": "Content / DNS Filtering",
+    "content": "Documented evidence of the methods that content / DNS filtering is implemented to prevent Internet traffic from prohibited content and/or hostile web sites."
+  },
+  {
+    "id": 127,
+    "ref": "E-NET-02",
+    "name": "Network Security",
+    "description": "Wireless Rogue Detection",
+    "content": "Documented evidence of automated or manual means to detect rogue wireless devices."
+  },
+  {
+    "id": 128,
+    "ref": "E-NET-03",
+    "name": "Network Security",
+    "description": "Work From Anywhere (WFA) Guidance (remote workers)",
+    "content": "Documented evidence of administrative and technical measures that are enforced at \"alternate work sites\" which includes working from home or working while traveling on business."
+  },
+  {
+    "id": 129,
+    "ref": "E-PES-01",
+    "name": "Physical Security",
+    "description": "Environmental Monitoring",
+    "content": "Documented evidence of environmental monitoring (e.g., water leaks, temperature, humidity, etc.)"
+  },
+  {
+    "id": 130,
+    "ref": "E-PES-02",
+    "name": "Physical Security",
+    "description": "Visitor Logbook",
+    "content": "Documented evidence of a visitor management and logging visitor activities."
+  },
+  {
+    "id": 131,
+    "ref": "E-PES-03",
+    "name": "Physical Security",
+    "description": "Defined Physical Security Roles",
+    "content": "Documented evidence of defined physical access control-specific roles that limit physical access to rooms and/or facilities."
+  },
+  {
+    "id": 132,
+    "ref": "E-PES-04",
+    "name": "Physical Security",
+    "description": "Site Security Plan (Site Plan)",
+    "content": "Documented evidence of a site security plan (site plan)."
+  },
+  {
+    "id": 133,
+    "ref": "E-PRI-01",
+    "name": "Privacy",
+    "description": "Accounting of Disclosures",
+    "content": "Documented evidence of accounting for privacy-related disclosures."
+  },
+  {
+    "id": 134,
+    "ref": "E-PRI-02",
+    "name": "Privacy",
+    "description": "Authorized Use",
+    "content": "Documented evidence of authorized use definitions for privacy-related data operations."
+  },
+  {
+    "id": 135,
+    "ref": "E-PRI-03",
+    "name": "Privacy",
+    "description": "Data Authority Registrations",
+    "content": "Documented evidence of registrations made with applicable data authorities for privacy-related data processing."
+  },
+  {
+    "id": 136,
+    "ref": "E-PRI-04",
+    "name": "Privacy",
+    "description": "Data Protection Impact Assessment (DPIA)",
+    "content": "Documented evidence of Data Protection Impact Assessment (DPIA)."
+  },
+  {
+    "id": 137,
+    "ref": "E-PRI-05",
+    "name": "Privacy",
+    "description": "Data Sharing Agreement",
+    "content": "Documented evidence of formal data sharing practices that address, at a minimum:\n� The business justification for the data sharing;\n� The type / category of data being shared;\n� The third-parties the data is being shared with;\n� Lawful bases for data sharing; and\n� Data subject rights."
+  },
+  {
+    "id": 138,
+    "ref": "E-PRI-06",
+    "name": "Privacy",
+    "description": "Data Subject Access",
+    "content": "Documented evidence of how data subject access requests are handled that includes intake through remediation."
+  },
+  {
+    "id": 139,
+    "ref": "E-PRI-07",
+    "name": "Privacy",
+    "description": "Personal Data Categories",
+    "content": "Documented evidence of formal personal data categories."
+  },
+  {
+    "id": 140,
+    "ref": "E-PRI-08",
+    "name": "Privacy",
+    "description": "Privacy Notice",
+    "content": "Documented evidence of a publicly-accessible privacy notice."
+  },
+  {
+    "id": 141,
+    "ref": "E-PRM-01",
+    "name": "Resource Management",
+    "description": "Cybersecurity Business Plan (CBP)",
+    "content": "Documented evidence of a cybersecurity-specific business plan that documents a strategic plan and discrete objectives."
+  },
+  {
+    "id": 142,
+    "ref": "E-PRM-02",
+    "name": "Resource Management",
+    "description": "Portfolio Roadmap",
+    "content": "Documented evidence of the organization's roadmap for implementing cybersecurity-related initiatives and technologies."
+  },
+  {
+    "id": 143,
+    "ref": "E-PRM-03",
+    "name": "Resource Management",
+    "description": "Secure Development Lifecycle (SDLC)",
+    "content": "Documented evidence of a secure development lifecycle that the organization utilizes for new initiatives or significant changes to existing initiatives to ensure cybersecurity and privacy principles are identified and implemented by default."
+  },
+  {
+    "id": 144,
+    "ref": "E-PRM-04",
+    "name": "Resource Management",
+    "description": "Targeted Maturity Level",
+    "content": "Documented evidence of a targeted level of control maturity from a Capability Maturity Model (CMM)."
+  },
+  {
+    "id": 145,
+    "ref": "E-RSK-01",
+    "name": "Risk Management",
+    "description": "Risk Management Program (RMP)",
+    "content": "Documented evidence of a Risk Management Program (RMP). This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on organizational practices that support existing policies and standards."
+  },
+  {
+    "id": 146,
+    "ref": "E-RSK-02",
+    "name": "Risk Management",
+    "description": "Cybersecurity Supply Chain Risk Management (C-SCRM)",
+    "content": "Documented evidence of a Cybersecurity Supply Chain Risk Management (C-SCRM). This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on organizational practices that support existing policies and standards."
+  },
+  {
+    "id": 147,
+    "ref": "E-RSK-03",
+    "name": "Risk Management",
+    "description": "Plan of Actions & Milestones (POA&M) / Risk Register",
+    "content": "Documented evidence of a POA&M, or risk register, that tracks control deficiencies from identification through remediation."
+  },
+  {
+    "id": 148,
+    "ref": "E-RSK-04",
+    "name": "Risk Management",
+    "description": "Cybersecurity Risk Assessment (RA)",
+    "content": "Documented evidence of a cybersecurity-specific risk assessment."
+  },
+  {
+    "id": 149,
+    "ref": "E-RSK-05",
+    "name": "Risk Management",
+    "description": "Supply Chain Risk Assessment (SCRA)",
+    "content": "Documented evidence of supply chain-specific risk assessment that evaluates risks that are specific to its supply chain."
+  },
+  {
+    "id": 150,
+    "ref": "E-RSK-06",
+    "name": "Risk Management",
+    "description": "Risk Threshold",
+    "content": "Documented evidence the organization has a defined risk threshold."
+  },
+  {
+    "id": 151,
+    "ref": "E-RSK-07",
+    "name": "Risk Management",
+    "description": "Risk Tolerance",
+    "content": "Documented evidence the organization has a defined risk tolerance."
+  },
+  {
+    "id": 152,
+    "ref": "E-TDA-01",
+    "name": "Technology Design & Acquisition",
+    "description": "Secure Software Development Principles (SSDP)",
+    "content": "Documented evidence of a Secure Software Development Principles (SSDP). This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on organizational practices that support existing policies and standards."
+  },
+  {
+    "id": 153,
+    "ref": "E-TDA-02",
+    "name": "Technology Design & Acquisition",
+    "description": "Security & Privacy by Design (SPBD)",
+    "content": "Documented evidence of a Security & Privacy by Design (SPBD). This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on organizational practices that support existing policies and standards."
+  },
+  {
+    "id": 154,
+    "ref": "E-TDA-03",
+    "name": "Technology Design & Acquisition",
+    "description": "Application Security Testing",
+    "content": "Documented evidence of application security testing (e.g., DAST, SAST, fuzzing, etc.)."
+  },
+  {
+    "id": 155,
+    "ref": "E-TDA-04",
+    "name": "Technology Design & Acquisition",
+    "description": "Design and Development Plan (DDP)",
+    "content": "Documented evidence of an engineering method to control the design process and govern the lifecycle of the product/service."
+  },
+  {
+    "id": 156,
+    "ref": "E-TDA-05",
+    "name": "Technology Design & Acquisition",
+    "description": "Failure Mode and Effect Analysis (FMEA)",
+    "content": "Documented evidence of an engineering method designed to define, identify, and present solutions for system failures, problems, or errors."
+  },
+  {
+    "id": 157,
+    "ref": "E-TDA-06",
+    "name": "Technology Design & Acquisition",
+    "description": "Multi Patient Harm View (MPHV)",
+    "content": "Documented evidence of a description of a Multi Patient Harm View (MPHV) that explains how the device / system defends against and/or responds to attacks with the potential to harm multiple patients. [note MPHV is specific to medical device manufacturers]"
+  },
+  {
+    "id": 158,
+    "ref": "E-TDA-07",
+    "name": "Technology Design & Acquisition",
+    "description": "Ports, Protocols & Services (PPS)",
+    "content": "Documented evidence of all ports, protocols and services in use by the system, application or service."
+  },
+  {
+    "id": 159,
+    "ref": "E-TDA-08",
+    "name": "Technology Design & Acquisition",
+    "description": "Secure Engineering Principles (SEP)",
+    "content": "Documented evidence of defined secure engineering principles used to ensure Confidentiality, Integrity, Availability & Safety (CIAS) concerns are properly addressed in the design and implementation of systems, applications and services."
+  },
+  {
+    "id": 160,
+    "ref": "E-TDA-09",
+    "name": "Technology Design & Acquisition",
+    "description": "Security Architecture View",
+    "content": "Documented evidence that identifies security-relevant system elements and their interfaces:\n� Define security context, domains, boundaries, and external interfaces of the system;\n� Align the architecture with (a) the system security objectives and requirements, (b) security design characteristics; and\n� Establish traceability of architecture elements to user and system security requirements."
+  },
+  {
+    "id": 161,
+    "ref": "E-TDA-10",
+    "name": "Technology Design & Acquisition",
+    "description": "Security Use Case View (SUCV)",
+    "content": "Documented evidence of diagrams, with explanatory text, describing various security scenarios in each of the operational and clinical functionality states of the system and how the system addresses each scenario architecturally. [note SUCV is specific to medical device manufacturers]"
+  },
+  {
+    "id": 162,
+    "ref": "E-TDA-11",
+    "name": "Technology Design & Acquisition",
+    "description": "Software Assurance Maturity Model (SAMM)",
+    "content": "Documented evidence of a Software Assurance Maturity Model (SAMM)."
+  },
+  {
+    "id": 163,
+    "ref": "E-TDA-12",
+    "name": "Technology Design & Acquisition",
+    "description": "Software Bill of Materials (SBOM)",
+    "content": "Documented evidence of a Software Bill of Materials (SBOM)."
+  },
+  {
+    "id": 164,
+    "ref": "E-TDA-13",
+    "name": "Technology Design & Acquisition",
+    "description": "Software Escrow",
+    "content": "Documented evidence of a software escrow solution."
+  },
+  {
+    "id": 165,
+    "ref": "E-TDA-14",
+    "name": "Technology Design & Acquisition",
+    "description": "System Security & Privacy Plan (SSPP)",
+    "content": "Documented evidence of at least one (1) System Security Plan (SSPP) that covers the sensitive/regulated data environment. There may be multiple SSPPs, based on applicable contracts."
+  },
+  {
+    "id": 166,
+    "ref": "E-TDA-15",
+    "name": "Technology Design & Acquisition",
+    "description": "Updateability / Patchability View",
+    "content": "Documented evidence of a description of the end-to-end process permitting software updates and patches to be deployed to the device/service."
+  },
+  {
+    "id": 167,
+    "ref": "E-TDA-16",
+    "name": "Technology Design & Acquisition",
+    "description": "Vulnerability Disclosure Program (VDP)",
+    "content": "Documented evidence of a Vulnerability Disclosure Program (VDP) (e.g., bug bounty)."
+  },
+  {
+    "id": 168,
+    "ref": "E-THR-01",
+    "name": "Threat Management",
+    "description": "Indicators of Exposure (IOE)",
+    "content": "Documented evidence of defined Indicators of Exposure (IOE)."
+  },
+  {
+    "id": 169,
+    "ref": "E-THR-02",
+    "name": "Threat Management",
+    "description": "Industry Associations / Memberships",
+    "content": "Documented evidence of industry associations the organization utilizes to maintain situational awareness of evolving threats and trends."
+  },
+  {
+    "id": 170,
+    "ref": "E-THR-03",
+    "name": "Threat Management",
+    "description": "Threat Intelligence Feeds (TIF)",
+    "content": "Documented evidence of threat intelligence feeds."
+  },
+  {
+    "id": 171,
+    "ref": "E-THR-04",
+    "name": "Threat Management",
+    "description": "Threat Intelligence Program (TIP)",
+    "content": "Documented evidence of a formal capability that intakes and analysis threat information to determine specific threat to the organization and necessary actions to mitigate the threat(s)."
+  },
+  {
+    "id": 172,
+    "ref": "E-THR-05",
+    "name": "Threat Management",
+    "description": "Threat Mitigation",
+    "content": "Documented evidence of steps taken to mitigate identified threats."
+  },
+  {
+    "id": 173,
+    "ref": "E-TPM-01",
+    "name": "Third-Party Management",
+    "description": "Third-Party Contracts",
+    "content": "Documented evidence of third-party contractual obligations for cybersecurity and privacy protections."
+  },
+  {
+    "id": 174,
+    "ref": "E-TPM-02",
+    "name": "Third-Party Management",
+    "description": "Third-Party Criticality Assessment",
+    "content": "Documented evidence of third-party criticality assessment that evaluates the critical nature of each third-party the organization works with."
+  },
+  {
+    "id": 175,
+    "ref": "E-TPM-03",
+    "name": "Third-Party Management",
+    "description": "Third-Party Service Reviews",
+    "content": "Documented evidence of a formal, annual stakeholder review of third-party services for each Third-Party Service Provider (TSP)."
+  },
+  {
+    "id": 176,
+    "ref": "E-TPM-04",
+    "name": "Third-Party Management",
+    "description": "Service Level Agreements (SLAs)",
+    "content": "Documented evidence of third-party Service Level Agreements (SLAs) to support business operations."
+  },
+  {
+    "id": 177,
+    "ref": "E-TPM-05",
+    "name": "Third-Party Management",
+    "description": "Break Clauses",
+    "content": "Documented evidence of \"break clauses\" in third-party contracts."
+  },
+  {
+    "id": 178,
+    "ref": "E-VPM-01",
+    "name": "Vulnerability & Patch Management",
+    "description": "Vulnerability & Patch Management Program (VPMP)",
+    "content": "Documented evidence of a Vulnerability & Patch Management Program (VPMP). This is program-level documentation in the form of a runbook, playbook or a similar format provides guidance on organizational practices that support existing policies and standards."
+  },
+  {
+    "id": 179,
+    "ref": "E-VPM-02",
+    "name": "Vulnerability Management",
+    "description": "Penetration Testing - Application",
+    "content": "Documented evidence of Application Security Testing (AST) activities:\n� Abuse case, malformed, and unexpected inputs (e.g.,  Robustness or Fuzz testing);\n� Attack surface analysis;\n� Vulnerability chaining;\n� Closed box testing of known vulnerability scanning;\n� Software composition analysis of binary executable files; and/or\n� Static and dynamic code analysis, including testing for credentials that are �hardcoded,� default, easily guessed, and easily compromised."
+  },
+  {
+    "id": 180,
+    "ref": "E-VPM-03",
+    "name": "Vulnerability Management",
+    "description": "Penetration Testing - Network",
+    "content": "Documented evidence of internal and external network penetration testing activities that focus on discovering and exploiting security vulnerabilities."
+  },
+  {
+    "id": 181,
+    "ref": "E-VPM-04",
+    "name": "Vulnerability Management",
+    "description": "Red Team Testing",
+    "content": "Documented evidence of \"red team\" testing."
+  },
+  {
+    "id": 182,
+    "ref": "E-VPM-05",
+    "name": "Vulnerability Management",
+    "description": "Vulnerability Assessments",
+    "content": "Documented evidence of internal and external vulnerability assessment activities."
+  }
+]
