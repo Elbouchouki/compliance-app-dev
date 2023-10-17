@@ -189,7 +189,7 @@ const SidebarItem = (
   return (
     <Link
       href={item.path as string}
-      className={cn("flex flex-row items-center  h-10 cursor-pointer text-black/80 dark:text-white/80 hover:dark:bg-gray-700 hover:bg-gray-300/70 px-3 rounded-md", {
+      className={cn("flex flex-row items-center h-10 cursor-pointer text-black/80 dark:text-white/80 hover:dark:bg-gray-700 hover:bg-gray-300/70 px-3 rounded-md", {
         "bg-gray-200 dark:bg-gray-800": item.path === pathname,
         "flex-row-reverse justify-start": langStore?.rtl
       })} >

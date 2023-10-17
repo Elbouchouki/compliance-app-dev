@@ -3,6 +3,7 @@ import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
 import { prisma } from "@/server/db";
 import { clerkClient } from "@clerk/nextjs";
+import { randomUUID } from "crypto";
 
 export const userRouter = router({
   getAll: publicProcedure.query(() => {
@@ -58,15 +59,44 @@ export const userRouter = router({
   //     })
   //   }
   // }),
-
-  // add: publicProcedure.input(
-  //   z.object({
-  //     name: z.string(),
-  //     userId: z.optional(z.string())
-  //   })
-  // ).mutation(({ input }) => {
-
-  // }),
+  checkBeforeAdd: publicProcedure.input(
+    z.object({
+      email: z.string()
+    })
+  ).mutation(({ input }) => {
+    return clerkClient.users.getCount({
+      emailAddress: [input.email],
+      username: [input.email.split("@")[0]]
+    });
+  }),
+  add: publicProcedure.input(
+    z.object({
+      firstName: z.string(),
+      lastName: z.string(),
+      email: z.string(),
+      role: z.string().optional(),
+      tenant: z.string().optional(),
+      active: z.boolean().optional(),
+    })
+  ).mutation(async ({ input }) => {
+    return clerkClient.users.createUser({
+      externalId: randomUUID(),
+      firstName: input.firstName,
+      username: input.email.split("@")[0],
+      emailAddress: [
+        input.email
+      ],
+      lastName: input.lastName,
+      skipPasswordChecks: true,
+      skipPasswordRequirement: true,
+      password: "test123",
+      publicMetadata: {
+        role: input.role,
+        tenant: input.tenant,
+        active: input.active || true
+      }
+    })
+  }),
 
   update: publicProcedure.input(
     z.object({

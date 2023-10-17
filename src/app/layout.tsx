@@ -33,13 +33,19 @@ export default async function RootLayout({
           <TRPCProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <TooltipProvider>
-                <main className='w-screen h-screen'>{children}</main>
+                <main className='w-screen h-screen bg-gradient-to-b from-background to-navbar'
+                  style={({
+                    "--tw-gradient-stops": 'var(--tw-gradient-from) 45%, currentcolor, var(--tw-gradient-to) 45%',
+                  } as any)}
+                >
+                  {children}
+                </main>
               </TooltipProvider>
             </ThemeProvider>
           </TRPCProvider>
           <Toaster />
         </body>
       </html>
-    </ClerkProvider>
+    </ClerkProvider >
   )
 }

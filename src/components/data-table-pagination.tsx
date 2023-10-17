@@ -33,7 +33,7 @@ export function DataTablePagination<TData>({
 
   return (
 
-    <div className="flex flex-col justify-between py-2 lg:items-center lg:flex-row ">
+    <div className="flex flex-col justify-between lg:items-center lg:flex-row ">
       <div className={cn("flex my-2 gap-1 text-sm lg:my-0 text-muted-foreground", {
         "flex-row-reverse": langStore?.rtl === true,
       })}>

@@ -1,36 +1,30 @@
 "use client"
 
-
-import * as z from "zod"
-
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { PlusCircle } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 import { useState } from "react"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
-import useUserStore from "@/store/userStore"
 import UserForm from "@/components/tenant-users/tenant-users-form"
-import useTenantStore from "@/store/tenantStore";
 import useLangStore from "@/store/langagueStore";
 
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 
-const AddUserDialogButton = ({
+const AddUserSheetButton = ({
   className
 }: {
   className?: string
 }) => {
 
   const [open, setOpen] = useState(false);
-  const tenantStore = useStore(useTenantStore, state => state)
   const langStore = useStore(useLangStore, state => state)
   const dict = langStore?.getDictionary()
 
@@ -41,10 +35,14 @@ const AddUserDialogButton = ({
     )
   }
 
+  function close() {
+    setOpen(false)
+  }
+
   return (
 
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
         <Button size="sm" className={cn("flex flex-row gap-2", {
           "flex-row-reverse": langStore?.rtl === true,
         })}>
@@ -55,32 +53,32 @@ const AddUserDialogButton = ({
             }
           </span>
         </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle className={cn({
+      </SheetTrigger>
+      <SheetContent className="sm:max-w-[425px] flex flex-col gap-5" side={langStore?.rtl === true ? "left" : "right"}>
+        <SheetHeader className="py-3">
+          <SheetTitle className={cn({
             "text-right mr-3": langStore?.rtl
           })}>
             {
               dict?.addUser || "Add User"
             }
-          </DialogTitle>
-          <DialogDescription className={cn({
+          </SheetTitle>
+          <SheetDescription className={cn({
             "text-right mr-3": langStore?.rtl
           })}>
             {
               dict?.addNewTenantUserToTheSystem || "Add new user to the system"
             }
-          </DialogDescription>
-        </DialogHeader>
-        <div className={cn("w-full", className)}>
-          <UserForm onSubmit={onSubmit} formType="add" />
+          </SheetDescription>
+        </SheetHeader>
+        <div className={cn("w-full grow", className)}>
+          <UserForm onSubmit={onSubmit} formType="add" close={close} />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
 
 
 
   )
 }
-export default AddUserDialogButton
+export default AddUserSheetButton

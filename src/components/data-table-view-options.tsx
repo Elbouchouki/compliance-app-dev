@@ -32,7 +32,7 @@ export function DataTableViewOptions<TData>({
         <Button
           variant="outline"
           size="icon"
-          className={cn("flex flex-row h-8 ml-auto gap-2", {
+          className={cn("flex flex-row h-8 ml-auto gap-2 text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10", {
             "flex-row-reverse": langStore?.rtl === true,
           })}
         >

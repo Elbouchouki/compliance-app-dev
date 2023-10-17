@@ -43,6 +43,7 @@ import { trpc } from "@/app/_trpc/client"
 import { EmailAddress, User } from "@clerk/nextjs/server"
 import { Skeleton } from "@/components/ui/skeleton"
 import { GET_ROLES } from "@/mock"
+import TableSkeleton from "@/components/table-skeleton"
 
 export function DataTable<TData, TValue>(
 ) {
@@ -81,7 +82,7 @@ export function DataTable<TData, TValue>(
         })} column={column} title="" />
       ),
       cell: ({ row }) =>
-        <div className="flex justify-center items-center w-8 h-8 rounded-full">
+        <div className="flex justify-center items-center m-1 mx-2 w-8 h-8 rounded-full">
           <Avatar className="w-8 h-8">
             <AvatarImage src={row.getValue("avatar")} alt={`${row.getValue("firstName")}'s avatar`} />
             <AvatarFallback>
@@ -161,10 +162,12 @@ export function DataTable<TData, TValue>(
           dict?.active || "Active"
         } />
       ),
-      cell: ({ row }) => <div className={cn("text-left whitespace-nowrap", {
-        "text-right": langStore?.rtl
+      cell: ({ row }) => <div className={cn("text-left whitespace-nowrap text-red-500", {
+        "text-right": langStore?.rtl,
+      }, {
+        "text-green-500": (row.getValue("active") as any)?.active,
       })} >
-        {
+        • {
           (row.getValue("active") as any)?.active ?
             dict?.enabled || "Enabled"
             : dict?.disabled || "Disabled"
@@ -195,8 +198,8 @@ export function DataTable<TData, TValue>(
         return <div className={cn("lg:whitespace-normal whitespace-nowrap flex gap-1 flex-wrap justify-start", {
           "flex-row-reverse": langStore?.rtl
         })} >
-          <Badge variant="outline" >
-            {getFormattedRole(role)}
+          <Badge className="bg-blue-500 hover:bg-blue-500 rounded-xl font-normal text-white" >
+            • {getFormattedRole(role)}
           </Badge>
         </div>
       },
@@ -255,12 +258,14 @@ export function DataTable<TData, TValue>(
   }
 
   if (users.isLoading) {
-    return <Skeleton className="h-full w-full grow" />
+    return <TableSkeleton />
   }
   return (
-    <div className="px-4 py-3 space-y-4 dark:border bg-card">
-      <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
-      <div className="border rounded-md ">
+    <div className="flex  flex-col py-3 gap-4 bg-navbar border">
+      <div className="mx-6">
+        <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
+      </div>
+      <div className="border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -313,7 +318,9 @@ export function DataTable<TData, TValue>(
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <div className="mx-6">
+        <DataTablePagination table={table} />
+      </div>
       <EditUserDialog />
     </div>
   )

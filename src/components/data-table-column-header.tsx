@@ -50,11 +50,11 @@ export function DataTableColumnHeader<TData, TValue>({
             <Button
               variant="ghost"
               size="sm"
-              className={cn("flex flex-row items-center gap-3 h-8 data-[state=open]:bg-accent ", {
+              className={cn("flex flex-row items-center  gap-3 h-8 data-[state=open]:bg-accent ", {
                 "flex-row-reverse": langStore?.rtl === true,
               })}
             >
-              <span className="">{title}</span>
+              <span >{title}</span>
               {column.getIsSorted() === "desc" ? (
                 <ArrowDownIcon className="w-4 h-4 ml-2" />
               ) : column.getIsSorted() === "asc" ? (

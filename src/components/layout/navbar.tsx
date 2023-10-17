@@ -48,8 +48,9 @@ const SearchButton = () => {
         <Button
           size="icon"
           variant="outline"
+          className="text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10"
         >
-          <Search className="w-5 h-5 text-muted-foreground bg-navbar-gray" />
+          <Search className="w-5 h-5" />
         </Button>
       </div>
     </DialogTrigger>
@@ -62,7 +63,7 @@ const SearchButton = () => {
         })} />
         <Input
           type="search"
-          placeholder="Type a command or search..."
+          placeholder={dict?.typeACommandOrSearch || "Type a command or search..."}
           className={cn("w-full h-12 border-0 ring-0 focus-visible:ring-0 focus-visible:outline-none", {
             "text-right": langStore?.rtl
           })}
@@ -177,7 +178,7 @@ const Navbar = () => {
   const pathname = usePathname()
 
   return (
-    <nav className={cn("flex items-center justify-center w-full h-16 gap-4 px-4 xl:px-8 py-1 flex-none bg-navbar border-b-[3px] border-b-primary-foreground", {
+    <nav className={cn("flex items-center justify-center w-full h-16 gap-4 px-4 xl:px-8 py-1 flex-none bg-navbar border-b-[3px] border-b-primary-foreground dark:border-b-primary", {
       "flex-row-reverse": langStore?.rtl
     })}>
       <div className={cn("flex items-center justify-start gap-2 grow", {
@@ -250,7 +251,9 @@ const Navbar = () => {
       <div className={cn("flex flex-row items-center gap-4", {
         "flex-row-reverse": langStore?.rtl
       })}>
-        <SearchButton />
+        <div className="hidden sm:flex">
+          <SearchButton />
+        </div>
         <ThemeToggle />
         <LangSwitch />
         <UserNav />

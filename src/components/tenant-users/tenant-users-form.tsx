@@ -20,11 +20,12 @@ import { Icons } from "../icons"
 
 type UserFormProps = {
   onSubmit: () => void
+  close: () => void
   formType: "add" | "edit"
   user?: User
 }
 
-const UserForm = ({ onSubmit, formType, user }: UserFormProps) => {
+const UserForm = ({ onSubmit, formType, user, close }: UserFormProps) => {
 
   const langStore = useStore(useLangStore, state => state)
   const dict = langStore?.getDictionary()
@@ -32,23 +33,25 @@ const UserForm = ({ onSubmit, formType, user }: UserFormProps) => {
   const tenants = trpc.tenant.getAll.useQuery({
     userId: currentUser.user?.id
   })
+  const addMutation = trpc.user.add.useMutation()
+  const checkBeforeAdd = trpc.user.checkBeforeAdd.useMutation()
   const mutation = trpc.user.update.useMutation()
 
   const utils = trpc.useContext();
   const FormSchema = z.object({
-    tenant: z.optional(z.string()),
-    firstName: z.optional(z.string().min(4, {
+    tenant: z.string().optional(),
+    firstName: z.string().min(4, {
       message: dict?.FromSchemaValidation.firstName || "First Name must be at least 4 characters.",
-    })),
-    lastName: z.optional(z.string().min(4, {
+    }),
+    lastName: z.string().min(4, {
       message: dict?.FromSchemaValidation.lastName || "Last Name must be at least 4 characters.",
-    })),
-    email: z.optional(z.string().email({
+    }),
+    email: z.string().email({
       message: dict?.FromSchemaValidation.invalidEmailAddress || "Invalid email address.",
-    })),
-    role: z.optional(z.string()),
-    active: z.optional(z.boolean()),
-    id: z.optional(z.string())
+    }),
+    role: z.string().optional(),
+    active: z.boolean().optional(),
+    id: z.string().optional()
   })
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -65,7 +68,31 @@ const UserForm = ({ onSubmit, formType, user }: UserFormProps) => {
   })
 
 
-  const onSubmitForm = (data: z.infer<typeof FormSchema>) => {
+  const onSubmitForm = async (data: z.infer<typeof FormSchema>) => {
+
+    checkBeforeAdd.mutate
+
+    if (formType === "add") {
+      addMutation.mutate(
+        {
+          firstName: data.firstName || "",
+          lastName: data.lastName || "",
+          email: data.email,
+          tenant: data.tenant,
+          role: data.role,
+          active: data.active,
+        },
+        {
+          onSuccess: () => {
+            utils.user.getAll.refetch().then(() => {
+              onSubmit()
+            })
+          }
+        }
+      )
+      return
+    }
+
     mutation.mutate(
       {
         firstName: data.firstName || "",
@@ -89,8 +116,8 @@ const UserForm = ({ onSubmit, formType, user }: UserFormProps) => {
 
 
   return (
-    <Form  {...form} >
-      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full flex flex-col gap-3" >
+    <Form  {...form}>
+      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full h-full flex flex-col gap-3" >
         <div className="flex flex-row gap-3">
           <div>
             <FormField
@@ -300,21 +327,29 @@ const UserForm = ({ onSubmit, formType, user }: UserFormProps) => {
             )}
           />
         </div>}
-        <div className={cn("mt-3", {
-          "flex flex-row-reverse": langStore?.rtl
+        <div className={cn("mt-auto grow flex gap-2 items-end", {
+          "flex-row-reverse ": langStore?.rtl
         })}>
           <Button type="submit"
-            disabled={mutation.isLoading}
-            className="flex flex-row gap-2"
+            disabled={mutation.isLoading || addMutation.isLoading}
+            onClick={() => { console.log(form.getValues()) }}
+            className="flex flex-row gap-2 "
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading
+              hidden: !mutation.isLoading && !addMutation.isLoading
             })} />
             <span>
               {
                 formType === "add" ?
                   dict?.addTenant || "Add Tenant"
                   : dict?.updateTenant || "Update Tenant"
+              }
+            </span>
+          </Button>
+          <Button type="reset" variant="ghost" onClick={() => close()} className="flex flex-row gap-2 hover:bg-destructive">
+            <span>
+              {
+                dict?.cancel || "Cancel"
               }
             </span>
           </Button>

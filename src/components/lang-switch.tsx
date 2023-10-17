@@ -34,7 +34,7 @@ const LangSwitch = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" className="text-muted-foreground bg-navbar-gray" >
+        <Button variant="outline" size="icon" className="text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10" >
           <p className="text-xs">
             {currentLang.key.toUpperCase()}
           </p>

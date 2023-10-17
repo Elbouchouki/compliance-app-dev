@@ -34,9 +34,14 @@ export function DataTableToolbar<TData>({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className={cn("flex flex-row  w-full gap-2", {
+      <div className={cn("flex flex-row  w-full gap-2 items-center", {
         "flex-row-reverse": langStore?.rtl === true,
       })}>
+        <div className="font-semibold">
+          {
+            dict?.users || "Users"
+          }
+        </div>
         {isFiltered && (
           <div className={cn("flex w-full", {
             "justify-end": langStore?.rtl === true,
@@ -58,10 +63,10 @@ export function DataTableToolbar<TData>({
           </div>
         )}
         <Input
-          placeholder={dict?.search || "Search..."}
+          placeholder={dict?.search || "Search"}
           value={globalFilter}
           onChange={(event) => setGlobalFilter(event.target.value)}
-          className={cn("h-8 w-[250px] text-left ml-auto", {
+          className={cn("h-8 w-[250px] text-left ml-auto text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10", {
             "mr-auto ml-0 text-right": langStore?.rtl === true,
           })}
         />
@@ -72,7 +77,7 @@ export function DataTableToolbar<TData>({
 
         <Button
           disabled={exporting}
-          size="icon" variant="outline" className="h-8" onClick={
+          size="icon" variant="outline" className="h-8 text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10" onClick={
             () => {
               toast.promise(
                 () => new Promise((resolve) => {
