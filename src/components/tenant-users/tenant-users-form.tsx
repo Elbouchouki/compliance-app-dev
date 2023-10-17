@@ -16,6 +16,7 @@ import { User } from "@clerk/nextjs/server"
 import { trpc } from "@/app/_trpc/client"
 import { useUser } from "@clerk/nextjs"
 import { Icons } from "../icons"
+import { toast } from "sonner"
 
 
 type UserFormProps = {
@@ -73,23 +74,34 @@ const UserForm = ({ onSubmit, formType, user, close }: UserFormProps) => {
     checkBeforeAdd.mutate
 
     if (formType === "add") {
-      addMutation.mutate(
-        {
-          firstName: data.firstName || "",
-          lastName: data.lastName || "",
-          email: data.email,
-          tenant: data.tenant,
-          role: data.role,
-          active: data.active,
-        },
-        {
-          onSuccess: () => {
-            utils.user.getAll.refetch().then(() => {
-              onSubmit()
-            })
+      checkBeforeAdd.mutate({ email: data.email }, {
+        onSuccess: (d) => {
+          if (d === 0) {
+            addMutation.mutate(
+              {
+                firstName: data.firstName || "",
+                lastName: data.lastName || "",
+                email: data.email,
+                tenant: data.tenant,
+                role: data.role,
+                active: data.active,
+              },
+              {
+                onSuccess: () => {
+                  utils.user.getAll.refetch().then(() => {
+                    onSubmit()
+                  })
+                }
+              }
+            )
+          } else {
+            close()
+            toast.error(
+              dict?.userAlreadyExist || "User already exist"
+            )
           }
         }
-      )
+      });
       return
     }
 
@@ -331,12 +343,12 @@ const UserForm = ({ onSubmit, formType, user, close }: UserFormProps) => {
           "flex-row-reverse ": langStore?.rtl
         })}>
           <Button type="submit"
-            disabled={mutation.isLoading || addMutation.isLoading}
+            disabled={mutation.isLoading || addMutation.isLoading || checkBeforeAdd.isLoading}
             onClick={() => { console.log(form.getValues()) }}
             className="flex flex-row gap-2 "
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading && !addMutation.isLoading
+              hidden: !mutation.isLoading && !addMutation.isLoading && !checkBeforeAdd.isLoading
             })} />
             <span>
               {

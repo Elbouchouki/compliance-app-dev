@@ -425,6 +425,7 @@ export type Dictionnary = {
   selected: string,
   toggleColumns: string,
   typeACommandOrSearch: string,
+  userAlreadyExist: string,
   clearFilters: string,
   backToAllQuestions: string,
   back: string,

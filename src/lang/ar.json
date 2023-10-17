@@ -48,6 +48,7 @@
   "tags": "العلامات",
   "labels": "التصنيفات",
   "typeACommandOrSearch": "اكتب أمرًا أو ابحث",
+  "userAlreadyExist": "المستخدم موجود بالفعل",
   "reports": "التقارير",
   "tenants": "المستأجرين",
   "users": "المستخدمين",

@@ -68,6 +68,7 @@
   "resetFilters": "Reset filters",
   "search": "Search",
   "typeACommandOrSearch": "Type a command or search",
+  "userAlreadyExist": "User already exist",
   "selected": "Selected",
   "toggleColumns": "Toggle columns",
   "clearFilters": "Clear filters",
