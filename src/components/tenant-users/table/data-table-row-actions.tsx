@@ -108,8 +108,8 @@ export function DataTableRowActions<TData>({
             Are you sure you want to delete this user?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete  {row.getValue("firstName")} {row.getValue("lastName")}'s account
-            and remove    {row.getValue("firstName")} {row.getValue("lastName")}'s data from our servers.
+            This action cannot be undone. This will permanently delete  {row.getValue("firstName")} {row.getValue("lastName")}&apos;s account
+            and remove {row.getValue("firstName")} {row.getValue("lastName")}&apos;s data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

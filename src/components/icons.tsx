@@ -40,7 +40,6 @@ import {
   PlusCircle,
   RefreshCw,
   Search,
-  Send,
   Settings,
   Shirt,
   ShoppingBag,
@@ -120,7 +119,6 @@ export const Icons: any = {
   tenantUsers: Users,
   help: HelpingHand,
   fqa: HelpCircle,
-
   github: GithubIcon,
   sun: SunMedium,
   moon: Moon,
@@ -153,7 +151,6 @@ export const Icons: any = {
   edit: Edit,
   crop: Crop,
   reset: RefreshCw,
-  send: Send,
   copy: Copy,
   downlaod: Download,
   warning: AlertTriangle,
