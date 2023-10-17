@@ -14,9 +14,12 @@ import {
 import useLangStore from "@/store/langagueStore"
 import { useStore } from "@/hooks/use-store"
 import { cn } from "@/lib/utils"
+import { CheckIcon } from "lucide-react"
+
+const themes = ["light", "dark", "system"] as const
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
   const langStore = useStore(useLangStore, state => state)
   const dict = langStore?.getDictionary()
   return (
@@ -29,21 +32,26 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align={langStore?.rtl === true ? "start" : "end"}>
-        <DropdownMenuItem onClick={() => setTheme("light")} >
-          <span className={cn({
-            "text-right w-full": langStore?.rtl
-          })}>{dict?.light}</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <span className={cn({
-            "text-right w-full": langStore?.rtl
-          })}>{dict?.dark}</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          <span className={cn({
-            "text-right w-full": langStore?.rtl
-          })}>{dict?.system}</span>
-        </DropdownMenuItem>
+        {
+          themes.map((t, index) => (
+            <DropdownMenuItem key={index} onClick={() => setTheme(t)} className={cn("flex flex-row gap-2", {
+              "flex-row-reverse": langStore?.rtl,
+            })}>
+              <span className={cn({
+                "text-right w-full ": langStore?.rtl
+              })}>
+                {
+                  dict?.[t]
+                }
+              </span>
+              <CheckIcon className={cn("w-4 h-4 ml-auto", {
+                "ml-0 mr-auto": langStore?.rtl
+              }, {
+                "hidden": t !== theme
+              })} />
+            </DropdownMenuItem>
+          ))
+        }
       </DropdownMenuContent>
     </DropdownMenu>
   )

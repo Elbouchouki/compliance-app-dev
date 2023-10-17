@@ -8,6 +8,8 @@ import useLangStore from "@/store/langagueStore";
 import { GET_KNOWLEDGE_BASE } from "@/mock";
 import { cn } from "@/lib/utils";
 import PageWrapper from "@/components/page-wrapper";
+import TabNav from "@/components/tab-nav";
+import { HelpNavItems } from "@/constants/navs.config";
 
 
 
@@ -19,6 +21,7 @@ export default function KnowledgeBases() {
 
   return (
     <PageWrapper className="flex flex-col h-full max-w-full gap-4 grow">
+      <TabNav navItems={HelpNavItems} />
       <div className="flex flex-col w-full gap-2 py-2 border-b sm:flex-row ">
         <div className="flex flex-col grow">
           <h1 className={

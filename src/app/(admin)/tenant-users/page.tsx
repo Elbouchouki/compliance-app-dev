@@ -18,30 +18,8 @@ export default function Tenants() {
   const dict = langStore?.getDictionary()
 
   return (
-    <PageWrapper className='flex flex-col max-w-full h-full gap-4 grow ' >
-      {/* <div className={cn("flex py-2 flex-col sm:flex-row ", {
-        " sm:flex-row-reverse": langStore?.rtl
-      })}> */}
+    <PageWrapper className='flex flex-col max-w-full h-full gap-4 grow'>
       <div className="flex flex-col gap-4 grow ">
-        {/* <div className="flex flex-col grow">
-          <h1 className={cn("text-xl items-center gap-2 font-semibold  flex flex-row", {
-            "flex-row-reverse": langStore?.rtl
-          })}>
-            <Icons.tenantUsers className=" w-5 h-5" />
-            <span>
-              {
-                dict?.users || 'Users'
-              }
-            </span>
-          </h1>
-          <p className={cn("text-sm text-muted-foreground", {
-            "text-right": langStore?.rtl
-          })}>
-            {
-              dict?.welcomeBack || "Welcome back, we're happy to have you here!"
-            }
-          </p>
-        </div> */}
         <div className="flex flex-col items-center py-5">
           <h1 className="text-3xl font-semibold">Our Beloved Members</h1>
           <h4 className="text-muted-foreground text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper vestibulum ac urna pharetra ligula</h4>

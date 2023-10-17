@@ -12,6 +12,7 @@ import { useStore } from "@/hooks/use-store"
 import useLangStore from "@/store/langagueStore"
 import { cn } from "@/lib/utils"
 import { Lang } from "@/types"
+import { CheckIcon } from "lucide-react"
 
 
 const LangSwitch = () => {
@@ -43,16 +44,20 @@ const LangSwitch = () => {
       <DropdownMenuContent className="flex flex-col gap-2" align={langStore?.rtl === true ? "start" : "end"}>
         {
           lang.map((l, index) => (
-            <DropdownMenuItem key={index} className="rounded-md" onClick={() => langStore?.changeLang(l.key)}>
+            <DropdownMenuItem key={index} onClick={() => langStore?.changeLang(l.key)}>
               <div className={cn("flex flex-row items-center  w-full", {
                 "flex-row-reverse justify-start": langStore?.rtl
               })}>
-                <Image src={l.icon} alt={l.text} width={24} height={24} className={cn("mr-3", {
-                  "ml-3 mr-0": langStore?.rtl
-                })} />
-                <span className="font-semibold">
+                <span className={cn({
+                  "text-right w-full ": langStore?.rtl
+                })}>
                   {l.text}
                 </span>
+                <CheckIcon className={cn("w-4 h-4 ml-auto", {
+                  "ml-0 mr-auto": langStore?.rtl
+                }, {
+                  "hidden": l.key !== currentLang.key
+                })} />
               </div>
             </DropdownMenuItem>
           ))

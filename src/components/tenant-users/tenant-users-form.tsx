@@ -67,6 +67,9 @@ const UserForm = ({ onSubmit, formType, user, close }: UserFormProps) => {
       id: user?.id
     }
   })
+  const users = trpc.user.getAll.useQuery(undefined, {
+    enabled: false
+  })
 
 
   const onSubmitForm = async (data: z.infer<typeof FormSchema>) => {
@@ -88,6 +91,7 @@ const UserForm = ({ onSubmit, formType, user, close }: UserFormProps) => {
               },
               {
                 onSuccess: () => {
+                  utils.user.getAll.invalidate()
                   utils.user.getAll.refetch().then(() => {
                     onSubmit()
                   })
@@ -343,12 +347,12 @@ const UserForm = ({ onSubmit, formType, user, close }: UserFormProps) => {
           "flex-row-reverse ": langStore?.rtl
         })}>
           <Button type="submit"
-            disabled={mutation.isLoading || addMutation.isLoading || checkBeforeAdd.isLoading}
+            disabled={mutation.isLoading || addMutation.isLoading || checkBeforeAdd.isLoading || users.isRefetching || users.isLoading || users.isFetching}
             onClick={() => { console.log(form.getValues()) }}
             className="flex flex-row gap-2 "
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading && !addMutation.isLoading && !checkBeforeAdd.isLoading
+              hidden: !mutation.isLoading && !addMutation.isLoading && !checkBeforeAdd.isLoading && !users.isLoading && !users.isRefetching && !users.isFetching
             })} />
             <span>
               {
@@ -358,7 +362,9 @@ const UserForm = ({ onSubmit, formType, user, close }: UserFormProps) => {
               }
             </span>
           </Button>
-          <Button type="reset" variant="ghost" onClick={() => close()} className="flex flex-row gap-2 hover:bg-destructive">
+          <Button
+            disabled={mutation.isLoading || addMutation.isLoading || checkBeforeAdd.isLoading || users.isRefetching || users.isLoading || users.isFetching}
+            type="reset" variant="ghost" onClick={() => close()} className="flex flex-row gap-2 hover:bg-destructive">
             <span>
               {
                 dict?.cancel || "Cancel"

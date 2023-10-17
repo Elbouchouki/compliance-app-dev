@@ -91,7 +91,7 @@ export const userRouter = router({
       skipPasswordRequirement: true,
       password: "test123",
       publicMetadata: {
-        role: input.role,
+        role: input.role || "visitor",
         tenant: input.tenant,
         active: input.active || true
       }

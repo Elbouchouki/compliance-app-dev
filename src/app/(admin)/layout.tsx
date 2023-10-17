@@ -17,9 +17,9 @@ export default function RootLayout({
     })}
     >
       {/* <Sidebar /> */}
-      <div className='flex flex-col w-full grow overflow-x-hidden '>
+      <div className='flex flex-col w-full grow overflow-x-hidden'>
         <Navbar />
-        <div className='px-1 my-2 py-2 md:py-6 mx-3 md:mx-10 xl:mx-28 grow no-scrollbar'>
+        <div className='grow no-scrollbar'>
           {children}
         </div>
       </div>

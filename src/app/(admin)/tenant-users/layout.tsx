@@ -11,5 +11,14 @@ export default function TenantUsersMetadataLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (<>{children}</>)
+  return (
+    <div
+      className='bg-gradient-to-b to-navbar from-background'
+      style={({
+        "--tw-gradient-stops": 'var(--tw-gradient-from) 45%, currentcolor, var(--tw-gradient-to) 45%',
+      } as any)}
+    >
+      {children}
+    </div>
+  )
 }

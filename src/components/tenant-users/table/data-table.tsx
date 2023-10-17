@@ -59,7 +59,6 @@ export function DataTable<TData, TValue>(
     []
   )
   const [sorting, setSorting] = React.useState<SortingState>([])
-
   const getFormattedRole = (role: string) => {
     if (role.toLocaleLowerCase() === "none") return dict?.none || "None"
     const formatted = GET_ROLES(langStore?.lang).filter(r => r.value === role.toLocaleLowerCase())[0]?.label
@@ -72,6 +71,8 @@ export function DataTable<TData, TValue>(
       accessorKey: "id",
       header: ({ column }) => (<></>),
       cell: ({ row }) => <></>,
+      enableSorting: false,
+      enableHiding: false,
     },
     {
       id: "avatar",
@@ -207,9 +208,11 @@ export function DataTable<TData, TValue>(
     },
     {
       id: "actions",
+
       cell: ({ row }) => <DataTableRowActions row={row} />,
     },
   ]
+
 
   const [globalFilter, setGlobalFilter] = React.useState<string>("")
 
@@ -261,7 +264,7 @@ export function DataTable<TData, TValue>(
     return <TableSkeleton />
   }
   return (
-    <div className="flex  flex-col py-3 gap-4 bg-navbar border">
+    <div className="flex flex-col py-3 gap-4 bg-navbar border">
       <div className="mx-6">
         <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
       </div>

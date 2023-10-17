@@ -48,7 +48,7 @@ const HelpForm = () => {
 
   return (
     <Form  {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col w-full gap-3">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col w-full gap-3 bg-navbar rounded-lg border px-4 py-6">
         {/* <div>
           <FormField
             control={form.control}
@@ -76,7 +76,13 @@ const HelpForm = () => {
             )}
           />
         </div> */}
+        <div className="font-semibold">
+          {
+            dict?.howCanweHelp || "How can we help you ?"
+          }
+        </div>
         <div>
+
           <FormField
             control={form.control}
             name="content"
@@ -84,16 +90,16 @@ const HelpForm = () => {
               <FormItem
                 className="flex flex-col w-full"
               >
-                <FormLabel className={cn("flex flex-row items-center gap-2", {
+                <FormLabel className={cn("flex flex-row items-center gap-2 text-xs", {
                   "flex-row-reverse": langStore?.rtl
                 })}>
                   {
-                    dict?.howCanweHelp || "How can we help?"
+                    dict?.description || "Description"
                   }
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    className={cn({
+                    className={cn("border bg-[#2b2d2f] p-3", {
                       "text-right": langStore?.rtl
                     })}
                     rows={5}
@@ -113,14 +119,17 @@ const HelpForm = () => {
             disabled={mutation.isLoading}
             className="flex flex-row gap-2"
           >
+            <span>
+              {
+                dict?.sendMessage || "Send"
+              }
+            </span>
             <Icons.loader className={cn("animate-spin w-4 h-4", {
               hidden: !mutation.isLoading
             })} />
-            <span>
-              {
-                dict?.sendMessage || "Send Message"
-              }
-            </span>
+            <Icons.send className={cn("w-4 h-4", {
+              hidden: mutation.isLoading
+            })} />
           </Button>
         </div>
       </form>

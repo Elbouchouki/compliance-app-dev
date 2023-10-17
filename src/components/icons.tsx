@@ -81,12 +81,14 @@ import {
   CircuitBoard,
   AlignJustifyIcon,
   LineChart,
-  NewspaperIcon
+  NewspaperIcon,
+  SendIcon
 } from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons: any = {
+  send: SendIcon,
   hamburger: AlignJustifyIcon,
   gapAssessment: CircuitBoard,
   reports: FileLineChart,

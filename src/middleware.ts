@@ -17,7 +17,6 @@ export default authMiddleware({
       }
     }
   },
-
   clockSkewInMs: 1000 * 60 * 60,
 });
 

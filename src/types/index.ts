@@ -290,6 +290,11 @@ export type Risk = {
   userId?: string
 }
 
+export type TabNavItem = {
+  name: string,
+  path: string
+}
+
 
 export const riskAssessmentScope = z.object({
   id: z.optional(z.string()),

@@ -3,12 +3,14 @@
 import { Icons } from "@/components/icons";
 import Footer from "@/components/layout/footer";
 import PageWrapper from "@/components/page-wrapper";
+import TabNav from "@/components/tab-nav";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { HelpNavItems } from "@/constants/navs.config";
 import { useStore } from "@/hooks/use-store";
 import { cn } from "@/lib/utils";
 import { FQA_MOCK } from "@/mock";
@@ -21,6 +23,7 @@ export default function FQA() {
 
   return (
     <PageWrapper className='flex flex-col h-full max-w-full gap-4 grow' >
+      <TabNav navItems={HelpNavItems} />
       <div className="flex flex-row py-2 border-b">
         <h1 className={cn("text-xl font-semibold grow flex flex-row gap-2 items-center", {
           "flex-row-reverse": langStore?.rtl

@@ -199,7 +199,7 @@ const Navbar = () => {
                 if (item.children && item.children.length > 0)
                   return (
                     <NavigationMenuItem key={index} >
-                      <NavigationMenuTrigger className={cn("bg-navbar text-muted-foreground hover:text-primary-foreground  hover:bg-primary data-[state=open]:text-primary-foreground data-[state=open]:bg-primary focus:text-primary-foreground focus:bg-primary dark:hover:text-primary-foreground dark:hover:bg-muted-foreground/10 dark:data-[state=open]:text-primary-foreground dark:data-[state=open]:bg-muted-foreground/10 dark:focus:text-primary-foreground dark:focus:bg-muted-foreground/10", {
+                      <NavigationMenuTrigger className={cn("bg-navbar text-muted-foreground hover:text-primary-foreground  hover:bg-primary data-[state=open]:text-primary-foreground data-[state=open]:bg-primary  dark:hover:text-primary-foreground dark:hover:bg-muted-foreground/10 dark:data-[state=open]:text-primary-foreground dark:data-[state=open]:bg-muted-foreground/10 ", {
                         "text-primary-foreground bg-primary hover:text-primary-foreground/80 hover:bg-primary/80 dark:text-primary-foreground dark:bg-muted-foreground/10 dark:hover:text-primary-foreground/80 dark:hover:bg-muted-foreground/10": item.children.some(child => { return child.path === pathname })
                       }, {
                         "flex-row-reverse ml-0 mr-1": langStore?.rtl
@@ -233,7 +233,7 @@ const Navbar = () => {
                   )
 
                 return <Link href={item.path as string} legacyBehavior passHref key={index}>
-                  <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-navbar text-muted-foreground hover:text-primary-foreground  hover:bg-primary data-[state=open]:text-primary-foreground data-[state=open]:bg-primary focus:text-primary-foreground focus:bg-primary  dark:hover:text-primary-foreground dark:hover:bg-muted-foreground/10 dark:data-[state=open]:text-primary-foreground dark:data-[state=open]:bg-muted-foreground/10 dark:focus:text-primary-foreground dark:focus:bg-muted-foreground/10", {
+                  <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-navbar text-muted-foreground hover:text-primary-foreground  hover:bg-primary data-[state=open]:text-primary-foreground data-[state=open]:bg-primary   dark:hover:text-primary-foreground dark:hover:bg-muted-foreground/10 dark:data-[state=open]:text-primary-foreground dark:data-[state=open]:bg-muted-foreground/10 ", {
                     "text-primary-foreground bg-primary hover:text-primary-foreground/80 hover:bg-primary/80 dark:text-primary-foreground dark:bg-muted-foreground/10 dark:hover:text-primary-foreground/80 dark:hover:bg-muted-foreground/10": item.path === pathname
                   })}>
                     {

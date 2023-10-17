@@ -16,7 +16,7 @@ const Footer = ({
   const dict = langStore?.getDictionary()
 
   return (
-    <footer className={cn("w-full flex flex-row justify-center gap-1 text-sm", className, {
+    <footer className={cn("w-full flex flex-row justify-center gap-1 text-sm py-2", className, {
       "flex-row-reverse": langStore?.rtl
     })}>
       <span>
