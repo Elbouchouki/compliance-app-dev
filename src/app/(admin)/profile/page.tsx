@@ -40,7 +40,8 @@ export default function Profile() {
             variables: {
               ...appearance.variables,
               colorBackground: theme === "light" ? "#ffffff" : "#111111",
-              colorPrimary: "#20C77F"
+              colorPrimary: "#20C77F",
+              colorText: theme === "light" ? "#000000" : "#ffffff",
             },
           }}
         />
