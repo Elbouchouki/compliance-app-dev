@@ -28,7 +28,7 @@ export default function KnowledgeBases() {
       <TabNav navItems={HelpNavItems} />
       <div className="flex flex-col justify-center items-center py-3  gap-8">
         <h1 className="text-xl md:text-2xl font-semibold lg:text-3xl">
-          We've got you covered!
+          We&apos;ve got you covered!
         </h1>
         <div className="max-w-xl w-full flex flex-col gap-5">
           <KnowledgeSearch />
