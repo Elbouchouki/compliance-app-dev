@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { PlusCircle } from "lucide-react";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { useState } from "react"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
@@ -18,7 +18,7 @@ import EvidenceForm from "@/components/evidence/evidence-form"
 import useLangStore from "@/store/langagueStore";
 
 
-const AddEvidenceDialogButton = ({
+const AddEvidenceSheetButton = ({
   className
 }: {
   className?: string
@@ -38,8 +38,8 @@ const AddEvidenceDialogButton = ({
 
   return (
 
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
         <Button size="sm" className={cn("flex flex-row gap-2", {
           "flex-row-reverse": langStore?.rtl
         })} >
@@ -50,29 +50,30 @@ const AddEvidenceDialogButton = ({
             }
           </span>
         </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle className={cn({
+      </SheetTrigger>
+      <SheetContent className="ssm:max-w-[425px] flex flex-col gap-5">
+        <SheetHeader className="py-3">
+
+          <SheetTitle className={cn({
             "text-right mr-3": langStore?.rtl
           })}>
             {
               dict?.addEvidence || "Add Evidence"
             }
-          </DialogTitle>
-          <DialogDescription className={cn({
+          </SheetTitle>
+          <SheetDescription className={cn({
             "text-right mr-3": langStore?.rtl
           })}>
             {
               dict?.addNewEvidenceToTheSystem || " Add new evidence to the system."
             }
-          </DialogDescription>
-        </DialogHeader>
-        <div className={cn("w-full", className)}>
+          </SheetDescription>
+        </SheetHeader>
+        <div className={cn("w-full grow", className)}>
           <EvidenceForm onSubmit={onSubmit} formType="add" />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   )
 }
-export default AddEvidenceDialogButton
+export default AddEvidenceSheetButton

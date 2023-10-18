@@ -250,7 +250,9 @@ export function DataTable<TData, TValue>(
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <div className="mx-6">
+        <DataTablePagination table={table} />
+      </div>
       <EditEvidenceDialog />
     </div>
   )

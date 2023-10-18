@@ -29,7 +29,9 @@ const EvidenceForm = ({ onSubmit, formType, evidence }: EvidenceFormProps) => {
   const dict = langStore?.getDictionary()
   const mutation = trpc.evidence.addOrUpdate.useMutation()
   const utils = trpc.useContext();
-
+  const evidences = trpc.evidence.getAll.useQuery(undefined, {
+    enabled: false
+  })
 
   const FormSchema = z.object({
     reference: z.optional(z.string()),
@@ -73,7 +75,7 @@ const EvidenceForm = ({ onSubmit, formType, evidence }: EvidenceFormProps) => {
 
   return (
     <Form  {...form}>
-      <form onSubmit={form.handleSubmit(onSubmitForm)} className="flex flex-col w-full gap-3">
+      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full h-full flex flex-col gap-3 ">
         <div>
           <FormField
             control={form.control}
@@ -237,19 +239,28 @@ const EvidenceForm = ({ onSubmit, formType, evidence }: EvidenceFormProps) => {
             )}
           />
         </div>
-        <div className={cn("mt-3", {
+        <div className={cn("mt-auto grow flex gap-2 items-end", {
           "flex flex-row-reverse": langStore?.rtl
         })}>
           <Button type="submit"
-            disabled={mutation.isLoading}
+            disabled={mutation.isLoading || evidences.isLoading || evidences.isFetching || evidences.isRefetching}
             className="flex flex-row gap-2"
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading
+              hidden: !mutation.isLoading && !evidences.isLoading && !evidences.isRefetching && !evidences.isFetching
             })} />
             <span>{
               formType === "add" ? "Add Evidence" : "Update Evidence"
             }
+            </span>
+          </Button>
+          <Button
+            disabled={mutation.isLoading || evidences.isLoading || evidences.isFetching || evidences.isRefetching}
+            type="reset" variant="ghost" onClick={() => close()} className="flex flex-row gap-2 hover:bg-destructive">
+            <span>
+              {
+                dict?.cancel || "Cancel"
+              }
             </span>
           </Button>
         </div>
