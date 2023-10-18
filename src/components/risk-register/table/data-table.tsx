@@ -43,6 +43,7 @@ import { useEffect, useState } from "react"
 import { useUser } from "@clerk/nextjs"
 import { trpc } from "@/app/_trpc/client"
 import { Skeleton } from "@/components/ui/skeleton"
+import TableSkeleton from "@/components/table-skeleton"
 
 export function DataTable<TData, TValue>(
 ) {
@@ -86,27 +87,6 @@ export function DataTable<TData, TValue>(
   }
 
   const columns: ColumnDef<Risk>[] = [
-    {
-      id: "select",
-      header: ({ table }) => (
-        <Checkbox
-          checked={table.getIsAllPageRowsSelected()}
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-          className="translate-y-[2px]"
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-          className="translate-y-[2px]"
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
-    },
     {
       id: "riskName",
       accessorKey: "riskName",
@@ -370,12 +350,14 @@ export function DataTable<TData, TValue>(
   }
 
   if (risks.isLoading) {
-    return <Skeleton className="h-full w-full grow"></Skeleton>
+    return <TableSkeleton />
   }
   return (
-    <div className="px-4 py-3 space-y-4 dark:border bg-card">
-      <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
-      <div className="border rounded-md ">
+    <div className="flex flex-col py-3 gap-4 bg-navbar border rounded-lg">
+      <div className="mx-2">
+        <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
+      </div>
+      <div className="border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

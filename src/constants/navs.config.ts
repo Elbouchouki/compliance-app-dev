@@ -12,3 +12,19 @@ export const HelpNavItems: TabNavItem[] = [
     path: "/fqa"
   }
 ]
+
+export const RiskManagementNavItems: TabNavItem[] = [
+  {
+    name: "Overview",
+    path: "/risk-management"
+  }, {
+    name: "Risk Assessment",
+    path: "/risk-assessment"
+  }, {
+    name: "Risk Management KPI",
+    path: "/risk-management-kpi"
+  }, {
+    name: "Risk Register",
+    path: "/risk-register"
+  }
+]

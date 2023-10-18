@@ -50,7 +50,7 @@ export function DataTableFacetedFilter<TData, TValue>({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className={cn("flex h-8 border-dashed", {
+        <Button variant="outline" size="sm" className={cn("flex h-8 border-dashed text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10", {
           "flex-row-reverse": langStore?.rtl === true,
         })}>
           <PlusCircledIcon className={cn("w-4 h-4 mr-2", {

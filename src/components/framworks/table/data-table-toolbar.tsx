@@ -39,7 +39,7 @@ export function DataTableToolbar<TData>({
 
         <Button
           disabled={exporting}
-          size="icon" variant="outline" className="h-8" onClick={
+          size="icon" variant="outline" className="h-8 text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10" onClick={
             () => {
               toast.promise(
                 () => new Promise((resolve) => {

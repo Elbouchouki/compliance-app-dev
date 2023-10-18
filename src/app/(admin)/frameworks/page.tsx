@@ -27,7 +27,7 @@ export default function Framworks() {
           </span>
         </h1>
       </div>
-      <div className="flex flex-col h-full pr-3 overflow-x-scroll">
+      <div className="h-full flex flex-col rounded-lg ">
         <DataTable />
         <Footer className='items-end mt-3 grow' />
       </div>

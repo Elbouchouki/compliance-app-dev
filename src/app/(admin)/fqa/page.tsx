@@ -24,18 +24,13 @@ export default function FQA() {
   return (
     <PageWrapper className='flex flex-col h-full max-w-full gap-4 grow' >
       <TabNav navItems={HelpNavItems} />
-      <div className="flex flex-row py-2 border-b">
-        <h1 className={cn("text-xl font-semibold grow flex flex-row gap-2 items-center", {
-          "flex-row-reverse": langStore?.rtl
-        })}>
-          <Icons.fqa className="w-4 h-4" />
-          <span>
-            {
-              dict?.frequentlyAskedAuestions || "Frequently Asked Questions"
-            }
-          </span>
-        </h1>
-      </div>
+      <h1 className="text-lg sm:text-xl xl:text-3xl font-semibold grow flex flex-row gap-2 items-center justify-center py-4">
+        <span>
+          {
+            dict?.frequentlyAskedAuestions || "Frequently Asked Questions"
+          }
+        </span>
+      </h1>
       <div className="h-full px-3 ">
         <Accordion type="single" collapsible className="w-full">
           {

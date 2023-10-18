@@ -61,11 +61,11 @@ export default function ExportToExcelButton(risks: { data: Risk[] }) {
     "درجة المخاطرة الكامنة": r.impact * r.likelihood,
     "درجة المخاطرة المتبقية": r.impact * r.likelihood * 4,
   }));
-  
+
   const jsonTosheet = (data: any) => {
     return XLSX.utils.json_to_sheet(data, { header: XLSX_LABELS(langStore?.lang).map(l => l.label) })
   }
-  
+
   const handleExportClick = () => {
     const ws = jsonTosheet(sheetRows)
     const wb = XLSX.utils.book_new();
@@ -76,16 +76,18 @@ export default function ExportToExcelButton(risks: { data: Risk[] }) {
     }
     XLSX.writeFile(wb, 'data.xlsx');
   };
-  
+
   return (
     <Button
-      className={cn("flex flex-row bg-green-800 gap-2 h-[32px] w-[180px] hover:bg-green-900 text-white font-light", {
-      "flex-row-reverse":langStore?.rtl
-      })}
+      variant="secondary"
+      size="sm"
       onClick={handleExportClick}
+      className="flex flex-row gap-2"
     >
       <FileSpreadsheet size={20} />
-      { dict?.exportToExcel || "Export Data"}
+      <p>
+        {dict?.exportToExcel || "Export Data"}
+      </p>
     </Button>
   )
 }

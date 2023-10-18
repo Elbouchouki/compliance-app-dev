@@ -59,8 +59,8 @@
     @apply bg-background text-foreground;
     position: fixed;
   }
-
 }
+
 
 @layer components {
   @variants responsive {

@@ -505,6 +505,14 @@ export type Dictionnary = {
   created_at: string,
   updated_at: string,
   thisIsTheReferenceForTheTenant: string,
+
+  riskStatusId: string,
+  tagId: string,
+  dateRaised: string,
+  updatedDate: string,
+  subCategoryId: string,
+  categoryId: string,
+
   contactEmail: string,
   exportingData: string,
   dataExported: string,

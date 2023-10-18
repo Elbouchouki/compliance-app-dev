@@ -99,7 +99,7 @@ const HelpForm = () => {
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    className={cn("border bg-[#2b2d2f] p-3", {
+                    className={cn("border dark:bg-[#2b2d2f] p-3", {
                       "text-right": langStore?.rtl
                     })}
                     rows={5}

@@ -800,7 +800,7 @@ const AR_CATEGORY: Category[] = [
       id: "s48",
       value: "العمليات التجارية"
     }]
-  }, 
+  },
   {
     id: "c7",
     value: "خارجي",
@@ -1866,75 +1866,67 @@ const knowledgeDataExample_AR: KnowledgeBaseData[] = [
 
 export const KNOWLEDGE_BASE_MOCK: KnowledgeBase[] = [
   {
-    title: "Maturity Levels",
-    description: "Overview of maturity levels",
-    image: "/images/maturity_levels.jpg",
-    id: "maturity_levels",
+    title: "Account and Billing",
+    description: "This category handles all customer inquiries related to account creation.",
+    image: "/knowledge/1.png",
+    id: "account_and_billing",
     data: knowledgeDataExample,
     lastUpdate: new Date(),
   },
   {
-    title: "Security & Privacy Capability Maturity Model (SP-CMM)",
+    title: "Technical Support",
+    description: "Technical support assists customers with any technical issues they encounter",
+    image: "/knowledge/2.png",
+    id: "technical_support",
+    data: knowledgeDataExample,
+    lastUpdate: new Date(),
+  },
+  {
+    title: "Integration Support",
     description:
-      "Thank you for showing interest in the Secure Controls Framework’s™ Security & Privacy Capability...",
-    image: "/images/security.png",
-    id: "security",
+      "Integration support focuses on assisting customers in integrating the SaaS product.",
+    image: "/knowledge/3.png",
+    id: "integration_support",
     data: knowledgeDataExample,
     lastUpdate: new Date(),
   },
   {
-    title: "List Of Known Issues",
+    title: "Feature Requests",
+    description: "This category deals with collecting customer feedback, suggestions, and features.",
+    image: "/knowledge/4.png",
+    id: "feature_requests",
+    data: knowledgeDataExample,
+    lastUpdate: new Date(),
+  }, {
+    title: "Knowledge Base",
     description:
-      "Thank you for being an early adopter of Tayakaan. Here you can find the full list of currently known issues.",
-    image: "/images/issues.png",
-    id: "issues",
+      "Documentation and knowledge base support involves creating and maintaining user guides.",
+    image: "/knowledge/5.png",
+    id: "knowledge_base",
     data: knowledgeDataExample,
     lastUpdate: new Date(),
   },
   {
-    title: "Implementation Statuses",
-    description: "Overview of Implementation Statuses in Tayakaan",
-    image: "/images/statuses.png",
-    id: "statuses",
+    title: "Privacy Support",
+    description:
+      "This category addresses concerns related to data security, privacy & compliance.",
+    image: "/knowledge/6.png",
+    id: "privacy_support",
+    data: knowledgeDataExample,
+    lastUpdate: new Date(),
+  },
+  {
+    title: "Account Termination",
+    description: "Account termination and data removal support assists customers in closing accounts.",
+    image: "/knowledge/7.png",
+    id: "account_termination",
     data: knowledgeDataExample,
     lastUpdate: new Date(),
   },
 ];
 
 export const KNOWLEDGE_BASE_MOCK_AR: KnowledgeBase[] = [
-  {
-    title: "مستويات النضوج",
-    description: "نظرة عامة على مستويات النضوج",
-    image: "/images/maturity_levels.jpg",
-    id: "maturity_levels",
-    data: knowledgeDataExample_AR,
-    lastUpdate: new Date(),
-  },
-  {
-    title: "نموذج نضوج قدرات الأمن والخصوصية ",
-    description: "شكرا لاهتمامك بإطار الضوابط الآمنة ™ لقدرات الأمن والخصوصية",
-    image: "/images/security.png",
-    id: "security",
-    data: knowledgeDataExample_AR,
-    lastUpdate: new Date(),
-  },
-  {
-    title: "قائمة المشاكل المعروفة",
-    description:
-      "شكرًا لك على أنك كنت مبكرًا في اعتماد تياكان. هنا يمكنك العثور على القائمة الكاملة للمشكلات المعروفة حاليًا",
-    image: "/images/issues.png",
-    id: "issues",
-    data: knowledgeDataExample_AR,
-    lastUpdate: new Date(),
-  },
-  {
-    title: "حالات التنفيذ",
-    description: "نظرة عامة على حالات التنفيذ في تياكان",
-    image: "/images/statuses.png",
-    id: "statuses",
-    data: knowledgeDataExample_AR,
-    lastUpdate: new Date(),
-  },
+
 ];
 
 export const GET_KNOWLEDGE_BASE = (lang: "ar" | "en" | undefined) =>

@@ -14,6 +14,7 @@ import { DataTableFacetedFilter } from "@/components/data-table-faceted-filter"
 import { CATEGORY, IMPACT, RISK_STATUS } from "@/mock"
 import { useUser } from "@clerk/nextjs"
 import { trpc } from "@/app/_trpc/client"
+import { DataTableViewOptions } from "@/components/data-table-view-options"
 
 
 interface DataTableToolbarProps<TData> {
@@ -47,52 +48,6 @@ export function DataTableToolbar<TData>({
     <div className={cn("flex flex-row items-center w-full gap-2", {
       "flex-row-reverse": langStore?.rtl === true,
     })}>
-      {!isFiltered && (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              onClick={() => table.resetColumnFilters()}
-              className={cn("flex flex-row items-center h-8 px-2 lg:px-3", {
-                "flex-row-reverse": langStore?.rtl === true,
-              })}
-            >
-              <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-              {dict?.view || "View"}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[150px]">
-            <DropdownMenuLabel>{dict?.toggleColumns || "Toggle columns"}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            {table
-              .getAllColumns()
-              .filter(
-                (column) =>
-                  typeof column.accessorFn !== "undefined" && column.getCanHide()
-              )
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) => { column.toggleVisibility(!!value) }}
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
-      <Input
-        placeholder={dict?.search || "Search..."}
-        value={globalFilter}
-        onChange={(event) => setGlobalFilter(event.target.value)}
-        className={cn("h-8 md:w-[250px] w-[140px] text-left", {
-          "mr-auto ml-0 text-right": langStore?.rtl === true,
-        })}
-      />
       {table.getColumn("impact") && (
         <DataTableFacetedFilter
           column={table.getColumn("impact")}
@@ -124,20 +79,6 @@ export function DataTableToolbar<TData>({
           options={riskStatus}
         />
       )}
-      {/* {!tagsData.isLoading && table.getColumn("tagId") && (
-        <DataTableFacetedFilter
-          column={table.getColumn("tagId")}
-          title={dict?.tag || "Tag"}
-          options={TAGS || []}
-        />
-      )} */}
-      {/* {table.getColumn("subcategory") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("subcategory")}
-            title="Priority"
-            // options={priorities}
-          />
-        )} */}
       {isFiltered && (
         <Button
           variant="ghost"
@@ -148,6 +89,17 @@ export function DataTableToolbar<TData>({
           <Cross2Icon className="ml-2 h-4 w-4" />
         </Button>
       )}
+      <Input
+        placeholder={dict?.search || "Search"}
+        value={globalFilter}
+        onChange={(event) => setGlobalFilter(event.target.value)}
+        className={cn("h-8 w-[250px] text-left ml-auto text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10", {
+          "mr-auto ml-0 text-right": langStore?.rtl === true,
+        })}
+      />
+      <div>
+        <DataTableViewOptions table={table} />
+      </div>
     </div>
   )
 }

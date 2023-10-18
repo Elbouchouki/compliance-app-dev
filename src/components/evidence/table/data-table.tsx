@@ -39,6 +39,7 @@ import { cn } from "@/lib/utils"
 import { useUser } from "@clerk/nextjs"
 import { trpc } from "@/app/_trpc/client"
 import { Skeleton } from "@/components/ui/skeleton"
+import TableSkeleton from "@/components/table-skeleton"
 
 
 export function DataTable<TData, TValue>(
@@ -53,7 +54,13 @@ export function DataTable<TData, TValue>(
 
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
+    React.useState<VisibilityState>({
+      reference: true,
+      name: true,
+      description: true,
+      content: false,
+      actions: true,
+    })
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
@@ -183,12 +190,14 @@ export function DataTable<TData, TValue>(
     setGlobalFilter(s)
   }
   if (evidences.isLoading) {
-    return <Skeleton className="w-full h-full grow"></Skeleton>
+    return <TableSkeleton elements={7} />
   }
   return (
-    <div className="px-4 py-3 space-y-4 dark:border bg-card">
-      <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
-      <div className="border rounded-md ">
+    <div className="flex flex-col py-3 gap-4 bg-navbar border">
+      <div className="mx-6">
+        <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
+      </div>
+      <div className="border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

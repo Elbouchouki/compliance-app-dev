@@ -87,10 +87,10 @@ export function DataTableToolbar<TData>({
           </div>
         )}
         <Input
-          placeholder={dict?.search || "Search..."}
+          placeholder={dict?.search || "Search"}
           value={globalFilter}
           onChange={(event) => setGlobalFilter(event.target.value)}
-          className={cn("h-8 w-[250px] text-left ml-auto", {
+          className={cn("h-8 w-[250px] text-left ml-auto text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10", {
             "mr-auto ml-0 text-right": langStore?.rtl === true,
           })}
         />

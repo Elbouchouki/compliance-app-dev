@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { PlusCircle } from "lucide-react";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { useState } from "react"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
@@ -33,7 +34,7 @@ import { useUser } from "@clerk/nextjs";
 import { Icons } from "../icons";
 
 
-const AddRiskDialogButton = ({
+const AddRiskSheetButton = ({
   className
 }: {
   className?: string
@@ -96,58 +97,58 @@ const AddRiskDialogButton = ({
 
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
         <Button size="sm" className={cn("flex flex-row items-center gap-2 flex-none", {
           "flex-row-reverse": langStore?.rtl
         })}>
           <PlusCircle className="w-4 h-4" />
           <span>{dict?.addRisk || "Add Risk"}</span>
         </Button>
-      </DialogTrigger>
-      <DialogContent className="w-screen">
-        <DialogHeader>
-          <DialogTitle className={cn({
+      </SheetTrigger>
+      <SheetContent >
+        <SheetHeader>
+          <SheetTitle className={cn({
             "text-right mr-3": langStore?.rtl
           })}>
             {dict?.addRisk || "Add Risk"}
-          </DialogTitle>
-        </DialogHeader>
-        <div className={cn("w-full", className)} >
-          <Form {...form}>
-            <form className="w-full h-[480px] overflow-y-auto" onSubmit={form.handleSubmit(onSubmit)} >
+          </SheetTitle>
+        </SheetHeader>
+        <Form {...form}>
+          <form className=" w-full h-full pb-16" onSubmit={form.handleSubmit(onSubmit)} >
+            <div className=" w-full h-full overflow-y-auto py-3">
               <RiskRegisterFormBody form={form} risk={risk} />
-              <div className={cn("w-full flex mt-2 flex-row-reverse gap-2 justify-end", {
-                "flex-row": langStore?.rtl
-              })}>
-                <Button type="button" variant="ghost" onClick={() => {
-                  form.reset()
-                  setOpen(false)
-                }}>
+            </div>
+            <div className={cn("w-full flex flex-row-reverse gap-2 justify-end", {
+              "flex-row": langStore?.rtl
+            })}>
+              <Button type="button" variant="ghost" onClick={() => {
+                form.reset()
+                setOpen(false)
+              }}>
+                {
+                  dict?.cancel || "Cancel"
+                }
+              </Button>
+              <Button type="submit" variant="outline"
+                disabled={mutation.isLoading}
+                className="flex flex-row gap-2"
+              >
+                <Icons.loader className={cn("animate-spin w-4 h-4", {
+                  hidden: !mutation.isLoading
+                })}
+                />
+                <span>
                   {
-                    dict?.cancel || "Cancel"
+                    dict?.createRisk || "Create"
                   }
-                </Button>
-                <Button type="submit" variant="outline"
-                  disabled={mutation.isLoading}
-                  className="flex flex-row gap-2"
-                >
-                  <Icons.loader className={cn("animate-spin w-4 h-4", {
-                    hidden: !mutation.isLoading
-                  })}
-                  />
-                  <span>
-                    {
-                      dict?.createRisk || "Create"
-                    }
-                  </span>
-                </Button>
-              </div>
-            </form>
-          </Form>
-        </div>
-      </DialogContent>
-    </Dialog>
+                </span>
+              </Button>
+            </div>
+          </form>
+        </Form>
+      </SheetContent>
+    </Sheet>
   )
 }
-export default AddRiskDialogButton
+export default AddRiskSheetButton
