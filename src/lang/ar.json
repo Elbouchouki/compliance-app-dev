@@ -303,6 +303,8 @@
   "lowRisk": "مخاطرة ضعيفة",
   "medRisk": "مخاطرة متوسطة",
   "highRisk": "مخاطرة مرتفعة",
+  "period": "الفترة",
+  "riskDeletedSuccessfully": "تم حذف المخاطرة بنجاح",
   "noData": "لا يوجد بيانات",
   "riskVulnerabilities": "نقاط الضعف في المخاطر",
   "vulnerabilities": "نقاط الضعف",

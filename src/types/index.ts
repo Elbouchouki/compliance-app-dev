@@ -381,6 +381,7 @@ export type Dictionnary = {
 
   operationalRiskIsEmpty: string,
   operationalRiskIsEmptyDesc: string,
+  riskDeletedSuccessfully: string,
 
 
   riskManagementKPI: string,
@@ -668,6 +669,7 @@ export type Dictionnary = {
   riskAnalysisProgress: string,
   responseProgressForRiskThreshold: string,
   riskRatingBreakdown: string,
+  period: string,
   lowRisk: string,
   medRisk: string,
   highRisk: string,

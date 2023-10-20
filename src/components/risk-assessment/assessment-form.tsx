@@ -106,19 +106,26 @@ export const AssessmentFormBody = (
           )}
         />
       </div>
-      <div className="flex flex-row gap-2">
-        <FormField
-          control={form.control}
-          name="reportingFrom"
-          render={({ field }) => (
-            <FormItem className="flex flex-col gap-1 w-full ">
-              <FormLabel className={cn({
-                "text-right": langStore?.rtl
-              })}>
+      <FormField
+        control={form.control}
+        name="reportingFrom"
+        render={({ field }) => (
+          <FormItem className="flex flex-col gap-1 w-full ">
+            <FormLabel className={cn({
+              "text-right": langStore?.rtl
+            })}>
+              {
+                dict?.period || "Period"
+              }
+            </FormLabel>
+            <div className={cn("flex flex-row gap-2 items-center", {
+              "flex-row-reverse": langStore?.rtl
+            })}>
+              <p className="text-xs w-10">
                 {
-                  dict?.reportingFrom || "Reporting From"
+                  dict?.from || "From"
                 }
-              </FormLabel>
+              </p>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -158,22 +165,24 @@ export const AssessmentFormBody = (
                   />
                 </PopoverContent>
               </Popover>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="reportingTo"
-          render={({ field }) => (
-            <FormItem className="flex flex-col gap-1 w-full ">
-              <FormLabel className={cn({
-                "text-right": langStore?.rtl
-              })}>
+            </div>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="reportingTo"
+        render={({ field }) => (
+          <FormItem className="flex flex-col gap-1 w-full ">
+            <div className={cn("flex flex-row gap-2 items-center", {
+              "flex-row-reverse": langStore?.rtl
+            })}>
+              <p className="text-xs w-10">
                 {
-                  dict?.reportingTo || "Reporting To"
+                  dict?.to || "To"
                 }
-              </FormLabel>
+              </p>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -193,7 +202,7 @@ export const AssessmentFormBody = (
                       ) : (
                         <span>
                           {
-                            dict?.pickDate || "Pick a date"
+                            dict?.to || "To"
                           }
                         </span>
                       )}
@@ -213,12 +222,11 @@ export const AssessmentFormBody = (
                   />
                 </PopoverContent>
               </Popover>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
+            </div>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
       <div>
         <FormField
           control={form.control}
@@ -260,16 +268,21 @@ type AssessmentFormProps = {
 
 const AssessmentForm = ({ onSubmit, formType, assessmentScope }: AssessmentFormProps) => {
 
-
   const langStore = useStore(useLangStore, state => state)
   const dict = langStore?.getDictionary()
 
-  const mutation = trpc.riskAssessmentScope.add.useMutation()
+  const mutation = trpc.riskAssessmentScope.addOrUpdate.useMutation()
   const { user } = useUser()
   const utils = trpc.useContext();
+  const risks = trpc.riskAssessmentScope.getAll.useQuery({
+    userId: user?.id
+  }, {
+    enabled: false
+  })
 
 
   const FormSchema = z.object({
+    id: z.string().optional(),
     name: z.string().min(4, {
       message: dict?.FromSchemaValidation.name || "Name must be at least 4 characters.",
     }),
@@ -294,6 +307,7 @@ const AssessmentForm = ({ onSubmit, formType, assessmentScope }: AssessmentFormP
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
+      id: assessmentScope?.id,
       name: assessmentScope?.name || "",
       description: assessmentScope?.description || "",
       status: assessmentScope?.status || "planned",
@@ -306,6 +320,7 @@ const AssessmentForm = ({ onSubmit, formType, assessmentScope }: AssessmentFormP
   function handleSubmit(data: z.infer<typeof FormSchema>) {
     mutation.mutate(
       {
+        id: data?.id,
         name: data?.name,
         description: data?.description,
         status: data?.status,
@@ -326,17 +341,18 @@ const AssessmentForm = ({ onSubmit, formType, assessmentScope }: AssessmentFormP
 
   return (
     <Form  {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full flex flex-col gap-3">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full flex flex-col gap-3 h-full ">
         <AssessmentFormBody form={form} />
-        <div className="mt-3">
+        <div className={cn("mt-auto grow flex gap-2 items-end", {
+          "flex-row-reverse ": langStore?.rtl
+        })}>
           <Button type="submit"
-            disabled={mutation.isLoading}
-            className="flex flex-row gap-2"
+            disabled={mutation.isLoading || risks.isRefetching || risks.isLoading || risks.isFetching}
+            className="flex flex-row gap-2 "
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading
-            })}
-            />
+              hidden: !mutation.isLoading && !risks.isLoading && !risks.isRefetching && !risks.isFetching
+            })} />
             <span>
               {
                 formType === "add" ?

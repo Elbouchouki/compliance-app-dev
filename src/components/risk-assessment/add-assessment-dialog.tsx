@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { PlusCircle } from "lucide-react";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { useState } from "react"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
@@ -22,7 +22,7 @@ import useRiskAssessmentScopeStore from "@/store/riskAssessementScopeStore";
 import { trpc } from "@/app/_trpc/client";
 import { useUser } from "@clerk/nextjs";
 
-const AddAssessmentDialogButton = ({
+const AddAssessmentSheetButton = ({
   className
 }: {
   className?: string
@@ -43,9 +43,9 @@ const AddAssessmentDialogButton = ({
 
   return (
 
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button size="sm" className={cn("flex flex-row gap-2", {
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <Button size="sm" className={cn("flex flex-row items-center gap-2 flex-none", {
           "flex-row-reverse": langStore?.rtl
         })}>
           <PlusCircle className="w-4 h-4" />
@@ -55,22 +55,22 @@ const AddAssessmentDialogButton = ({
             }
           </span>
         </Button>
-      </DialogTrigger>
-      <DialogContent className="">
-        <DialogHeader>
-          <DialogTitle className={cn({
+      </SheetTrigger>
+      <SheetContent className="">
+        <SheetHeader className="pb-5">
+          <SheetTitle className={cn({
             "text-right mr-3": langStore?.rtl
           })}>
             {
               dict?.addRiskScope || "Add Risk Scope"
             }
-          </DialogTitle>
-        </DialogHeader>
-        <div className={cn("w-full", className)}>
+          </SheetTitle>
+        </SheetHeader>
+        <div className={cn("w-full h-full pb-10", className)}>
           <AssessmentForm onSubmit={onSubmit} formType="add" />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   )
 }
-export default AddAssessmentDialogButton
+export default AddAssessmentSheetButton

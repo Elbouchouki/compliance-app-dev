@@ -74,7 +74,7 @@ export const riskAssessmentScopeRouter = router({
   }),
 
   add: publicProcedure.input(
-   z.object({
+    z.object({
       name: z.string().min(4, {
         message: "Name must be at least 4 characters.",
       }),

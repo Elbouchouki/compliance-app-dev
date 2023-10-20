@@ -20,11 +20,13 @@ import useTagStore from "@/store/tagStore"
 import { useUser } from "@clerk/nextjs"
 import { trpc } from "@/app/_trpc/client"
 import { Icons } from "../icons"
+import { riskStore } from "@/store/riskStore"
 
 type RiskFormProps = {
   onSubmit: () => void
   formType: "add" | "edit"
   risk?: Risk
+  close?: () => void
 }
 
 export const RiskRegisterFormBody = (
@@ -53,8 +55,8 @@ export const RiskRegisterFormBody = (
   })
 
   return (
-    <div className="flex flex-col w-full gap-4 overflow-y-auto px-4">
-      <div>
+    <div className="flex flex-col w-full gap-4 overflow-y-auto pr-4 pl-1 py-4">
+      {/* <div>
         <FormField
           control={form.control}
           name="searchMasterRiskList"
@@ -77,7 +79,7 @@ export const RiskRegisterFormBody = (
             </FormItem>
           )}
         />
-      </div>
+      </div> */}
       <div>
         <FormField
           control={form.control}
@@ -421,15 +423,10 @@ export const RiskRegisterFormBody = (
     </div>
   )
 }
-
 const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
 
   const langStore = useStore(useLangStore, state => state)
   const dict = langStore?.getDictionary()
-
-  const mutation = trpc.risk.addOrUpdate.useMutation()
-  const { user } = useUser()
-  const utils = trpc.useContext();
 
   const FormSchema = z.object({
     id: z.optional(z.string()),
@@ -451,31 +448,22 @@ const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
     riskStatus: z.string(),
     impact: z.coerce.number(),
     likelihood: z.coerce.number(),
-    riskAssessmentScopeId: z.optional(z.string()),
     owner: z.string().min(2, {
       message: dict?.FromSchemaValidation.name || "Name must be at least 2 characters.",
     }),
     tagId: z.optional(z.string()),
   })
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      riskName: risk?.riskName,
-      description: risk?.description,
-      consequences: risk?.consequences,
-      affectedAsset: risk?.affectedAsset,
-      riskStatus: risk?.riskStatusId,
-      impact: risk?.impact,
-      likelihood: risk?.likelihood,
-      category: risk?.categoryId,
-      subcategory: risk?.subCategoryId,
-      riskAssessmentScopeId: risk?.riskAssessmentScopeId,
-      owner: risk?.owner,
-      id: risk?.id || Math.random().toString(),
-      tagId: risk?.tagId || "",
-    }
+  const mutation = trpc.risk.addOrUpdate.useMutation()
+  const { user } = useUser()
+  const utils = trpc.useContext();
+  const risks = trpc.risk.getAll.useQuery({
+    userId: user?.id
+  }, {
+    enabled: false
   })
+  const riskStoreTools = useStore(riskStore, state => state);
+
 
   function handleSubmit(data: z.infer<typeof FormSchema>) {
     mutation.mutate(
@@ -496,7 +484,7 @@ const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
       },
       {
         onSuccess: () => {
-          utils.risk.getByUserId.refetch().then(() => {
+          utils.risk.getAll.refetch().then(() => {
             onSubmit()
           })
         }
@@ -504,25 +492,58 @@ const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
     )
   }
 
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      riskName: risk?.riskName,
+      description: risk?.description,
+      consequences: risk?.consequences,
+      affectedAsset: risk?.affectedAsset,
+      riskStatus: risk?.riskStatusId,
+      dateRaised: new Date(risk?.dateRaised as string) ?? undefined,
+      impact: risk?.impact,
+      likelihood: risk?.likelihood,
+      category: risk?.categoryId,
+      subcategory: risk?.subCategoryId,
+      owner: risk?.owner,
+      id: risk?.id || Math.random().toString(),
+      tagId: risk?.tagId || "",
+    }
+  })
+
+
+
   return (
-    <Form  {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full flex flex-col gap-3">
-        <RiskRegisterFormBody form={form} risk={risk} />
-        <div className="mt-3">
-          <Button type="submit"
-            disabled={mutation.isLoading}
+    <Form {...form}>
+      <form className=" w-full h-full pb-16" onSubmit={form.handleSubmit(handleSubmit)} >
+        <div className=" w-full h-full overflow-y-auto py-3">
+          <RiskRegisterFormBody form={form} risk={risk} />
+        </div>
+
+        <div className={cn("w-full flex flex-row-reverse gap-2 justify-end", {
+          "flex-row": langStore?.rtl
+        })}>
+          <Button type="button" variant="ghost"
+            disabled={mutation.isLoading || risks.isFetching || risks.isRefetching}
+            onClick={() => {
+              form.reset()
+              riskStoreTools?.setEditModalOpen(false)
+            }}>
+            {
+              dict?.cancel || "Cancel"
+            }
+          </Button>
+          <Button type="submit" variant="outline"
+            disabled={mutation.isLoading || risks.isFetching || risks.isRefetching}
             className="flex flex-row gap-2"
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading
+              hidden: !mutation.isLoading && !risks.isFetching && !risks.isRefetching
             })}
             />
-
             <span>
               {
-                formType === "add" ?
-                  "Add Risk"
-                  : "Update Risk"
+                dict?.updateRisk || "Update Risk"
               }
             </span>
           </Button>

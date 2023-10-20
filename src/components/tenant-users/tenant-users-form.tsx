@@ -348,7 +348,6 @@ const UserForm = ({ onSubmit, formType, user, close }: UserFormProps) => {
         })}>
           <Button type="submit"
             disabled={mutation.isLoading || addMutation.isLoading || checkBeforeAdd.isLoading || users.isRefetching || users.isLoading || users.isFetching}
-            onClick={() => { console.log(form.getValues()) }}
             className="flex flex-row gap-2 "
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {

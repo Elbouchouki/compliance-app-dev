@@ -34,16 +34,14 @@ import EditAssessmentDialog from "../edit-risk-dialog"
 import { useStore } from "@/hooks/use-store"
 import useLangStore from "@/store/langagueStore"
 import { cn } from "@/lib/utils"
-import { Risk, Tag } from "@/types"
+import { Risk } from "@/types"
 import { DataTableRowActions } from "./data-table-row-actions"
-import { riskStore } from "@/store/riskStore"
 import { CATEGORY, RISK_STATUS } from "@/mock"
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useEffect, useState } from "react"
 import { useUser } from "@clerk/nextjs"
 import { trpc } from "@/app/_trpc/client"
-import { Skeleton } from "@/components/ui/skeleton"
+import TableSkeleton from "@/components/table-skeleton"
 
 export function DataTable<TData, TValue>(
   { scopeId }: { scopeId: string }
@@ -91,27 +89,6 @@ export function DataTable<TData, TValue>(
 
   const columns: ColumnDef<Risk>[] = [
     {
-      id: "select",
-      header: ({ table }) => (
-        <Checkbox
-          checked={table.getIsAllPageRowsSelected()}
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-          className="translate-y-[2px]"
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-          className="translate-y-[2px]"
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
-    },
-    {
       id: "riskName",
       accessorKey: "riskName",
       header: ({ column }) => (
@@ -119,7 +96,7 @@ export function DataTable<TData, TValue>(
           "text-right": langStore?.rtl
         })} column={column} title={dict?.riskName || "Risk Name"} />
       ),
-      cell: ({ row }) => <div className={cn("text-left whitespace-nowrap", {
+      cell: ({ row }) => <div className={cn("mx-1 text-left whitespace-nowrap", {
         "text-right": langStore?.rtl
       })} >
         {(row.getValue("riskName"))}
@@ -288,7 +265,7 @@ export function DataTable<TData, TValue>(
       cell: ({ row }) => <div className={cn("text-left whitespace-nowrap", {
         "text-right": langStore?.rtl
       })} >
-        {(new Date(row.getValue("dateRaised")).toUTCString())}
+        {(new Date(row.getValue("dateRaised")).toLocaleDateString())}
       </div>,
       filterFn: "includesStringSensitive"
 
@@ -304,7 +281,7 @@ export function DataTable<TData, TValue>(
       cell: ({ row }) => <div className={cn("text-left whitespace-nowrap", {
         "text-right": langStore?.rtl
       })} >
-        {(new Date(row.getValue("updatedDate"))).toUTCString()}
+        {(new Date(row.getValue("updatedDate"))).toLocaleDateString()}
       </div>,
       filterFn: "includesStringSensitive"
 
@@ -374,12 +351,14 @@ export function DataTable<TData, TValue>(
   }
 
   if (risks.isLoading || tags.isLoading) {
-    return <Skeleton className="h-full w-full  grow" />
+    return <TableSkeleton />
   }
   return (
-    <div className="px-4 py-3 space-y-4 dark:border bg-card">
-      <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
-      <div className="border rounded-md ">
+    <div className="flex flex-col py-3 gap-4 bg-navbar border rounded-lg">
+      <div className="mx-6">
+        <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
+      </div>
+      <div className="border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -432,7 +411,9 @@ export function DataTable<TData, TValue>(
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <div className="mx-6">
+        <DataTablePagination table={table} />
+      </div>
       <EditAssessmentDialog />
     </div>
   )

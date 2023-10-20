@@ -10,6 +10,9 @@ import { DataTableViewOptions } from "@/components/data-table-view-options"
 import useLangStore from "@/store/langagueStore"
 import { useStore } from "@/hooks/use-store"
 import { cn } from "@/lib/utils"
+import { useState } from "react"
+import { toast } from "sonner"
+import { HardDriveDownload, Loader2 } from "lucide-react"
 
 
 interface DataTableToolbarProps<TData> {
@@ -25,11 +28,13 @@ export function DataTableToolbar<TData>({
   globalFilter
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
+  const [exporting, setExporting] = useState(false)
   const langStore = useStore(useLangStore, state => state)
   const dict = langStore?.getDictionary()
+
   return (
     <div className="flex flex-col gap-3">
-      <div className={cn("flex flex-row w-full gap-2", {
+      <div className={cn("flex flex-row  w-full gap-2 items-center", {
         "flex-row-reverse": langStore?.rtl === true,
       })}>
         {isFiltered && (
@@ -60,9 +65,38 @@ export function DataTableToolbar<TData>({
             "mr-auto ml-0 text-right": langStore?.rtl === true,
           })}
         />
+
         <div>
           <DataTableViewOptions table={table} />
         </div>
+
+        <Button
+          disabled={exporting}
+          size="icon" variant="outline" className="h-8 text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10" onClick={
+            () => {
+              toast.promise(
+                () => new Promise((resolve) => {
+                  setExporting(true)
+                  setTimeout(() => {
+                    setExporting(false)
+                    resolve({})
+                  }
+                    , 2000)
+                }),
+                {
+                  loading: dict?.exportingData || "Exporting data...",
+                  success: dict?.dataExported || "Data exported",
+                  error: dict?.errorExportingData || "Error exporting data"
+                }
+              )
+            }
+          } >
+          {
+            exporting ? <Loader2 className="w-4 h-4 animate-spin" />
+              :
+              <HardDriveDownload className="w-4 h-4 " />
+          }
+        </Button>
       </div>
     </div>
   )

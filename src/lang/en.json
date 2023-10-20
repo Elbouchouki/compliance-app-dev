@@ -303,6 +303,8 @@
   "lowRisk": "low risk",
   "medRisk": "medium risk",
   "highRisk": "high risk",
+  "period": "Period",
+  "riskDeletedSuccessfully": "Risk deleted successfully",
   "noData": "No Data",
   "riskVulnerabilities": "Risk Vulnerabilities",
   "vulnerabilities": "Vulnerabilities",

@@ -32,17 +32,12 @@ export function DataTableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0
   const langStore = useStore(useLangStore, state => state)
   const dict = langStore?.getDictionary()
-
   const categorys = CATEGORY(langStore?.lang).map(c => ({ label: c.value, value: c.id }));
-  // const subc = CATEGORY.map(c => (c.subCategory)).map(c => ({}));
   const riskStatus = RISK_STATUS(langStore?.lang).map(s => ({ label: s.value, value: s.id }))
-
   const { user } = useUser()
   const tagsData = trpc.tag.getAll.useQuery({
     userId: user?.id
   })
-
-  const TAGS = tagsData?.data?.map(t => ({ label: t.name, value: t.id }))
 
   return (
     <div className={cn("flex flex-col md:flex-row items-start w-full gap-2", {

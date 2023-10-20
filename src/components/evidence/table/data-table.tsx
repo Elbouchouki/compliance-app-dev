@@ -193,7 +193,7 @@ export function DataTable<TData, TValue>(
     return <TableSkeleton elements={7} />
   }
   return (
-    <div className="flex flex-col py-3 gap-4 bg-navbar border">
+    <div className="flex flex-col py-3 gap-4 bg-navbar border rounded-lg">
       <div className="mx-6">
         <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
       </div>

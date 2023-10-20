@@ -20,18 +20,15 @@ export default function RiskAssessment() {
   return (
     <PageWrapper className='flex flex-col h-full max-w-full gap-4 grow' >
       <TabNav navItems={RiskManagementNavItems} />
-      <div className={cn("flex border-b py-2 flex-col sm:flex-row gap-2", {
+      <div className={cn("flex py-2 flex-col sm:flex-row gap-2", {
         "sm:flex-row-reverse": langStore?.rtl
       })}>
         <h1 className={cn("text-xl font-semibold grow flex flex-row gap-2 items-center", {
           "flex-row-reverse": langStore?.rtl
         })}>
-          <Icons.riskAssessment className=" w-5 h-5 " />
-          <span>
-            {
-              dict?.riskAssessmentScope
-            }
-          </span>
+          {
+            dict?.riskAssessmentScope
+          }
         </h1>
         <div className={cn("flex justify-end", {
           "flex-row-reverse": langStore?.rtl

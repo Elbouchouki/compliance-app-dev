@@ -30,7 +30,7 @@ export default function Tenants() {
           <AddTenantDialogButton />
         </div>
       </div>
-      <div className="h-full flex flex-col rounded-lg ">
+      <div className="h-full flex flex-col overflow-x-scroll pr-3  p-1">
         <DataTable />
         <Footer className='mt-3 grow items-end' />
       </div>
