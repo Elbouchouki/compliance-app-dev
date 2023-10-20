@@ -666,7 +666,7 @@ export type Dictionnary = {
   riskThresholdPercentage: string,
   riskThreshold: string,
   riskAnalysisProgress: string,
-  responseProgressForRistkThreshold: string,
+  responseProgressForRiskThreshold: string,
   riskRatingBreakdown: string,
   lowRisk: string,
   medRisk: string,

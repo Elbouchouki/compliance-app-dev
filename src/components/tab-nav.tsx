@@ -25,7 +25,7 @@ const TabNav = ({ navItems }: TabNavProps) => {
 
         (navItems).map((item, index) => (
           <Link href={item.path} key={index} className={cn(' text-xs sm:text-sm border-b-1 py-3 hover:border-primary-foreground/30 hover:dark:border-primary/30 hover:border-b-2 text-muted-foreground', {
-            "border-primary-foreground dark:border-primary border-b-2 text-foreground": item.path.includes(pathname.split('/')[1]),
+            "border-primary-foreground dark:border-primary border-b-2 text-foreground": item.path == ('/' + pathname.split('/')[1]),
           })}>
             {
               dict ? (dict[item.key as keyof typeof dict] as string || item.name) : item.name

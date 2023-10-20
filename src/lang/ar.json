@@ -298,7 +298,7 @@
   "riskThresholdPercentage": "نسبة عتبة المخاطرة",
   "riskThreshold": "عتبة المخاطرة",
   "riskAnalysisProgress": "التقدم في تحليل المخاطر",
-  "responseProgressForRistkThreshold": "تقدم الاستجابة لعتبة المخاطر",
+  "responseProgressForRiskThreshold": "تقدم الاستجابة لعتبة المخاطر",
   "riskRatingBreakdown": "تقييم المخاطر المنفصل",
   "lowRisk": "مخاطرة ضعيفة",
   "medRisk": "مخاطرة متوسطة",
