@@ -379,6 +379,9 @@ export type Dictionnary = {
   outstanding: string,
   revolutionary: string,
 
+  operationalRiskIsEmpty: string,
+  operationalRiskIsEmptyDesc: string,
+
 
   riskManagementKPI: string,
   riskAssessment: string,

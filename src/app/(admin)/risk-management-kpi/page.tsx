@@ -10,27 +10,19 @@ import { trpc } from "@/app/_trpc/client";
 import { RiskManagementNavItems } from "@/constants/navs.config";
 import TabNav from "@/components/tab-nav";
 import { Separator } from "@/components/ui/separator";
-import { Doughnut } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 import { useTheme } from "next-themes";
+import { ControlPerformanceChart } from '@/components/risk-management-kpi/control-performance-chart';
+import { OpenIssueChart } from '@/components/risk-management-kpi/open-issue-chart';
+import RiskMap from '@/components/risk-management-kpi/risk-by-map';
+import { RiskByTypeChart } from '@/components/risk-management-kpi/risk-by-type-chart';
+import OperationalRiskTable from '@/components/risk-management-kpi/table';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Risk } from '@prisma/client';
+import { Link } from 'lucide-react';
+import { faker } from '@faker-js/faker';
+import Image from 'next/image';
 
-
-const options = {
-  responsive: true,
-  animation: {
-    animateScale: true,
-    animateRotate: true
-  },
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      position: 'right',
-      labels: {
-        boxWidth: 10,
-        padding: 12
-      }
-    },
-  }
-}
 
 export default function RiskAssessment() {
 
@@ -41,6 +33,32 @@ export default function RiskAssessment() {
   const riskData = trpc.risk.getLimited.useQuery({
     userId: user?.id as string
   })
+
+
+  const colorDegree = (degree: number) => {
+    if (degree <= 5) {
+      return "bg-[#2f4858]"
+    } else if (degree <= 10) {
+      return "bg-[#156175]"
+    } else if (degree <= 15) {
+      return "bg-[#007b8a]"
+    } else if (degree <= 20) {
+      return "bg-[#009592]"
+    } else {
+      return "bg-[#00af8f]"
+    }
+  }
+
+  const heatMapHeaders = ["Negligible", "Low", "Moderate", "Significant", "Catastrophic"]
+  const heatMap: {
+    [key: string]: number[]
+  } = {
+    "IMPROBABLE": [5, 10, 15, 20, 25],
+    "REMOTE": [5, 10, 15, 20, 25],
+    "OCCASIONAL": [5, 10, 15, 20, 25],
+    "PROBABLE": [5, 10, 15, 20, 25],
+    "FRECUENT": [5, 10, 15, 20, 25]
+  }
 
   return (
     <PageWrapper className='flex flex-col max-w-full h-full gap-5 grow'>
@@ -59,9 +77,10 @@ export default function RiskAssessment() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
         <div className="w-full flex flex-col rounded-lg border bg-navbar">
-          <div className="py-2 px-4 text-sm">{dict?.openIssues || "Open Issues"}</div>
+          <div className={cn("py-2 px-4 text-sm font-semibold", {
+            "text-right": langStore?.rtl
+          })}>{dict?.openIssues || "Open Issues"}</div>
           <Separator />
           <div className="p-8 flex justify-center items-center h-64">
             <Doughnut
@@ -106,7 +125,9 @@ export default function RiskAssessment() {
         </div>
 
         <div className="w-full flex flex-col rounded-lg border bg-navbar">
-          <div className="py-2 px-4 text-sm">{dict?.controlPerformance || "Control Performance"}</div>
+          <div className={cn("py-2 px-4 text-sm font-semibold", {
+            "text-right": langStore?.rtl
+          })}>{dict?.controlPerformance || "Control Performance"}</div>
           <Separator />
           <div className="p-8 flex justify-center items-center h-64">
             <Doughnut
@@ -151,53 +172,114 @@ export default function RiskAssessment() {
               }} />
           </div>
         </div>
-
       </div>
 
-      {/* <div>
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-4 mb-4">
-          {!riskData.isLoading && <div className={cn("flex flex-col items-center gap-2 justify-center", {
-            "order-last": langStore?.rtl
-          })}>
-            <h3 className="text-l">{dict?.operationalRisk || "Operational Risk"}</h3>
-            <div>
-              <OperationalRiskTable limitedRisks={riskData.data as Risk[]} />
-            </div>
-            <Link className="text-sky-600  underline" href="/risk-register">{dict?.clickHere || "Click here for more info..."}</Link>
-          </div>}
-          {riskData.isLoading && <Skeleton className={cn({ "order-last": langStore?.rtl })} />}
-          <div className={cn("flex flex-col items-center gap-2 justify-center")}>
-            <h3 className="text-l">{dict?.controlPerformance || "Control Performance"}</h3>
-            <div>
-              <ControlPerformanceChart />
+
+      <div className="grid md:grid-cols-5 grid-rows-1 gap-4 ">
+        <div className="md:col-span-3 col-span-5 rounded-lg border bg-navbar w-full flex flex-col">
+          <div className={cn("py-2 px-4 text-sm font-semibold", {
+            "text-right": langStore?.rtl
+          })}>{dict?.riskByType || "Risk by Type"}</div>
+          <Separator />
+          <div className='pb-4 flex  justify-center items-center  h-full w-full px-4'>
+            <div className='w-full h-full max-w-lg flex justify-center items-center'>
+              <Bar options={{
+                indexAxis: 'y' as const,
+                responsive: true,
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                }
+              }
+              }
+                data={{
+                  labels: ['Unauthorized Activity', 'Disaster', 'Human Resource', 'Transactional'],
+                  datasets: [
+                    {
+                      label: 'Type',
+                      data: ['Unauthorized Activity', 'Disaster', 'Human Resource', 'Transactional'].map(() => faker.datatype.number({ min: 0, max: 25 })),
+                      borderColor: "#125dcb",
+                      backgroundColor: "#125dcb",
+                      borderRadius: 5,
+                    },
+                  ],
+                }} />
             </div>
           </div>
-          <div className={cn("flex flex-col items-center gap-2 justify-center", {
-            "order-first": langStore?.rtl
-          })}>
-            <h3 className="text-l">{dict?.openIssues || "Open Issues"}</h3>
-            <div>
-              <OpenIssueChart />
+
+        </div>
+        <div className="md:col-span-2 col-span-5 md:col-start-4 rounded-lg border bg-navbar w-full flex flex-col">
+          <div className={cn("py-2 px-4 text-sm font-semibold", {
+            "text-right": langStore?.rtl
+          })}>{dict?.operationalRisk || "Operational Risk"}</div>
+          <Separator />
+          <div className='flex flex-col justify-center items-center w-full h-full gap-2 p-8'>
+            <Image src="/HandClap.svg" alt="HandClap svg" width={200} height={200} />
+            <div className='text-center text-lg font-semibold'>
+              {
+                dict?.operationalRiskIsEmpty || "Operational Risk is Empty"
+              }
             </div>
+            <div className='text-center text-xs text-muted-foreground px-10'>
+              {
+                dict?.operationalRiskIsEmptyDesc || "You Have no operational risks at the moment, Press on More Info to add more"
+              }
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div className="w-full  flex-col rounded-lg border bg-navbar hidden sm:flex ">
+        <div className={cn("py-2 px-4 text-sm font-semibold", {
+          "text-right": langStore?.rtl
+        })}>{dict?.riskHeatMap || "Risk Heat Map"}</div>
+        <Separator />
+        <div className='p-10 flex flex-col gap-4 lg:px-28'>
+          <div className='flex flex-row gap-4 justify-evenly'>
+            <div className='text-sm text-muted-foreground w-full'>
+            </div>
+            {
+              heatMapHeaders.map((header, index) => {
+                return (
+                  <div className='text-sm  text-muted-foreground dark:text-foreground w-full'>
+                    {header}
+                  </div>
+                )
+              })
+            }
+          </div>
+          <div className='flex flex-col gap-4 justify-evenly'>
+
+            {
+              Object.keys(heatMap).map((key, index) => {
+                return (
+                  <div className='flex flex-row gap-4 justify-evenly h-14'>
+                    <div className='text-sm text-muted-foreground dark:text-foreground  w-full h-full flex justify-center items-center'>
+                      <p >
+                        {
+                          key.slice(0, 1) + key.slice(1).toLowerCase()
+                        }
+                      </p>
+                    </div>
+                    {
+                      heatMap[key].map((value, index) => (
+                        <div className={cn('text-sm text-white dark:text-foreground rounded-lg w-full h-full flex justify-center items-center', colorDegree(value))}>
+                          <p >
+                            {value}
+                          </p>
+                        </div>
+                      ))
+                    }
+                  </div>
+                )
+              })
+            }
           </div>
         </div>
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
-          <div className="flex flex-col items-center gap-2 justify-center">
-            <h3 className="text-l">{dict?.riskByType || "Risk by Type"}</h3>
-            <div className="w-full h-full">
-              <RiskByTypeChart />
-            </div>
-          </div>
-          <div className={cn("flex flex-col items-center gap-2 justify-center", {
-            "order-first": langStore?.rtl
-          })}>
-            <h3 className="text-l">{dict?.riskByMap || "Risk by Map"}</h3>
-            <div className="w-full h-full overflow-x-scroll">
-              <RiskMap />
-            </div>
-          </div>
-        </div>
-      </div> */}
+      </div>
       <Footer className='mt-3 grow items-end' />
     </PageWrapper>
   )

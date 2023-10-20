@@ -51,6 +51,8 @@
   "subCategoryId": "تصنيف فرعي",
   "categoryId": "فئة",
   "intuitive": "بديهي",
+  "operationalRiskIsEmpty": "مخاطرة التشغيل فارغة",
+  "operationalRiskIsEmptyDesc": "يجب عليك إضافة مخاطرة تشغيلية للمتابعة",
   "frictionless": "بدون احتكاك",
   "enterprise": "مؤسسة",
   "outstanding": "متميز",

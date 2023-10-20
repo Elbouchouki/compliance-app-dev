@@ -27,6 +27,8 @@
   "complianceAuditFinding": "Compliance Audit Finding",
   "inprogress": "In Progress",
   "complianceOverview": "Overview",
+  "operationalRiskIsEmpty": "Operational Risk is empty",
+  "operationalRiskIsEmptyDesc": "You Have no operational risks at the moment, Press on More Info to add more",
   "complianceStatusSummary": "Compliance Status Summary",
   "complianceTrendChart": "Compliance Trend Chart",
   "gapAssessment": "Gap Assessment",
