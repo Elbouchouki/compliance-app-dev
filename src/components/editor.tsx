@@ -15,8 +15,8 @@ const Editor = ({
   return (
     <div className="p-2 border rounded-md">
       <OriginalEditor
-        toolbarClassName='bg-card text-black border-0'
-        editorClassName='border rounded-md p-2 text-md'
+        toolbarClassName='bg-red-100 text-black border-0 '
+        editorClassName='border rounded-md p-2 text-md '
         editorState={editorState}
         onEditorStateChange={setEditorState}
       />

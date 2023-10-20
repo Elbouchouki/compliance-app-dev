@@ -78,7 +78,7 @@ const TrainingCompletionProgress = ({ className }: {
             completed: false
           },
         ]}
-        height={20}
+        height={10}
         backgroundColor="gray"
         border="1px solid gray"
         component={CustomComponent}

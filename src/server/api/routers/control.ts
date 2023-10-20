@@ -93,6 +93,23 @@ export const controlRouter = router({
     });
   }),
 
+  getByFrameworkId: publicProcedure.input(
+    z.object({ frameworkId: z.string() })
+  ).query(({ input }) => {
+    return prisma.control.findMany({
+      where: {
+        frameworkId: input.frameworkId
+      },
+      include: {
+        assessments: {
+          include: {
+            assessmentObjective: true
+          }
+        }
+      }
+    });
+  }),
+
   getAllByFrameworkId: publicProcedure.input(
     z.object({ frameworkIds: z.array(z.string()) })
   ).query(({ input }) => {

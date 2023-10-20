@@ -306,6 +306,7 @@
   "period": "الفترة",
   "riskDeletedSuccessfully": "تم حذف المخاطرة بنجاح",
   "areYouSureYouWantToLogout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "complianceStatusSummaryIsEmpty": "ملخص حالة الامتثال فارغ",
   "noData": "لا يوجد بيانات",
   "riskVulnerabilities": "نقاط الضعف في المخاطر",
   "vulnerabilities": "نقاط الضعف",

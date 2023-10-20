@@ -512,10 +512,6 @@ const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
     }
   })
 
-  console.log(mutation.isLoading)
-  console.log(risks.isFetching)
-  console.log(risks.isLoading)
-  console.log(risks.isRefetching)
 
 
   return (

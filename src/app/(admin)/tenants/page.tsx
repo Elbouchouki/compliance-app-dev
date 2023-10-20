@@ -18,22 +18,34 @@ export default function Tenants() {
 
   return (
 
-    <PageWrapper className='flex flex-col max-w-full h-full gap-4 grow' >
-      <div className={cn("flex border-b py-2  flex-row", {
-        "flex-row-reverse": langStore?.rtl
+
+    <PageWrapper className='flex flex-col w-full h-full gap-4' >
+      <div className={cn("flex flex-col w-full gap-2 py-2 sm:flex-row", {
+        "sm:flex-row-reverse": langStore?.rtl,
       })}>
-        <h1 className={cn("text-xl font-semibold grow flex flex-row items-center gap-2", {
-          "flex-row-reverse": langStore?.rtl
-        })}>
-          <Icons.tenants className="inline-block w-5 h-5" />
-          <span>
+        <div className="flex flex-col grow">
+          <h1 className={
+            cn("text-xl font-semibold grow gap-2 flex flex-row items-center", {
+              "flex-row-reverse": langStore?.rtl
+            })
+          }>
             {
               dict?.tenants
             }
-          </span>
-        </h1>
-        <AddTenantDialogButton />
+          </h1>
+          {/* <h3 className={cn("text-sm text-muted-foreground", {
+          "text-right": langStore?.rtl
+        })}>
+          {
+            dict?.evidenceCanBeAddedAndAssociatedWithControls || "Evidence can be added and associated with controls"
+          }
+        </h3> */}
+        </div>
+        <div className="flex justify-end">
+          <AddTenantDialogButton />
+        </div>
       </div>
+
       <div className="h-full flex flex-col overflow-x-scroll pr-3">
         <DataTable />
         <Footer className='mt-3 grow items-end' />

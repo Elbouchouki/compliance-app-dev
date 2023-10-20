@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { PlusCircle } from "lucide-react";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { useState } from "react"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
@@ -18,7 +18,7 @@ import PolicyForm from "@/components/policies/policy-form"
 import useLangStore from "@/store/langagueStore";
 
 
-const AddPolicyDialogButton = ({
+const AddPolicySheetButton = ({
   className
 }: {
   className?: string
@@ -36,8 +36,8 @@ const AddPolicyDialogButton = ({
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
         <Button size="sm" className={cn("flex flex-row gap-2", {
           "flex-row-reverse": langStore?.rtl
         })} >
@@ -48,29 +48,29 @@ const AddPolicyDialogButton = ({
             }
           </span>
         </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle className={cn({
+      </SheetTrigger>
+      <SheetContent className="flex flex-col gap-5">
+        <SheetHeader className="py-3">
+          <SheetTitle className={cn({
             "text-right mr-3": langStore?.rtl
           })}>
 
             {
               dict?.addPolicy || "Add Policy"
-            }</DialogTitle>
-          <DialogDescription className={cn({
+            }</SheetTitle>
+          <SheetDescription className={cn({
             "text-right mr-3": langStore?.rtl
           })}>
             {
               dict?.addNewPolicyToTheSystem || "Add new policy to the system."
             }
-          </DialogDescription>
-        </DialogHeader>
-        <div className={cn("w-full", className)}>
+          </SheetDescription>
+        </SheetHeader>
+        <div className={cn("w-full h-full", className)}>
           <PolicyForm onSubmit={onSubmit} formType="add" />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   )
 }
-export default AddPolicyDialogButton
+export default AddPolicySheetButton

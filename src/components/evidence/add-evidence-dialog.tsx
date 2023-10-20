@@ -51,7 +51,7 @@ const AddEvidenceSheetButton = ({
           </span>
         </Button>
       </SheetTrigger>
-      <SheetContent className="ssm:max-w-[425px] flex flex-col gap-5">
+      <SheetContent className="flex flex-col gap-5">
         <SheetHeader className="py-3">
 
           <SheetTitle className={cn({
@@ -69,7 +69,7 @@ const AddEvidenceSheetButton = ({
             }
           </SheetDescription>
         </SheetHeader>
-        <div className={cn("w-full grow", className)}>
+        <div className={cn("w-full h-full", className)}>
           <EvidenceForm onSubmit={onSubmit} formType="add" />
         </div>
       </SheetContent>

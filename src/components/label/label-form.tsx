@@ -49,6 +49,12 @@ const LabelForm = ({ onSubmit, formType, label }: LabelFormProps) => {
     }
   })
 
+  const labels = trpc.label.getAll.useQuery({
+    userId: user?.id || ""
+  }, {
+    enabled: false
+  })
+
   const onSubmitForm = (data: z.infer<typeof FormSchema>) => {
     mutation.mutate(
       {
@@ -69,7 +75,7 @@ const LabelForm = ({ onSubmit, formType, label }: LabelFormProps) => {
 
   return (
     <Form  {...form}>
-      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full flex flex-col gap-3">
+      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full h-full flex flex-col gap-3 ">
         <div>
           <FormField
             control={form.control}
@@ -134,15 +140,15 @@ const LabelForm = ({ onSubmit, formType, label }: LabelFormProps) => {
             )}
           />
         </div>
-        <div className={cn("mt-3", {
+        <div className={cn("mt-auto grow flex gap-2 items-end", {
           "flex flex-row-reverse": langStore?.rtl
         })}>
           <Button type="submit"
-            disabled={mutation.isLoading}
+            disabled={mutation.isLoading || labels.isLoading || labels.isFetching || labels.isRefetching}
             className="flex flex-row gap-2"
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading
+              hidden: !mutation.isLoading && !labels.isLoading && !labels.isRefetching && !labels.isFetching
             })} />
             <span>
               {

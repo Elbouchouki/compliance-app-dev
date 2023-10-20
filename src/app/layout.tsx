@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import '@/styles/editor.css'
+// import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 import type { Metadata } from 'next'
 import { Toaster } from "@/components/ui/toaster"

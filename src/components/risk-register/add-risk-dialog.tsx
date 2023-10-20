@@ -7,7 +7,6 @@ import { PlusCircle } from "lucide-react";
 import {
   Sheet,
   SheetContent,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -16,19 +15,14 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
 import { RiskRegisterFormBody } from "@/components/risk-register/risk-form"
-import useAssessmentScopeStore from "@/store/assessmentScopeStore";
 import useLangStore from "@/store/langagueStore";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import * as z from "zod"
 import { useForm } from "react-hook-form"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Form } from "@/components/ui/form"
 import { RiskForm } from "@/types";
 import { riskStore } from "@/store/riskStore";
-import { Textarea } from "../ui/textarea";
-import { Input } from "../ui/input";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { trpc } from "@/app/_trpc/client";
 import { useUser } from "@clerk/nextjs";
 import { Icons } from "../icons";
@@ -111,10 +105,10 @@ const AddRiskSheetButton = ({
           <span>{dict?.addRisk || "Add Risk"}</span>
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-full" >
-        <SheetHeader>
+      <SheetContent className="">
+        <SheetHeader className="pb-5">
           <SheetTitle className={cn({
-            "text-right": langStore?.rtl
+            "text-right mr-3": langStore?.rtl
           })}>
             {dict?.addRisk || "Add Risk"}
           </SheetTitle>

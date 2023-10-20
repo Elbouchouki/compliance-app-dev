@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useStore } from "@/hooks/use-store";
-import { ArrowLeft, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,6 +19,7 @@ import { trpc } from "@/app/_trpc/client";
 import { Icons } from "@/components/icons";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 
 export default function GapAssessmentDetails() {
@@ -106,28 +107,64 @@ export default function GapAssessmentDetails() {
   } else {
     return (
       <PageWrapper className='flex flex-col h-full max-w-full gap-4 grow' >
-        <div className={cn("w-full border-b py-2 flex flex-row gap-4 ", {
+
+
+
+
+        <div className={cn("flex flex-row", {
           "flex-row-reverse": langStore?.rtl
         })}>
-          <Button variant="ghost"
-            size="sm"
-            onClick={() => router.back()}
-            className={cn("flex flex-row items-center gap-2", {
+          <Link href={`/gap-assessment/${params.scope as string}`} >
+            <Button variant="outline" size="sm" className={cn("flex flex-row gap-2 items-center  bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10", {
               "flex-row-reverse": langStore?.rtl
-            })}
-          >
-            <ArrowLeft className={cn("w-4 h-4", {
-              "transform rotate-180": langStore?.rtl
-            })} />
-            <span>
-              {
-                dict?.backToAllQuestions || "Back to all questions"
-              }
-            </span>
-          </Button>
+            })}>
+              <Icons.back className={cn("w-5 h-5", {
+                "transform rotate-180": langStore?.rtl
+              })} />
+              <p>
+                {dict?.back || "Back"}
+              </p>
+            </Button>
+          </Link>
+          {/* // TODO : loading */}
+          <div className={cn("flex flex-row items-center gap-2 px-4", {
+            "flex-row-reverse": langStore?.rtl
+          })}>
+            {
+              controlAssessmentScope?.isLoading ?
+                <div className="flex flex-row items-center gap-2 shadow animate-pulse">
+                  <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-14"></div>
+                  /
+                  <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-14"></div>
+                  /
+                  <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-14"></div>
+                </div>
+                :
+                <>
+                  <Link href="/gap-assessment" className="text-xs text-muted-foreground">
+                    {
+                      dict?.gapAssessmentScope
+                    }
+                  </Link>
+                  <div className="text-muted-foreground">/</div>
+                  <Link href={`/gap-assessment/${params.scope as string}`} className="text-xs text-muted-foreground">
+                    {
+                      controlAssessmentScope?.data?.assessmentScope.name
+                    }
+                  </Link>
+                  <div className="text-muted-foreground">/</div>
+                  <p className="text-xs text-primary-foreground dark:text-primary ">
+                    {
+                      controlAssessmentScope?.data?.control.name
+                    }
+                  </p>
+                </>
+            }
+          </div>
         </div>
+
         <div className="flex-col w-full">
-          <Card className="rounded-md">
+          <Card className="rounded-md bg-navbar">
             <CardHeader >
               <div className={cn("w-full flex flex-row gap-4 flex-wrap", {
                 "flex-row-reverse": langStore?.rtl
@@ -188,7 +225,7 @@ export default function GapAssessmentDetails() {
                     })}>
                       {
                         controlAssessmentScope?.data?.maturity?.id !== "Unanswered" ?
-                          <Badge className={controlAssessmentScope?.data?.maturity?.color}>
+                          <Badge className={cn("text-white", controlAssessmentScope?.data?.maturity?.color)}>
                             {controlAssessmentScope?.data?.maturity?.id}
                           </Badge>
                           : null
@@ -275,7 +312,7 @@ export default function GapAssessmentDetails() {
         </div>
 
         <div className="mx-5">
-          <Card>
+          <Card className="bg-navbar">
             <CardHeader>
               <CardTitle className={cn("text-sm", {
                 "text-right": langStore?.rtl
@@ -307,7 +344,7 @@ export default function GapAssessmentDetails() {
             </CardContent>
           </Card>
         </div>
-        <Card>
+        <Card className="bg-navbar">
           <Tabs defaultValue="informations" className="w-full">
             <CardHeader>
               <div className={cn("flex flex-row", {
@@ -368,7 +405,7 @@ export default function GapAssessmentDetails() {
                       }
                     })
 
-                  }} variant="outline" className="w-full flex flex-row gap-2">
+                  }} className="w-full flex flex-row gap-2">
 
                   <Icons.loader className={cn("animate-spin w-4 h-4", {
                     "hidden": !mutation.isLoading
@@ -400,7 +437,7 @@ export default function GapAssessmentDetails() {
                       }
                     })
 
-                  }} variant="outline" className="w-full flex flex-row gap-2">
+                  }} className="w-full flex flex-row gap-2">
 
                   <Icons.loader className={cn("animate-spin w-4 h-4", {
                     "hidden": !mutation.isLoading
@@ -415,7 +452,7 @@ export default function GapAssessmentDetails() {
             </CardContent>
           </Tabs>
         </Card>
-        <Card>
+        <Card className="bg-navbar">
           <Tabs defaultValue="policies" className="w-full" >
             <CardHeader>
               <div className={cn("flex flex-row", {
@@ -457,7 +494,7 @@ export default function GapAssessmentDetails() {
                       }
                     })
 
-                  }} variant="outline" className="w-full flex flex-row gap-2">
+                  }} className="w-full flex flex-row gap-2">
 
                   <Icons.loader className={cn("animate-spin w-4 h-4", {
                     "hidden": !mutation.isLoading
@@ -490,7 +527,7 @@ export default function GapAssessmentDetails() {
                       }
                     })
 
-                  }} variant="outline" className="w-full flex flex-row gap-2">
+                  }} className="w-full flex flex-row gap-2">
 
                   <Icons.loader className={cn("animate-spin w-4 h-4", {
                     "hidden": !mutation.isLoading
@@ -522,7 +559,7 @@ export default function GapAssessmentDetails() {
                       }
                     })
 
-                  }} variant="outline" className="w-full flex flex-row gap-2">
+                  }} className="w-full flex flex-row gap-2">
 
                   <Icons.loader className={cn("animate-spin w-4 h-4", {
                     "hidden": !mutation.isLoading

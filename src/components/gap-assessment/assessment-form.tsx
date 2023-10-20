@@ -42,7 +42,7 @@ export const AssessmentFormBody = (
           name="name"
           render={({ field, fieldState }) => (
             <FormItem
-              className="w-full flex flex-col"
+              className="w-full flex flex-col my-1 "
             >
               <FormLabel className={cn({
                 "text-right": langStore?.rtl
@@ -71,7 +71,7 @@ export const AssessmentFormBody = (
           name="type"
           render={({ field }) => (
             <FormItem
-              className="w-full flex flex-col"
+              className="w-full flex flex-col my-1"
             >
               <FormLabel className={cn({
                 "text-right": langStore?.rtl
@@ -111,7 +111,146 @@ export const AssessmentFormBody = (
           )}
         />
       </div>
-      <div className="flex flex-row gap-2">
+
+
+
+
+
+
+
+
+
+
+      <FormField
+        control={form.control}
+        name="reportingFrom"
+        render={({ field }) => (
+          <FormItem className="flex flex-col gap-1 w-full my-1 ">
+            <FormLabel className={cn({
+              "text-right": langStore?.rtl
+            })}>
+              {
+                dict?.period || "Period"
+              }
+            </FormLabel>
+            <div className={cn("flex flex-row gap-2 items-center", {
+              "flex-row-reverse": langStore?.rtl
+            })}>
+              <p className="text-xs w-10">
+                {
+                  dict?.from || "From"
+                }
+              </p>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-full pl-3 text-left font-normal",
+                        !field.value && "text-muted-foreground", {
+                        "flex-row-reverse": langStore?.rtl
+                      }
+                      )}
+                    >
+                      {field.value ? (
+                        format(new Date(field.value), "PPP", {
+                          locale: langStore?.lang === "ar" ? ar : enUS
+                        })
+                      ) : (
+                        <span>
+                          {
+                            dict?.pickDate || "Pick a date"
+                          }
+                        </span>
+                      )}
+                      <Icons.calendar className={cn("ml-auto h-4 w-4 opacity-50", {
+                        "ml-0 mr-auto": langStore?.rtl
+                      })} />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    locale={langStore?.lang === "ar" ? ar : enUS}
+                    mode="single"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="reportingTo"
+        render={({ field }) => (
+          <FormItem className="flex flex-col gap-1 w-full ">
+            <div className={cn("flex flex-row gap-2 items-center", {
+              "flex-row-reverse": langStore?.rtl
+            })}>
+              <p className="text-xs w-10">
+                {
+                  dict?.to || "To"
+                }
+              </p>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-full pl-3 text-left font-normal",
+                        !field.value && "text-muted-foreground", {
+                        "flex-row-reverse": langStore?.rtl
+                      }
+                      )}
+                    >
+                      {field.value ? (
+                        format(new Date(field.value), "PPP", {
+                          locale: langStore?.lang === "ar" ? ar : enUS
+                        })
+                      ) : (
+                        <span>
+                          {
+                            dict?.to || "To"
+                          }
+                        </span>
+                      )}
+                      <Icons.calendar className={cn("ml-auto h-4 w-4 opacity-50", {
+                        "ml-0 mr-auto": langStore?.rtl
+                      })} />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    locale={langStore?.lang === "ar" ? ar : enUS}
+                    mode="single"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+
+
+
+
+
+
+
+      {/* <div className="flex flex-row gap-2">
         <FormField
           control={form.control}
           name="reportingFrom"
@@ -222,7 +361,7 @@ export const AssessmentFormBody = (
             </FormItem>
           )}
         />
-      </div>
+      </div> */}
 
       <div>
         <FormField
@@ -230,7 +369,7 @@ export const AssessmentFormBody = (
           name="description"
           render={({ field, fieldState }) => (
             <FormItem
-              className="w-full flex flex-col"
+              className="w-full flex flex-col my-1"
             >
               <FormLabel className={cn({
                 "text-right": langStore?.rtl
@@ -267,6 +406,13 @@ const AssessmentForm = ({ onSubmit, formType, assessmentScope }: AssessmentFormP
   const mutation = trpc.assessment.addOrUpdateAssessment.useMutation()
   const utils = trpc.useContext();
 
+  const assessments = trpc.assessment.getAllAssessments.useQuery({
+    userId: user?.id
+  }, {
+    enabled: false
+  })
+
+
   const FormSchema = z.object({
     id: z.string(),
     name: z.string().min(4, {
@@ -284,7 +430,7 @@ const AssessmentForm = ({ onSubmit, formType, assessmentScope }: AssessmentFormP
     status: z.enum(["planned", "in-progress", "completed"], {
       required_error: dict?.FromSchemaValidation.status || "Status is required"
     }).optional(),
-    type: z.enum(["internal", "external", "both"], {
+    type: z.enum(["internal", "external"], {
       required_error: dict?.FromSchemaValidation.type || "Type is required"
     }),
   })
@@ -326,19 +472,19 @@ const AssessmentForm = ({ onSubmit, formType, assessmentScope }: AssessmentFormP
 
   return (
     <Form  {...form}>
-      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full flex flex-col gap-3">
+      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full flex flex-col my-1 gap-3 h-full ">
         <AssessmentFormBody form={form} />
-        <div className="mt-3">
+        <div className={cn("mt-auto  w-full flex flex-row-reverse gap-2 justify-end", {
+          "flex-row": langStore?.rtl
+        })}>
           <Button type="submit"
-            disabled={mutation.isLoading}
+            disabled={mutation.isLoading || assessments.isLoading || assessments.isFetching || assessments.isRefetching}
             className="flex flex-row gap-2"
           >
-
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading
+              hidden: !mutation.isLoading && !assessments.isLoading && !assessments.isFetching && !assessments.isRefetching
             })}
             />
-
             <span>
               {
                 formType === "add" ?

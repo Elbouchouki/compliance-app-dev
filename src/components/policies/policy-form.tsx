@@ -29,6 +29,11 @@ const PolicyForm = ({ onSubmit, formType, policy, showOptionnals = true }: Polic
   const mutation = trpc.policy.addOrUpdate.useMutation()
   const utils = trpc.useContext();
   const { user } = useUser()
+  const policies = trpc.policy.getAll.useQuery({
+    userId: user?.id || ""
+  }, {
+    enabled: false
+  })
 
 
   const FormSchema = z.object({
@@ -73,7 +78,7 @@ const PolicyForm = ({ onSubmit, formType, policy, showOptionnals = true }: Polic
 
   return (
     <Form  {...form}>
-      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full flex flex-col gap-3">
+      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full h-full flex flex-col gap-3 ">
         <div>
           <FormField
             control={form.control}
@@ -174,15 +179,15 @@ const PolicyForm = ({ onSubmit, formType, policy, showOptionnals = true }: Polic
             )}
           />
         </div>
-        <div className={cn("mt-3", {
+        <div className={cn("mt-auto grow flex gap-2 items-end", {
           "flex flex-row-reverse": langStore?.rtl
         })}>
           <Button type="submit"
-            disabled={mutation.isLoading}
+            disabled={mutation.isLoading || policies.isLoading || policies.isFetching || policies.isRefetching}
             className="flex flex-row gap-2"
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading
+              hidden: !mutation.isLoading && !policies.isLoading && !policies.isRefetching && !policies.isFetching
             })} />
             <span>{
               formType === "add" ?

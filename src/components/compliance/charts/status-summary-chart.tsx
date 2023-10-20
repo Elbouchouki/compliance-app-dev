@@ -5,11 +5,13 @@ import { Pie } from 'react-chartjs-2';
 import { GET_MATURITY_LEVELS } from "@/mock";
 import { useStore } from '@/hooks/use-store';
 import useLangStore from '@/store/langagueStore';
-import { groupByKey } from '@/lib/utils';
+import { cn, groupByKey } from '@/lib/utils';
 import { backgroundColor, borderColor } from './colors.const';
 import { trpc } from '@/app/_trpc/client';
 import { useUser } from '@clerk/nextjs';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Separator } from '@/components/ui/separator';
+import Image from 'next/image';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -41,9 +43,25 @@ const StatusSummaryChart = ({
     return val.toFixed(2)
   })
 
-  if (assessmentScopes?.isLoading) {
-    return <Skeleton className="w-full h-full" />
-  }
+  if (assessmentScopes?.isLoading) return (
+    <div className="shadow animate-pulse  w-full flex flex-col rounded-lg border bg-background h-full"></div>
+  )
+
+  if (assessmentScopes?.isError || values.length === 0 || !total)
+    return (
+      <div className='w-full h-full flex flex-row justify-center items-center'>
+        <div className='flex flex-col justify-center items-center w-full h-full gap-2 p-8'>
+          <Image src="/HandClap.svg" alt="HandClap svg" width={200} height={200} />
+          <div className='text-center text-lg font-semibold'>
+            {dict?.complianceStatusSummary || "Compliance Status Summary"}
+          </div>
+          <div className='text-center text-xs text-muted-foreground px-10'>
+            {dict?.complianceStatusSummaryIsEmpty || "Compliance Status Summary is Empty"}
+          </div>
+        </div>
+      </div>
+    )
+
   return (
     <Pie className={className}
       options={{

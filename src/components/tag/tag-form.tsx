@@ -27,6 +27,12 @@ const TagForm = ({ onSubmit, formType, tag }: TagFormProps) => {
   const { user } = useUser()
   const utils = trpc.useContext();
 
+  const tags = trpc.tag.getAll.useQuery({
+    userId: user?.id || ""
+  }, {
+    enabled: false
+  })
+
   const FormSchema = z.object({
     name: z.string().min(4, {
       message: dict?.FromSchemaValidation.name || "Name must be at least 4 characters.",
@@ -61,7 +67,7 @@ const TagForm = ({ onSubmit, formType, tag }: TagFormProps) => {
 
   return (
     <Form  {...form}>
-      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full flex flex-col gap-3">
+      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full h-full flex flex-col gap-3 ">
         <div>
           <FormField
             control={form.control}
@@ -96,15 +102,15 @@ const TagForm = ({ onSubmit, formType, tag }: TagFormProps) => {
             )}
           />
         </div>
-        <div className={cn("mt-3", {
+        <div className={cn("mt-auto grow flex gap-2 items-end", {
           "flex flex-row-reverse": langStore?.rtl
         })}>
           <Button type="submit"
-            disabled={mutation.isLoading}
+            disabled={mutation.isLoading || tags.isLoading || tags.isRefetching || tags.isFetching}
             className="flex flex-row gap-2"
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading
+              hidden: !mutation.isLoading && !tags.isLoading && !tags.isRefetching && !tags.isFetching
             })} />
             <span>
               {

@@ -1,3 +1,4 @@
+"use client"
 import { useStore } from '@/hooks/use-store';
 import { GET_MATURITY_LEVELS, GET_MONTHS } from '@/mock';
 import useLangStore from '@/store/langagueStore';
@@ -30,25 +31,6 @@ ChartJS.register(
   BarController
 );
 
-const options = {
-  plugins: {
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart - Stacked',
-    },
-  },
-  responsive: true,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-
-};
-
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 
@@ -78,11 +60,8 @@ const TrendChart = () => {
     data.push([maxControls - left, ...monthData]);
   })
 
-
-
   return (
     <Chart type='bar' options={{
-
       plugins: {
         legend: {
           display: true,
@@ -90,6 +69,7 @@ const TrendChart = () => {
         },
       },
       responsive: true,
+      maintainAspectRatio: true,
       scales: {
         x: {
           stacked: true,
@@ -105,7 +85,9 @@ const TrendChart = () => {
           {
             type: 'line' as const,
             label: dict?.total || 'Total',
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: '#1c84f6',
+            borderWidth: 1,
+            borderDash: [5, 5],
             data: transpose(data)[0],
           },
           ...transpose(data).slice(1).map((d, index) => ({

@@ -209,36 +209,6 @@ const EvidenceForm = ({ onSubmit, formType, evidence }: EvidenceFormProps) => {
             )}
           />
         </div>
-        <div>
-          <FormField
-            name="content"
-            render={({ field }) => (
-              <FormItem
-                className="flex flex-col w-full"
-              >
-                <FormLabel className={cn("flex flex-row items-center gap-2", {
-                  "text-right flex-row-reverse": langStore?.rtl
-                })}>
-                  <span>
-                    {
-                      dict?.attachement || "Attachement"
-                    }
-                  </span>
-                  <Badge variant="outline" className="text-xs">
-                    {
-                      dict?.optional || "Optional"
-                    }
-                  </Badge>
-                </FormLabel>
-                <FormControl>
-                  <Input className={cn({
-                    "text-right": langStore?.rtl
-                  })} id="picture" type="file" />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-        </div>
         <div className={cn("mt-auto grow flex gap-2 items-end", {
           "flex flex-row-reverse": langStore?.rtl
         })}>

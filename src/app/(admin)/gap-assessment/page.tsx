@@ -18,6 +18,26 @@ export default function GapAssessments() {
   return (
     <PageWrapper className='flex flex-col h-full max-w-full gap-4 grow' >
 
+
+      <div className={cn("flex py-2 flex-col sm:flex-row gap-2", {
+        "sm:flex-row-reverse": langStore?.rtl
+      })}>
+        <h1 className={cn("text-xl font-semibold grow flex flex-row gap-2 items-center", {
+          "flex-row-reverse": langStore?.rtl
+        })}>
+          {
+            dict?.gapAssessmentScope
+          }
+        </h1>
+        <div className={cn("flex justify-end", {
+          "flex-row-reverse": langStore?.rtl
+        })}>
+          <AddAssessmentDialogButton />
+        </div>
+      </div>
+
+      {/* 
+
       <div className={cn("flex border-b py-2 flex-col sm:flex-row gap-2", {
         "sm:flex-row-reverse": langStore?.rtl
       })}>
@@ -36,9 +56,9 @@ export default function GapAssessments() {
         })}>
           <AddAssessmentDialogButton />
         </div>
-      </div>
+      </div> */}
 
-      <div className="h-full flex flex-col overflow-x-scroll pr-3  p-1">
+      <div className="h-full flex flex-col">
         <DataTable />
         <Footer className='mt-3 grow items-end' />
       </div>

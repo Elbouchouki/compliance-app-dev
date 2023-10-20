@@ -2,18 +2,18 @@
 
 import { cn } from "@/lib/utils"
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
 import usePolicyStore from "@/store/policyStore"
 import PolicyForm from "@/components/policies/policy-form"
 import useLangStore from "@/store/langagueStore"
 
-const EditPolicyDialog = ({
+const EditPolicySheet = ({
   className,
 }: {
   className?: string
@@ -33,27 +33,25 @@ const EditPolicyDialog = ({
   }
 
   return (
-    <Dialog open={policyStore?.editModalOpen} onOpenChange={policyStore?.setEditModalOpen}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle className={cn("flex flex-row gap-1 mr-3", {
-            "flex-row-reverse": langStore?.rtl === true,
+    <Sheet open={policyStore?.editModalOpen} onOpenChange={policyStore?.setEditModalOpen}>
+      <SheetContent className="flex flex-col gap-5">
+        <SheetHeader className="py-3">
+          <SheetTitle className={cn({
+            "text-right mr-3": langStore?.rtl
           })}>
             <span>
               {
                 dict?.editPolicy || "Edit Policy"
               }
             </span>
-            <span>
-              {policyStore?.editModalPolicy?.id.substring(0, 8)}
-            </span>
-          </DialogTitle>
-        </DialogHeader>
-        <div className={cn("w-full", className)}>
+
+          </SheetTitle>
+        </SheetHeader>
+        <div className={cn("w-full  h-full", className)}>
           <PolicyForm policy={policyStore?.editModalPolicy} onSubmit={onSubmit} formType="edit" />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   )
 }
-export default EditPolicyDialog
+export default EditPolicySheet

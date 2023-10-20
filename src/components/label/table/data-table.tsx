@@ -39,6 +39,7 @@ import { cn } from "@/lib/utils"
 import { trpc } from "@/app/_trpc/client"
 import { useUser } from "@clerk/nextjs"
 import { Skeleton } from "@/components/ui/skeleton"
+import TableSkeleton from "@/components/table-skeleton"
 
 
 export function DataTable<TData, TValue>(
@@ -198,12 +199,14 @@ export function DataTable<TData, TValue>(
     setGlobalFilter(s)
   }
   if (labels.isLoading) {
-    return <Skeleton className="h-full w-full grow"></Skeleton>
+    return <TableSkeleton elements={7} />
   }
   return (
-    <div className="space-y-4">
-      <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
-      <div className="border rounded-md ">
+    <div className="flex flex-col py-3 gap-4 bg-navbar border rounded-lg">
+      <div className="mx-6">
+        <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
+      </div>
+      <div className="border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -256,7 +259,9 @@ export function DataTable<TData, TValue>(
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <div className="mx-6">
+        <DataTablePagination table={table} />
+      </div>
       <EditLabelDialog />
     </div>
   )

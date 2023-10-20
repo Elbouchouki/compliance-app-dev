@@ -17,7 +17,7 @@ export default function Evidence() {
 
   return (
     <PageWrapper className='flex flex-col w-full h-full gap-4' >
-      <div className={cn("flex flex-col w-full gap-2 py-2 border-b sm:flex-row", {
+      <div className={cn("flex flex-col w-full gap-2 py-2 sm:flex-row", {
         "sm:flex-row-reverse": langStore?.rtl,
       })}>
         <div className="flex flex-col grow">
@@ -26,12 +26,9 @@ export default function Evidence() {
               "flex-row-reverse": langStore?.rtl
             })
           }>
-            <Icons.evidence className="w-4 h-4" />
-            <span>
-              {
-                dict?.evidence || "Evidence"
-              }
-            </span>
+            {
+              dict?.evidence || "Evidence"
+            }
           </h1>
           <h3 className={cn("text-sm text-muted-foreground", {
             "text-right": langStore?.rtl

@@ -2,11 +2,11 @@
 
 import { cn } from "@/lib/utils"
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
 import useEvidenceStore from "@/store/evidenceStore"
@@ -34,27 +34,24 @@ const EditEvidenceDialog = ({
   }
 
   return (
-    <Dialog open={evidenceStore?.editModalOpen} onOpenChange={evidenceStore?.setEditModalOpen}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle className={cn("flex flex-row gap-1 mr-3", {
-            "flex-row-reverse": langStore?.rtl === true,
+    <Sheet open={evidenceStore?.editModalOpen} onOpenChange={evidenceStore?.setEditModalOpen}>
+      <SheetContent className="flex flex-col gap-5">
+        <SheetHeader className="py-3">
+          <SheetTitle className={cn({
+            "text-right mr-3": langStore?.rtl
           })}>
             <span>
               {
                 dict?.editEvidence || "Edit Evidence"
               }
             </span>
-            <span>
-              {evidenceStore?.editModalEvidence?.id.substring(0, 6)}
-            </span>
-          </DialogTitle>
-        </DialogHeader>
-        <div className={cn("w-full", className)}>
+          </SheetTitle>
+        </SheetHeader>
+        <div className={cn("w-full h-full", className)}>
           <EvidenceForm evidence={evidenceStore?.editModalEvidence} onSubmit={onSubmit} formType="edit" />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   )
 }
 export default EditEvidenceDialog

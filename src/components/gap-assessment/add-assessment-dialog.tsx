@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { PlusCircle } from "lucide-react";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { useState } from "react"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
@@ -28,7 +28,7 @@ import { trpc } from "@/app/_trpc/client";
 import { Icons } from "../icons";
 import { useUser } from "@clerk/nextjs";
 
-const AddAssessmentDialogButton = ({
+const AddAssessmentSheetButton = ({
   className
 }: {
   className?: string
@@ -107,6 +107,12 @@ const AddAssessmentDialogButton = ({
     enabled: false
   })
 
+  const assessments = trpc.assessment.getAllAssessments.useQuery({
+    userId: user?.id || ""
+  }, {
+    enabled: false
+  })
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data)
     mutation.mutate({
@@ -139,8 +145,8 @@ const AddAssessmentDialogButton = ({
 
   return (
 
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
         <Button size="sm" className={cn("flex flex-row gap-2", {
           "flex-row-reverse": langStore?.rtl
         })}>
@@ -151,22 +157,23 @@ const AddAssessmentDialogButton = ({
             }
           </span>
         </Button>
-      </DialogTrigger>
-      <DialogContent className="">
-        <DialogHeader>
-          <DialogTitle className={cn({
+      </SheetTrigger>
+      <SheetContent className="">
+        <SheetHeader className="mb-4">
+          <SheetTitle className={cn({
             "text-right mr-3": langStore?.rtl
           })}>
             {
               dict?.addAssessment || "Add assessment scope"
             }
-          </DialogTitle>
-        </DialogHeader>
+          </SheetTitle>
+        </SheetHeader>
 
-        <div className={cn("w-full", className)} >
+        <div className={cn("w-full h-full pb-10 ", className)}>
+
           <Form  {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} >
-              <Tabs value={stepper} >
+            <form onSubmit={form.handleSubmit(onSubmit)} className=" w-full h-full">
+              <Tabs value={stepper} className="w-full h-full">
                 <TabsList className="w-full flex flex-row justify-around">
                   {
                     langStore?.rtl ?
@@ -181,9 +188,12 @@ const AddAssessmentDialogButton = ({
                       ))
                   }
                 </TabsList>
-                <TabsContent value="details" className="w-full flex flex-col gap-3">
+                <div className=" py-3"></div>
+                <TabsContent value="details" className={cn("w-full h-full flex flex-col gap-3", {
+                  'h-0': stepper !== 'details'
+                })}>
                   <AssessmentFormBody form={form} />
-                  <div className={cn("w-full flex flex-row-reverse gap-2 justify-end", {
+                  <div className={cn("mt-auto pb-20 w-full flex flex-row-reverse gap-2 justify-end", {
                     "flex-row": langStore?.rtl
                   })}>
                     <Button type="button" variant="ghost" onClick={() => {
@@ -213,8 +223,10 @@ const AddAssessmentDialogButton = ({
                     </Button>
                   </div>
                 </TabsContent>
-                <TabsContent value="frameworks" className="w-full flex flex-col gap-3">
-                  <div className="flex flex-col max-h-96 overflow-y-scroll px-4">
+                <TabsContent value="frameworks" className={cn("w-full h-full flex flex-col gap-3", {
+                  'h-0': stepper !== "frameworks"
+                })}>
+                  <div className="flex flex-col max-h-full overflow-y-scroll px-4">
                     <FormField
                       control={form.control}
                       name="framworks"
@@ -269,7 +281,7 @@ const AddAssessmentDialogButton = ({
                       )}
                     />
                   </div>
-                  <div className={cn("w-full flex flex-row-reverse gap-2 justify-end", {
+                  <div className={cn("mt-auto pb-20 w-full flex flex-row-reverse gap-2 justify-end", {
                     "flex-row": langStore?.rtl
                   })}>
                     <Button type="button" variant="outline" onClick={() => {
@@ -302,8 +314,10 @@ const AddAssessmentDialogButton = ({
                     </Button>
                   </div>
                 </TabsContent>
-                <TabsContent value="controls" className="w-full flex flex-col gap-3">
-                  <div className="flex flex-col max-h-96 overflow-y-scroll px-4">
+                <TabsContent value="controls" className={cn("w-full h-full flex flex-col gap-3", {
+                  'h-0': stepper !== "controls"
+                })}>
+                  <div className="flex flex-col max-h-full overflow-y-scroll px-4">
                     <FormField
                       control={form.control}
                       name="controls"
@@ -358,7 +372,7 @@ const AddAssessmentDialogButton = ({
                       )}
                     />
                   </div>
-                  <div className={cn("w-full flex flex-row-reverse gap-2 justify-end", {
+                  <div className={cn("mt-auto pb-20 w-full flex flex-row-reverse gap-2 justify-end", {
                     "flex-row": langStore?.rtl
                   })}>
                     <Button type="button" variant="outline" onClick={() => setStepper("frameworks")}>
@@ -381,7 +395,9 @@ const AddAssessmentDialogButton = ({
                     </Button>
                   </div>
                 </TabsContent>
-                <TabsContent value="review" className="w-full flex flex-col gap-3">
+                <TabsContent value="review" className={cn("w-full h-full flex flex-col gap-3", {
+                  'h-0': stepper !== "review"
+                })}>
                   <div className="w-full flex flex-col gap-2">
                     <div className="w-full  flex flex-row gap-2">
                       <div className="w-full  flex flex-col gap-1">
@@ -443,21 +459,23 @@ const AddAssessmentDialogButton = ({
                       </div>
                     </div>
                   </div>
-                  <div className={cn("w-full flex flex-row-reverse gap-2 justify-end", {
+                  <div className={cn("mt-auto pb-24 w-full flex flex-row-reverse gap-2 justify-end", {
                     "flex-row": langStore?.rtl
                   })}>
-                    <Button type="button" variant="outline" onClick={() => setStepper("controls")}>
+                    <Button type="button" variant="outline"
+                      disabled={mutation.isLoading || afterMutation.isLoading || assessments.isLoading || assessments.isFetching || assessments.isRefetching}
+                      onClick={() => setStepper("controls")}>
                       {
                         dict?.previous || "Previous"
                       }
                     </Button>
                     <Button type="submit"
-                      disabled={mutation.isLoading || afterMutation.isLoading}
+                      disabled={mutation.isLoading || afterMutation.isLoading || assessments.isLoading || assessments.isFetching || assessments.isRefetching}
                       className="flex flex-row gap-2"
                     >
 
                       <Icons.loader className={cn("animate-spin w-4 h-4", {
-                        hidden: !mutation.isLoading && !afterMutation.isLoading
+                        hidden: !mutation.isLoading && !afterMutation.isLoading && !assessments.isLoading && !assessments.isFetching && !assessments.isRefetching
                       })}
                       />
 
@@ -473,8 +491,8 @@ const AddAssessmentDialogButton = ({
             </form>
           </Form>
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   )
 }
-export default AddAssessmentDialogButton
+export default AddAssessmentSheetButton

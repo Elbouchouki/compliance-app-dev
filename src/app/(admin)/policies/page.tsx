@@ -19,8 +19,7 @@ export default function Policies() {
 
   return (
     <PageWrapper className='flex flex-col w-full h-full gap-4' >
-
-      <div className={cn("flex flex-col w-full gap-2 py-2 border-b sm:flex-row", {
+      <div className={cn("flex flex-col w-full gap-2 py-2 sm:flex-row", {
         "sm:flex-row-reverse": langStore?.rtl,
       })}>
         <div className="flex flex-col grow">
@@ -29,7 +28,6 @@ export default function Policies() {
               "flex-row-reverse": langStore?.rtl
             })
           }>
-            <Icons.policies className="w-4 h-4 " />
             <span>
               {
                 dict?.policies || "Policies"
@@ -49,7 +47,7 @@ export default function Policies() {
         </div>
       </div>
 
-      <div className="h-full flex flex-col overflow-x-scroll pr-3">
+      <div className="h-full flex flex-col rounded-lg ">
         <DataTable />
         <Footer className='mt-3 grow items-end' />
       </div>

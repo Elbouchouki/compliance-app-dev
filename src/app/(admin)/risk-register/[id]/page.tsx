@@ -65,7 +65,7 @@ export default function RiskDataPage() {
         "flex-row-reverse": langStore?.rtl
       })}>
         <Link href="/risk-register" >
-          <Button variant="outline" size="sm" className={cn("flex flex-row gap-2 items-center border-[#2b2d2f] bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10", {
+          <Button variant="outline" size="sm" className={cn("flex flex-row gap-2 items-center  bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10", {
             "flex-row-reverse": langStore?.rtl
           })}>
             <Icons.back className={cn("w-5 h-5", {
@@ -366,6 +366,6 @@ export default function RiskDataPage() {
         }} />
       </div>
       <Footer className='mt-3 grow items-end' />
-    </PageWrapper>
+    </PageWrapper >
   )
 }

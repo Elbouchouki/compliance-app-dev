@@ -17,7 +17,7 @@ export default function Labels() {
 
   return (
     <PageWrapper className='flex flex-col w-full h-full gap-4' >
-      <div className={cn("flex flex-col w-full gap-2 py-2 border-b sm:flex-row", {
+      <div className={cn("flex flex-col w-full gap-2 py-2 sm:flex-row", {
         "sm:flex-row-reverse": langStore?.rtl,
       })}>
         <div className="flex flex-col grow">
@@ -26,12 +26,9 @@ export default function Labels() {
               "flex-row-reverse": langStore?.rtl
             })
           }>
-            <Icons.labels className="inline-block w-4 h-4" />
-            <span>
-              {
-                dict?.labels || "Labels"
-              }
-            </span>
+            {
+              dict?.labels || "Labels"
+            }
           </h1>
           <h3 className={cn("text-sm text-muted-foreground", {
             "text-right": langStore?.rtl
@@ -45,9 +42,9 @@ export default function Labels() {
           <AddLabelDialogButton />
         </div>
       </div>
-      <div className="h-full flex flex-col overflow-x-scroll pr-3  p-1">
+      <div className="h-full flex flex-col rounded-lg ">
         <DataTable />
-        <Footer className='mt-3 grow items-end' />
+        <Footer className='items-end mt-3 grow' />
       </div>
     </PageWrapper>
   )

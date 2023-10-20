@@ -40,7 +40,7 @@ const AuditFinding = ({ className }: { className?: string }) => {
     "Severity Level"
   ]
   return (
-    <div className={cn("", className)}>
+    <div className={cn("w-full h-full flex flex-row justify-center items-center", className)}>
       <Table>
         <TableHeader>
           <TableRow >

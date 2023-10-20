@@ -32,6 +32,12 @@ const TenantForm = ({ onSubmit, formType, tenant }: TenantFormProps) => {
   const mutation = trpc.tenant.addOrUpdate.useMutation()
   const utils = trpc.useContext()
 
+  const tenants = trpc.tenant.getAll.useQuery({
+    userId: user?.id || ""
+  }, {
+    enabled: false
+  })
+
   const FormSchema = z.object({
     reference: z.optional(z.string()),
     name: z.string().min(4, {
@@ -74,7 +80,7 @@ const TenantForm = ({ onSubmit, formType, tenant }: TenantFormProps) => {
 
   return (
     <Form  {...form}>
-      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full flex flex-col gap-3">
+      <form onSubmit={form.handleSubmit(onSubmitForm)} className="w-full h-full flex flex-col gap-3">
         <div>
           <FormField
             control={form.control}
@@ -91,6 +97,7 @@ const TenantForm = ({ onSubmit, formType, tenant }: TenantFormProps) => {
                       dict?.reference || "Reference"
                     }
                   </span>
+
                   <Badge variant="outline" className="text-xs">
                     {
                       dict?.optional || "Optional"
@@ -104,15 +111,6 @@ const TenantForm = ({ onSubmit, formType, tenant }: TenantFormProps) => {
                     })}
                     placeholder="ref-123" {...field} />
                 </FormControl>
-                <FormDescription
-                  className={cn({
-                    "text-right": langStore?.rtl
-                  })}
-                >
-                  {
-                    dict?.thisIsTheReferenceForTheTenant || "This is the reference for the tenant."
-                  }
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -129,10 +127,18 @@ const TenantForm = ({ onSubmit, formType, tenant }: TenantFormProps) => {
                 <FormLabel className={cn({
                   "text-right": langStore?.rtl
                 })}>
-                  {
-                    dict?.name || "Name"
-                  }
+                  <span>
+                    {
+                      dict?.name || "Name"
+                    }
+                  </span>
+                  {/* <Badge variant="outline" className="text-xs">
+                    {
+                      dict?.optional || "Optional"
+                    }
+                  </Badge> */}
                 </FormLabel>
+
                 <FormControl>
                   <Input
                     className={cn({
@@ -156,9 +162,16 @@ const TenantForm = ({ onSubmit, formType, tenant }: TenantFormProps) => {
                 <FormLabel className={cn({
                   "text-right": langStore?.rtl
                 })}>
-                  {
-                    dict?.contactEmail || "Contact Email"
-                  }
+                  <span>
+                    {
+                      dict?.contactEmail || "Contact Email"
+                    }
+                  </span>
+                  {/* <Badge variant="outline" className="text-xs">
+                    {
+                      dict?.optional || "Optional"
+                    }
+                  </Badge> */}
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -172,15 +185,15 @@ const TenantForm = ({ onSubmit, formType, tenant }: TenantFormProps) => {
             )}
           />
         </div>
-        <div className={cn("mt-3", {
+        <div className={cn("mt-auto grow flex gap-2 items-end", {
           "flex flex-row-reverse": langStore?.rtl
         })}>
           <Button type="submit"
-            disabled={mutation.isLoading}
+            disabled={mutation.isLoading || tenants.isLoading || tenants.isFetching || tenants.isRefetching}
             className="flex flex-row gap-2"
           >
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading
+              hidden: !mutation.isLoading && !tenants.isLoading && !tenants.isRefetching && !tenants.isFetching
             })} />
             <span>
               {

@@ -1536,11 +1536,7 @@ export const ASSESSMENTS_SCOPE_TYPES: ScopeTypesObject[] = [
   {
     label: "External",
     value: "external",
-  },
-  {
-    label: "Both",
-    value: "both",
-  },
+  }
 ];
 export const ASSESSMENTS_SCOPE_TYPES_AR: ScopeTypesObject[] = [
   {
@@ -1550,11 +1546,7 @@ export const ASSESSMENTS_SCOPE_TYPES_AR: ScopeTypesObject[] = [
   {
     label: "خارجي",
     value: "external",
-  },
-  {
-    label: "كلاهما",
-    value: "both",
-  },
+  }
 ];
 export const GET_ASSESSMENTS_SCOPE_TYPES = (lang: "ar" | "en" | undefined) =>
   lang === "ar" ? ASSESSMENTS_SCOPE_TYPES_AR : ASSESSMENTS_SCOPE_TYPES;

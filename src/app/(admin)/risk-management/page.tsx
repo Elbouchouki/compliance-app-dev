@@ -26,15 +26,19 @@ import RiskHeatMap from '@/components/risk-heat-map';
 import { Badge } from '@/components/ui/badge';
 
 
-const KPIItem = ({ icon, title, value, color }: {
+const KPIItem = ({ icon, title, value, color, rtl }: {
   title: string,
   icon: React.ReactNode,
   value: number,
-  color?: string
+  color?: string,
+  rtl?: boolean
+
 }) => {
   return (
     <div className="w-full flex flex-col rounded-lg border bg-navbar p-4 gap-4">
-      <div className="rounded-full border-2 w-12 h-12 flex justify-center items-center">
+      <div className={cn("rounded-full border-2 w-12 h-12 flex justify-center items-center ", {
+        "self-end": rtl
+      })}>
         {
           icon
         }
@@ -127,24 +131,28 @@ export default function RiskManagements() {
           icon={<KanbanSquare className="w-5 h-5" />}
           value={riskThresholdPercentage}
           color="bg-[#efa22f]"
+          rtl={langStore?.rtl}
         />
         <KPIItem
           title={dict?.riskThreshold || "Risk Threshold"}
           icon={<Shield className="w-5 h-5" />}
           value={riskThreshold}
           color="bg-[#1c84f6]"
+          rtl={langStore?.rtl}
         />
         <KPIItem
           title={dict?.riskAnalysisProgress || "Risk Analysis Progress"}
           icon={<LineChart className="w-5 h-5" />}
           value={riskAnalysisProgress}
           color="bg-[#f06a6a]"
+          rtl={langStore?.rtl}
         />
         <KPIItem
           title={dict?.responseProgressForRiskThreshold || "Response Progress For Risk Threshold"}
           icon={<TrendingUp className="w-5 h-5" />}
           value={responseProgressForRistkThreshold}
           color="bg-[#0982ee]"
+          rtl={langStore?.rtl}
         />
       </div >
 

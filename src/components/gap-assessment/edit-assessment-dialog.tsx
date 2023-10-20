@@ -5,18 +5,18 @@ import * as z from "zod"
 
 import { cn } from "@/lib/utils"
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
+  Sheet as _Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
 import AssessmentForm from "@/components/gap-assessment/assessment-form"
 import useAssessmentScopeStore from "@/store/assessmentScopeStore"
 import useLangStore from "@/store/langagueStore"
 
-const EditAssessmentDialog = ({
+const Sheet = ({
   className,
 }: {
   className?: string
@@ -34,25 +34,23 @@ const EditAssessmentDialog = ({
   }
 
   return (
-    <Dialog open={assessmentStore?.editModalOpen} onOpenChange={assessmentStore?.setEditModalOpen}>
-      <DialogContent >
-        <DialogHeader>
-          <DialogTitle>
-            <span>
-              {
-                dict?.updateAssessment || "Update assessment scope"
-              }
-            </span>
-            <span>
-              {" " + assessmentStore?.editModalAssessmentScope?.id.substring(0, 8)}
-            </span>
-          </DialogTitle>
-        </DialogHeader>
-        <div className={cn("w-full", className)}>
+    <_Sheet open={assessmentStore?.editModalOpen} onOpenChange={assessmentStore?.setEditModalOpen}>
+      <SheetContent >
+        <SheetHeader className="mb-4">
+
+          <SheetTitle className={cn({
+            "text-right mr-3": langStore?.rtl
+          })}>
+            {
+              dict?.updateAssessment || "Update assessment scope"
+            }
+          </SheetTitle>
+        </SheetHeader>
+        <div className={cn("w-full h-full pb-10", className)}>
           <AssessmentForm assessmentScope={assessmentStore?.editModalAssessmentScope} onSubmit={onSubmit} formType="edit" />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </_Sheet>
   )
 }
-export default EditAssessmentDialog
+export default Sheet

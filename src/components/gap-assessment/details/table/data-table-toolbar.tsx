@@ -13,6 +13,9 @@ import { useStore } from "@/hooks/use-store"
 import useLangStore from "@/store/langagueStore"
 import { cn } from "@/lib/utils"
 import { trpc } from "@/app/_trpc/client"
+import { useState } from "react"
+import { HardDriveDownload, Loader2 } from "lucide-react"
+import { toast } from "sonner"
 
 
 interface DataTableToolbarProps<TData> {
@@ -32,12 +35,16 @@ export function DataTableToolbar<TData>({
   const langStore = useStore(useLangStore, state => state)
   const dict = langStore?.getDictionary()
   const frameworks = trpc.framwork.getAll.useQuery()
+  const [exporting, setExporting] = useState(false)
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className={cn("flex flex-row flex-wrap w-full gap-2 mt-2", {
-        "flex-row-reverse": langStore?.rtl === true,
-      })}>
+
+
+
+    <div className={cn("flex flex-col md:flex-row items-start w-full gap-2", {
+      "flex-row-reverse": langStore?.rtl === true,
+    })}>
+      <div className="flex flex-row flex-wrap gap-2 w-full">
         {table.getColumn("framework") && (
           <DataTableFacetedFilter
             column={table.getColumn("framework")}
@@ -62,30 +69,18 @@ export function DataTableToolbar<TData>({
             }
           />
         )}
-      </div>
-      <div className={cn("flex flex-row w-full gap-2", {
-        "flex-row-reverse": langStore?.rtl === true,
-      })}>
         {isFiltered && (
-          <div className={cn("flex w-full", {
-            "justify-end": langStore?.rtl === true,
-          })}>
-            <Button
-              variant="ghost"
-              onClick={() => table.resetColumnFilters()}
-              className={cn("flex flex-row items-center h-8 px-2 lg:px-3 gap-2", {
-                "flex-row-reverse": langStore?.rtl === true,
-              })}
-            >
-              <span>
-                {
-                  dict?.resetFilters || "Reset Filters"
-                }
-              </span>
-              <Cross2Icon className="w-4 h-4" />
-            </Button>
-          </div>
+          <Button
+            variant="ghost"
+            onClick={() => table.resetColumnFilters()}
+            className="h-8 px-2 lg:px-3"
+          >
+            {dict?.reset || "Reset"}
+            <Cross2Icon className="ml-2 h-4 w-4" />
+          </Button>
         )}
+      </div>
+      <div className="flex flex-row gap-2 justify-end w-full md:w-0">
         <Input
           placeholder={dict?.search || "Search"}
           value={globalFilter}
@@ -94,9 +89,38 @@ export function DataTableToolbar<TData>({
             "mr-auto ml-0 text-right": langStore?.rtl === true,
           })}
         />
+
         <div>
           <DataTableViewOptions table={table} />
         </div>
+
+        <Button
+          disabled={exporting}
+          size="icon" variant="outline" className="h-8 text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10" onClick={
+            () => {
+              toast.promise(
+                () => new Promise((resolve) => {
+                  setExporting(true)
+                  setTimeout(() => {
+                    setExporting(false)
+                    resolve({})
+                  }
+                    , 2000)
+                }),
+                {
+                  loading: dict?.exportingData || "Exporting data...",
+                  success: dict?.dataExported || "Data exported",
+                  error: dict?.errorExportingData || "Error exporting data"
+                }
+              )
+            }
+          } >
+          {
+            exporting ? <Loader2 className="w-4 h-4 animate-spin" />
+              :
+              <HardDriveDownload className="w-4 h-4 " />
+          }
+        </Button>
       </div>
     </div>
   )

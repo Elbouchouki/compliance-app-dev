@@ -2,18 +2,18 @@
 
 import { cn } from "@/lib/utils"
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
 import useTagStore from "@/store/tagStore"
 import TagForm from "@/components/tag/tag-form"
 import useLangStore from "@/store/langagueStore"
 
-const EditTagDialog = ({
+const EditTagSheet = ({
   className,
 }: {
   className?: string
@@ -31,11 +31,11 @@ const EditTagDialog = ({
   }
 
   return (
-    <Dialog open={tagStore?.editModalOpen} onOpenChange={tagStore?.setEditModalOpen}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle className={cn("flex flex-row gap-1 mr-3", {
-            "flex-row-reverse": langStore?.rtl === true,
+    <Sheet open={tagStore?.editModalOpen} onOpenChange={tagStore?.setEditModalOpen}>
+      <SheetContent className="flex flex-col gap-5">
+        <SheetHeader className="py-3">
+          <SheetTitle className={cn({
+            "text-right mr-3": langStore?.rtl
           })}>
             <span>
               {
@@ -45,13 +45,13 @@ const EditTagDialog = ({
             <span>
               {tagStore?.editModalTag?.id.substring(0, 6)}
             </span>
-          </DialogTitle>
-        </DialogHeader>
-        <div className={cn("w-full", className)}>
+          </SheetTitle>
+        </SheetHeader>
+        <div className={cn("w-full h-full", className)}>
           <TagForm tag={tagStore?.editModalTag} onSubmit={onSubmit} formType="edit" />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   )
 }
-export default EditTagDialog
+export default EditTagSheet

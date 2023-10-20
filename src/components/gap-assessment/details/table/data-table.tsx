@@ -40,6 +40,7 @@ import { usePathname } from "next/navigation"
 import { Control, MaturityLevel } from "@prisma/client"
 import { trpc } from "@/app/_trpc/client"
 import { Skeleton } from "@/components/ui/skeleton"
+import TableSkeleton from "@/components/table-skeleton"
 
 
 export function DataTable<TData, TValue>(
@@ -74,13 +75,13 @@ export function DataTable<TData, TValue>(
       accessorKey: "control.id",
       header: ({ column }) => (
         <DataTableColumnHeader
-          className="ml-2 lg:whitespace-normal whitespace-nowrap"
+          className="ml-2 whitespace-normal"
           column={column}
           title={
             dict?.controlCode || "Control Code"
           } />
       ),
-      cell: ({ row }) => <div className={cn("lg:whitespace-normal whitespace-nowrap", {
+      cell: ({ row }) => <div className={cn("whitespace-normal", {
         "text-right": langStore?.rtl === true
       })}>
         {row.getValue("id") !== undefined &&
@@ -96,7 +97,7 @@ export function DataTable<TData, TValue>(
       id: "framework",
       accessorKey: "control.Framework.name",
       header: ({ column }) => (
-        <DataTableColumnHeader className={cn("lg:whitespace-normal whitespace-nowrap", {
+        <DataTableColumnHeader className={cn("whitespace-normal", {
           "text-right": langStore?.rtl === true
         })}
           column={column}
@@ -106,7 +107,7 @@ export function DataTable<TData, TValue>(
         />
       ),
       cell: ({ row }) => (
-        <div className={cn("lg:whitespace-normal whitespace-nowrap", {
+        <div className={cn("whitespace-normal", {
           "text-right": langStore?.rtl === true
         })}>
           {row.getValue("framework")}
@@ -129,7 +130,7 @@ export function DataTable<TData, TValue>(
       id: "description",
       accessorKey: "control.description",
       header: ({ column }) => (
-        <DataTableColumnHeader className={cn("lg:whitespace-normal whitespace-nowrap", {
+        <DataTableColumnHeader className={cn("whitespace-normal", {
           "text-right": langStore?.rtl === true
         })}
           column={column}
@@ -138,7 +139,7 @@ export function DataTable<TData, TValue>(
           }
         />
       ),
-      cell: ({ row }) => <div className={cn("lg:whitespace-normal whitespace-nowrap", {
+      cell: ({ row }) => <div className={cn("whitespace-normal", {
         "text-right": langStore?.rtl === true
       })}>
         {row.getValue("description")}
@@ -148,7 +149,7 @@ export function DataTable<TData, TValue>(
       id: "maturity",
       accessorKey: "maturity",
       header: ({ column }) => (
-        <DataTableColumnHeader className={cn("lg:whitespace-normal whitespace-nowrap", {
+        <DataTableColumnHeader className={cn("whitespace-normal", {
           "text-right": langStore?.rtl === true
         })}
           column={column}
@@ -157,7 +158,7 @@ export function DataTable<TData, TValue>(
           }
         />
       ),
-      cell: ({ row }) => <div className={cn("flex flex-row items-start lg:whitespace-normal whitespace-nowrap gap-1", {
+      cell: ({ row }) => <div className={cn("flex flex-row items-start whitespace-normal gap-1", {
         "flex-row-reverse": langStore?.rtl
       })}>
         {(row.getValue("maturity") as MaturityLevel).id !== "Unanswered" ?
@@ -243,13 +244,15 @@ export function DataTable<TData, TValue>(
 
 
   if (controls.isLoading) {
-    return <Skeleton className="h-full w-full grow"></Skeleton>
+    return <TableSkeleton elements={7} />
   }
 
   return (
-    <div className="px-4 py-3 space-y-4 dark:border bg-card">
-      <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
-      <div className="border rounded-md ">
+    <div className="flex flex-col py-3 gap-4 bg-navbar border rounded-lg">
+      <div className="mx-6">
+        <DataTableToolbar globalFilter={globalFilter} setGlobalFilter={handleGlobalFilter} table={table} />
+      </div>
+      <div className="border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -302,7 +305,9 @@ export function DataTable<TData, TValue>(
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <div className="mx-6">
+        <DataTablePagination table={table} />
+      </div>
     </div>
   )
 }

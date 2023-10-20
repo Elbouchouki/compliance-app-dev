@@ -16,7 +16,7 @@ const MaturityLevels = () => {
 
   return (
     <div>
-      <Card className="rounded-md">
+      <Card className="rounded-md bg-navbar">
         <CardContent className="items-center justify-start px-3 py-0">
           <Accordion defaultValue="item-1" type="single" collapsible className="w-full">
             <AccordionItem value="item-1" className="border-b-0 ">

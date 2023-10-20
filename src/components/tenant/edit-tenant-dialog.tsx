@@ -2,18 +2,18 @@
 
 import { cn } from "@/lib/utils"
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
 import useTenantStore from "@/store/tenantStore"
 import TenantForm from "@/components/tenant/tenant-form"
 import useLangStore from "@/store/langagueStore"
 
-const EditTenantDialog = ({
+const EditTenantSheet = ({
   className,
 }: {
   className?: string
@@ -32,10 +32,11 @@ const EditTenantDialog = ({
   }
 
   return (
-    <Dialog open={tenantStore?.editModalOpen} onOpenChange={tenantStore?.setEditModalOpen}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle className={cn("flex flex-row gap-1", {
+    <Sheet open={tenantStore?.editModalOpen} onOpenChange={tenantStore?.setEditModalOpen}>
+      <SheetContent className="sm:max-w-[425px] flex flex-col gap-5" side={langStore?.rtl === true ? "left" : "right"}>
+
+        <SheetHeader>
+          <SheetTitle className={cn("flex flex-row gap-1", {
             "flex-row-reverse": langStore?.rtl,
           })}>
             <span>
@@ -46,13 +47,13 @@ const EditTenantDialog = ({
             <span>
               {tenantStore?.editModalTenant?.id.substring(0, 6)}
             </span>
-          </DialogTitle>
-        </DialogHeader>
-        <div className={cn("w-full", className)}>
+          </SheetTitle>
+        </SheetHeader>
+        <div className={cn("w-full grow", className)}>
           <TenantForm tenant={tenantStore?.editModalTenant} onSubmit={onSubmit} formType="edit" />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   )
 }
-export default EditTenantDialog
+export default EditTenantSheet

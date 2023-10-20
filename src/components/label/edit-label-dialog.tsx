@@ -2,18 +2,18 @@
 
 import { cn } from "@/lib/utils"
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
 import useLabelStore from "@/store/labelStore"
 import LabelForm from "@/components/label/label-form"
 import useLangStore from "@/store/langagueStore"
 
-const EditLabelDialog = ({
+const EditLabelSheet = ({
   className,
 }: {
   className?: string
@@ -32,29 +32,24 @@ const EditLabelDialog = ({
   }
 
   return (
-    <Dialog open={labelStore?.editModalOpen} onOpenChange={labelStore?.setEditModalOpen}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle className={cn("flex flex-row gap-1 mr-3", {
-            "flex-row-reverse": langStore?.rtl === true,
+    <Sheet open={labelStore?.editModalOpen} onOpenChange={labelStore?.setEditModalOpen}>
+      <SheetContent className="flex flex-col gap-5">
+        <SheetHeader className="py-3">
+          <SheetTitle className={cn({
+            "text-right mr-3": langStore?.rtl
           })}>
             <span>
               {
                 dict?.editLabel || "Edit Label"
               }
             </span>
-            <span>
-              {
-                labelStore?.editModalLabel?.id.substring(0, 6)
-              }
-            </span>
-          </DialogTitle>
-        </DialogHeader>
-        <div className={cn("w-full", className)}>
+          </SheetTitle>
+        </SheetHeader>
+        <div className={cn("w-full h-full", className)}>
           <LabelForm label={labelStore?.editModalLabel} onSubmit={onSubmit} formType="edit" />
         </div>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   )
 }
-export default EditLabelDialog
+export default EditLabelSheet
