@@ -264,7 +264,7 @@ export function DataTable<TData, TValue>(
       cell: ({ row }) => <div className={cn("text-left whitespace-nowrap", {
         "text-right": langStore?.rtl
       })} >
-        {(new Date(row.getValue("dateRaised")).toUTCString())}
+        {(new Date(row.getValue("dateRaised")).toLocaleDateString())}
       </div>,
       filterFn: "includesStringSensitive"
 
@@ -280,10 +280,9 @@ export function DataTable<TData, TValue>(
       cell: ({ row }) => <div className={cn("text-left whitespace-nowrap", {
         "text-right": langStore?.rtl
       })} >
-        {(new Date(row.getValue("updatedDate"))).toUTCString()}
+        {(new Date(row.getValue("updatedDate"))).toLocaleDateString()}
       </div>,
       filterFn: "includesStringSensitive"
-
     },
     {
       id: "actions",
@@ -410,7 +409,9 @@ export function DataTable<TData, TValue>(
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <div className="mx-6">
+        <DataTablePagination table={table} />
+      </div>
       <EditAssessmentDialog />
     </div>
   )

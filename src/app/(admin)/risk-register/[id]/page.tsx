@@ -1,19 +1,24 @@
 'use client'
 
 import { trpc } from "@/app/_trpc/client"
+import { Icons } from "@/components/icons"
 import Footer from "@/components/layout/footer"
 import PageWrapper from "@/components/page-wrapper"
-import { UpdateRiskForm } from "@/components/risk/form"
+import EditRiskDialog from "@/components/risk-register/edit-risk-dialog"
+import TabNav from "@/components/tab-nav"
 import { Badge } from "@/components/ui/badge"
-import { DialogHeader } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
+import { RiskManagementNavItems } from "@/constants/navs.config"
 import { cn } from "@/lib/utils"
 import { CATEGORY, RISK_STATUS } from "@/mock"
 import useLangStore from "@/store/langagueStore"
 import { riskStore } from "@/store/riskStore"
 import { Risk } from "@/types"
 import { useUser } from "@clerk/nextjs"
-import { ChevronLeft, ChevronRight, ShieldQuestion } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useStore } from "zustand"
@@ -21,6 +26,7 @@ import { useStore } from "zustand"
 export default function RiskDataPage() {
 
   const langStore = useStore(useLangStore, state => state)
+
   const dict = langStore?.getDictionary()
   const params = useParams()
   const router = useRouter()
@@ -29,9 +35,7 @@ export default function RiskDataPage() {
 
   const id = params.id
   const [loading, setLoading] = useState(true)
-  const [updatingStatus, setUpdatingStatus] = useState<boolean>(false)
 
-  const { user } = useUser()
   const riskData = trpc.risk.get.useQuery({
     id: id as string
   })
@@ -56,97 +60,232 @@ export default function RiskDataPage() {
   if (loading || risk === null) {
     return <Skeleton className='w-screen h-screen' />
   } else return (
-    <PageWrapper className="flex grow flex-col w-full h-full gap-4">
-      <div className={cn('flex grow flex-col w-full h-full gap-4')}>
-        <div className="w-full border-b py-2 gap-2 flex flex-col sm:flex-row">
-          <div className={cn("flex flex-col sm:flex-row grow py-2 gap-3 items-start sm:items-center sm:justify-between justify-start w-full", {
-            "items-end": langStore?.rtl
-          })}>
-            <div className={cn("flex flex-row items-center gap-3", {
-              "flex-row-reverse": langStore?.rtl
-            })}>
-              <ShieldQuestion className="inline-block w-5 h-5 mr-2" />
-              <h1 className="text-xl font-semibold">
-                {risk?.riskName}
-              </h1>
-            </div>
-            <div className={cn("flex flex-row items-center gap-3", {
-              "flex-row-reverse": langStore?.rtl
-            })}>
-              <h1>{risk?.owner}</h1>
-              {(risk?.impact ?? 0) * (risk?.likelihood ?? 0)}
-              <p className="text-[12px]">{(new Date(risk?.dateRaised as string) as Date).toUTCString()}</p>
-            </div>
-          </div>
-        </div>
-        <div className={cn("flex flex-col gap-3 border-[1px] p-2", {
-          "items-end": langStore?.rtl
-        })}>
-          <h2 className="text-[20px]">{ dict?.description || "Description"}</h2>
-          <p>{risk?.description}</p>
-        </div>
-        <div className={cn("flex flex-col gap-3 border-[1px] p-2", {
-          "items-end": langStore?.rtl
-        })}>
-          <h2 className="text-[20px]">{ dict?.consequences || "Consequences"}</h2>
-          <p>{risk?.consequences}</p>
-        </div>
-        <div className={cn("flex flex-col border-[1px] p-2", {
-          "items-end": langStore?.rtl
-        })}>
-          <h2 className="text-[20px]">{ dict?.riskLevel || "Risk Levels"}</h2>
-          <div className={cn("flex flex-row flex-wrap gap-5 mt-5", {
+    <PageWrapper className='flex flex-col max-w-full h-full gap-5 grow'>
+      <TabNav navItems={RiskManagementNavItems} />
+
+      <div className={cn("flex flex-row", {
+        "flex-row-reverse": langStore?.rtl
+      })}>
+        <Link href="/risk-register" >
+          <Button variant="outline" size="sm" className={cn("flex flex-row gap-2 items-center border-[#2b2d2f] bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10", {
             "flex-row-reverse": langStore?.rtl
           })}>
-            {langStore?.lang === 'en' ?
-              <>
-                <Badge>Impact: {risk?.impact}</Badge>
-                <Badge>Probability: {risk?.likelihood}</Badge>
-                <Badge>Priority: {(risk?.impact ?? 0) * (risk?.likelihood ?? 0)}</Badge>
-              </> :
-              <>
-                <Badge>{risk?.impact} :{dict?.impact}</Badge>
-                <Badge>{risk?.likelihood} :{dict?.likelihood}</Badge>
-                <Badge>{(risk?.impact ?? 0) * (risk?.likelihood ?? 0)} :{dict?.priority}</Badge>
-              </>
+            <Icons.back className={cn("w-5 h-5", {
+              "transform rotate-180": langStore?.rtl
+            })} />
+            <p>
+              {dict?.back || "Back"}
+            </p>
+          </Button>
+        </Link>
+        <div className={cn("flex flex-row items-center gap-2 px-4", {
+          "flex-row-reverse": langStore?.rtl
+        })}>
+          <Link href="/risk-register" className="text-xs text-muted-foreground">
+            {
+              dict?.riskRegister || "Risk Register"
             }
-          </div>
+          </Link>
+          <div className="text-muted-foreground">/</div>
+          <p className="text-xs text-primary-foreground dark:text-primary ">
+            {risk?.riskName}
+          </p>
         </div>
-        <div className={cn("flex flex-col gap-3 border-[1px] p-2", {
-          "items-end": langStore?.rtl
+      </div>
+
+      <div className="">
+
+      </div>
+
+      <div className='w-full p-4 flex flex-col rounded-lg border bg-navbar gap-3'>
+        <h2 className={cn('text-xs md:text-sm xl:text-base font-semibold', {
+          'text-right': langStore?.rtl
         })}>
-          <h2 className="text-[20px]">{ dict?.affectedAsset || "Affected Asset"}</h2>
-          <p>{risk?.affectedAsset}</p>
+          {
+            dict?.description || "Description"
+          }
+        </h2>
+        <div className={cn("text-xs md:text-sm text-muted-foreground", {
+          'text-right': langStore?.rtl
+        })}>
+          {risk?.description}
         </div>
-        <div className={cn("grid md:grid-cols-2 grid-cols-1 gap-3 border-[1px] p-2", {
-          "items-end": langStore?.rtl
+      </div>
+
+      <div className='w-full p-4 flex flex-col rounded-lg border bg-navbar gap-3'>
+        <h2 className={cn('text-xs md:text-sm xl:text-base font-semibold', {
+          'text-right': langStore?.rtl
         })}>
-          <div className={cn("flex flex-col gap-3 border-[1px] p-2", {
-            "items-end": langStore?.rtl
+          {
+            dict?.consequences || "Consequences"
+          }
+        </h2>
+        <div className={cn("text-xs md:text-sm text-muted-foreground", {
+          'text-right': langStore?.rtl
+        })}>
+          {risk?.consequences}
+        </div>
+      </div>
+
+      <div className={cn('w-full p-4 flex flex-row justify-between rounded-lg border bg-navbar ', {
+        "flex-row-reverse": langStore?.rtl
+      })}>
+        <h2 className={cn('text-xs md:text-sm xl:text-base font-semibold', {
+          'text-right': langStore?.rtl
+        })}>
+          {
+            dict?.riskLevel || "Risk Levels"
+          }
+        </h2>
+        <div className={cn("text-xs md:text-sm text-muted-foreground flex flex-row gap-2", {
+          "flex-row-reverse": langStore?.rtl
+
+        })}>
+          <Badge variant="outline" className={cn("rounded-xl font-normal flex flew-row gap-1  ", {
+            "flex-row-reverse": langStore?.rtl
           })}>
-            <h2 className="text-[20px]">{ dict?.category || "Category"}</h2>
-            <div className={cn("flex flex-row gap-2 p-2", {
-              "flex-row-reverse": langStore?.rtl
+            <p>
+              {
+                dict?.impact || "Impact"
+              }
+            </p>
+            <p>:</p>
+            <p>{risk?.impact}</p>
+          </Badge>
+          <Badge variant="outline" className={cn("rounded-xl font-normal flex flew-row gap-1  ", {
+            "flex-row-reverse": langStore?.rtl
+          })}>
+            <p>
+              {
+                dict?.likelihood || "Probability"
+              }
+            </p>
+            <p>:</p>
+            <p>{risk?.likelihood}</p>
+          </Badge>
+          <Badge variant="outline" className={cn("rounded-xl font-normal flex flew-row gap-1  ", {
+            "flex-row-reverse": langStore?.rtl
+          })}>
+            <p>
+              {
+                dict?.priority || "Priority"
+              }
+            </p>
+            <p>:</p>
+            <p>{(risk?.impact ?? 0) * (risk?.likelihood ?? 0)}</p>
+          </Badge>
+        </div>
+      </div>
+
+
+      <div className='w-full p-4 flex flex-col rounded-lg border bg-navbar gap-3'>
+        <h2 className={cn('text-xs md:text-sm xl:text-base font-semibold', {
+          'text-right': langStore?.rtl
+        })}>
+          {dict?.affectedAsset || "Affected Asset"}
+        </h2>
+        <div className={cn("text-xs md:text-sm text-muted-foreground", {
+          'text-right': langStore?.rtl
+        })}>
+          {risk?.affectedAsset}
+        </div>
+      </div>
+
+      <div className=" w-full flex flex-col rounded-lg border bg-navbar">
+        <div className="flex flex-row">
+
+          <div className={cn('w-full p-4 flex flex-row justify-between', {
+            "flex-row-reverse": langStore?.rtl
+          })}>
+            <h2 className='text-xs md:text-sm xl:text-base'>
+              {
+                dict?.category || "Category"
+              }
+            </h2>
+            <div className={cn("text-xs md:text-sm text-muted-foreground", {
+              'text-right': langStore?.rtl
             })}>
-              <p>{category?.value}</p>
-              {langStore.rtl ? <ChevronLeft /> : <ChevronRight />}
-              <p>{subCategory?.value}</p>
+              <Badge variant="outline" className={cn("flex flex-row gap-2  px-3 rounded-xl", {
+                "flex-row-reverse": langStore?.rtl
+              })}>
+                <p>{category?.value}</p>
+                {langStore.rtl ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+                <p>{subCategory?.value}</p>
+              </Badge>
             </div>
           </div>
-          <div className={cn("flex flex-col h-full gap-3 border-[1px] p-2", {
-            "items-end md:order-first": langStore?.rtl
+
+          <Separator orientation="vertical" />
+
+          <div className={cn('w-full p-4 flex flex-row justify-between', {
+            "flex-row-reverse": langStore?.rtl
           })}>
-            <h2 className="text-[20px]">{ dict?.riskStatus || "Risk Status"}</h2>
-            <p>{riskStatus.value}</p>
+            <h2 className='text-xs md:text-sm xl:text-base'>
+              {
+                dict?.riskStatus || "Risk Status"
+              }
+            </h2>
+            <Badge variant="outline" className="rounded-xl">
+              {riskStatus.value}
+            </Badge>
+          </div>
+
+        </div>
+        <Separator />
+        <div className={cn('w-full p-4 flex flex-row justify-between', {
+          "flex-row-reverse": langStore?.rtl
+        })}>
+          <h2 className='text-xs md:text-sm xl:text-base'>
+            {
+              dict?.updateDate || "Update Date"
+            }
+          </h2>
+          <div className={cn("text-xs md:text-sm text-muted-foreground", {
+            'text-right': langStore?.rtl
+          })}>
+            <Badge variant="outline" className={cn("flex flex-row gap-2 p-1 px-2 rounded-xl", {
+              "flex-row-reverse": langStore?.rtl
+            })}>
+              {(new Date(risk?.dateRaised as string) as Date).toLocaleString()}
+            </Badge>
           </div>
         </div>
-        <div className={cn("flex", {
-          "justify-end": langStore?.rtl
+        <Separator />
+        <div className={cn('w-full p-4 flex flex-row justify-between', {
+          "flex-row-reverse": langStore?.rtl
         })}>
-          <UpdateRiskForm risk={risk as Risk} />
+          <h2 className='text-xs md:text-sm xl:text-base'>
+            {
+              dict?.inherentRiskScore || "Inherent Risk Score"
+            }
+          </h2>
+          <div className={cn("text-xs md:text-sm text-muted-foreground", {
+            'text-right': langStore?.rtl
+          })}>
+            <Badge className={cn("flex flex-row gap-2 p-1 px-2 rounded-xl", {
+              "flex-row-reverse": langStore?.rtl
+            })}>
+              {(risk?.impact ?? 0) * (risk?.likelihood ?? 0)}
+            </Badge>
+          </div>
         </div>
-        <Footer className='mt-3 grow items-end' />
       </div>
+      <div className={cn("flex flex-row", {
+        "justify-end": langStore?.rtl
+      })}>
+        <Button onClick={() => {
+          store.setEditModalRisk(risk as Risk)
+          store.setEditModalOpen(true)
+        }}>
+          {
+            dict?.updateRisk || "Update Risk"
+          }
+        </Button>
+        <EditRiskDialog refresh={() => {
+          riskData.refetch()
+        }} />
+      </div>
+      <Footer className='mt-3 grow items-end' />
     </PageWrapper>
   )
 }

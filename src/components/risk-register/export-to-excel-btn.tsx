@@ -30,7 +30,7 @@ export default function ExportToExcelButton(risks: { data: Risk[] }) {
     riskStatus.set(s.id, s.value);
   });
 
-  const sheetRows = langStore?.lang === "en" ? data.map(r => ({
+  const sheetRows = langStore?.lang === "en" ? data?.map(r => ({
     "Id": r.id,
     "Risk Name": r.riskName,
     "Create Date": (new Date(r.dateRaised as string)).toUTCString(),
@@ -45,7 +45,7 @@ export default function ExportToExcelButton(risks: { data: Risk[] }) {
     "Risk Status": riskStatus.get(r.riskStatusId),
     "Inherent Risk Score": r.impact * r.likelihood,
     "Residual Risk Score": r.impact * r.likelihood * 4,
-  })) : data.map(r => ({
+  })) : data?.map(r => ({
     "Id": r.id,
     "اسم المخاطرة": r.riskName,
     "تاريخ الانشاء": (new Date(r.dateRaised as string)).toUTCString(),

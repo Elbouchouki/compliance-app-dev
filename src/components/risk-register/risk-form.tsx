@@ -19,6 +19,7 @@ import { CATEGORY, RISK_STATUS } from "@/mock"
 import { useUser } from "@clerk/nextjs"
 import { trpc } from "@/app/_trpc/client"
 import { Icons } from "../icons"
+import { riskStore } from "@/store/riskStore"
 
 
 export const RiskRegisterFormBody = (
@@ -44,8 +45,8 @@ export const RiskRegisterFormBody = (
 
 
   return (
-    <div className="flex flex-col w-full gap-4 overflow-y-auto px-4">
-      <div>
+    <div className="flex flex-col w-full gap-4 overflow-y-auto pr-4 pl-1 py-4">
+      {/* <div>
         <FormField
           control={form.control}
           name="searchMasterRiskList"
@@ -68,7 +69,7 @@ export const RiskRegisterFormBody = (
             </FormItem>
           )}
         />
-      </div>
+      </div> */}
       <div>
         <FormField
           control={form.control}
@@ -385,11 +386,13 @@ export const RiskRegisterFormBody = (
                     {dict?.likelihood || "Likelihood"}
                   </FormLabel>
                   <FormControl>
-                    <Slider onValueChange={(val) => {
-                      setLikelihood(val[0])
-                      setRiskScore(val[0] * impact)
-                      field.onChange(val[0])
-                    }} defaultValue={[field.value]} min={1} max={5} step={1} />
+                    <Slider
+
+                      onValueChange={(val) => {
+                        setLikelihood(val[0])
+                        setRiskScore(val[0] * impact)
+                        field.onChange(val[0])
+                      }} defaultValue={[field.value]} min={1} max={5} step={1} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -418,6 +421,7 @@ type RiskFormProps = {
   onSubmit: () => void
   formType: "add" | "edit"
   risk?: Risk
+  close?: () => void
 }
 
 const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
@@ -454,6 +458,13 @@ const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
   const mutation = trpc.risk.addOrUpdate.useMutation()
   const { user } = useUser()
   const utils = trpc.useContext();
+  const risks = trpc.risk.getAll.useQuery({
+    userId: user?.id
+  }, {
+    enabled: false
+  })
+  const riskStoreTools = useStore(riskStore, state => state);
+
 
   function handleSubmit(data: z.infer<typeof FormSchema>) {
     mutation.mutate(
@@ -501,27 +512,43 @@ const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
     }
   })
 
-  return (
-    <Form  {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full flex flex-col gap-3">
-        <RiskRegisterFormBody form={form} risk={risk} />
-        <div className="mt-3">
+  console.log(mutation.isLoading)
+  console.log(risks.isFetching)
+  console.log(risks.isLoading)
+  console.log(risks.isRefetching)
 
-          <Button type="submit"
-            disabled={mutation.isLoading}
+
+  return (
+    <Form {...form}>
+      <form className=" w-full h-full pb-16" onSubmit={form.handleSubmit(handleSubmit)} >
+        <div className=" w-full h-full overflow-y-auto py-3">
+          <RiskRegisterFormBody form={form} risk={risk} />
+        </div>
+
+        <div className={cn("w-full flex flex-row-reverse gap-2 justify-end", {
+          "flex-row": langStore?.rtl
+        })}>
+          <Button type="button" variant="ghost"
+            disabled={mutation.isLoading || risks.isFetching || risks.isRefetching}
+            onClick={() => {
+              form.reset()
+              riskStoreTools?.setEditModalOpen(false)
+            }}>
+            {
+              dict?.cancel || "Cancel"
+            }
+          </Button>
+          <Button type="submit" variant="outline"
+            disabled={mutation.isLoading || risks.isFetching || risks.isRefetching}
             className="flex flex-row gap-2"
           >
-
             <Icons.loader className={cn("animate-spin w-4 h-4", {
-              hidden: !mutation.isLoading
+              hidden: !mutation.isLoading && !risks.isFetching && !risks.isRefetching
             })}
             />
-
             <span>
               {
-                formType === "add" ?
-                  "Add Risk"
-                  : "Update Risk"
+                dict?.updateRisk || "Update Risk"
               }
             </span>
           </Button>

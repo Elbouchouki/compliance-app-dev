@@ -2,11 +2,11 @@
 
 import { cn } from "@/lib/utils"
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { toast } from "sonner"
 import { useStore } from "@/hooks/use-store"
 import AssessmentForm from "@/components/risk-register/risk-form"
@@ -15,37 +15,38 @@ import { riskStore } from "@/store/riskStore"
 
 const EditRiskDialog = ({
   className,
+  refresh
 }: {
   className?: string
+  refresh?: () => void
+
 }) => {
 
   const riskStoreTools = useStore(riskStore, state => state);
-
   const langStore = useStore(useLangStore, state => state)
+  const dict = langStore?.getDictionary()
 
   function onSubmit() {
     riskStoreTools?.setEditModalOpen(false)
-    toast.success("Risk updated successfully")
+    toast.success(dict?.riskUpdatedSuccessful || "Risk updated successfully")
+    refresh?.()
   }
 
   return (
-    <Dialog open={riskStoreTools?.editModalOpen} onOpenChange={riskStoreTools?.setEditModalOpen}>
-      <DialogContent >
-        <DialogHeader>
-          <DialogTitle>
-            <span>
-              {"Update risk"}
-            </span>
-            <span>
-              {" " + riskStoreTools?.editModalRisk?.riskName}
-            </span>
-          </DialogTitle>
-        </DialogHeader>
-        <div className={cn("w-full h-[480px] overflow-y-auto p-4", className)}>
-          <AssessmentForm risk={riskStoreTools?.editModalRisk} onSubmit={onSubmit} formType="edit" />
-        </div>
-      </DialogContent>
-    </Dialog>
+    <Sheet open={riskStoreTools?.editModalOpen} onOpenChange={riskStoreTools?.setEditModalOpen}>
+      <SheetContent className="w-full" >
+        <SheetHeader>
+          <SheetTitle className={cn({
+            "text-right": langStore?.rtl
+          })}>
+            {
+              dict?.updateRisk || "Update Risk"
+            }
+          </SheetTitle>
+        </SheetHeader>
+        <AssessmentForm risk={riskStoreTools?.editModalRisk} onSubmit={onSubmit} formType="edit" />
+      </SheetContent>
+    </Sheet>
   )
 }
 export default EditRiskDialog

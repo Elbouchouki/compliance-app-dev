@@ -31,7 +31,7 @@ export default async function RootLayout({
       <html lang="en-US" suppressHydrationWarning >
         <body className={inter.className}>
           <TRPCProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               <TooltipProvider>
                 <main
                   className='w-screen h-screen'

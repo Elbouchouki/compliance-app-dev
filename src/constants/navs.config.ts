@@ -3,28 +3,35 @@ import { TabNavItem } from "@/types";
 export const HelpNavItems: TabNavItem[] = [
   {
     name: "Knowledge Base",
-    path: "/knowledge-base"
+    path: "/knowledge-base",
+    key: "knowledgeBase"
   }, {
     name: "Help",
-    path: "/help"
+    path: "/help",
+    key: "help"
   }, {
     name: "FAQ’s",
-    path: "/fqa"
+    path: "/fqa",
+    key: "fqa"
   }
 ]
 
 export const RiskManagementNavItems: TabNavItem[] = [
   {
     name: "Overview",
-    path: "/risk-management"
+    path: "/risk-management",
+    key: "complianceOverview"
   }, {
     name: "Risk Assessment",
-    path: "/risk-assessment"
+    path: "/risk-assessment",
+    key: "riskAssessment"
   }, {
     name: "Risk Management KPI",
-    path: "/risk-management-kpi"
+    path: "/risk-management-kpi",
+    key: "riskManagementKPI"
   }, {
     name: "Risk Register",
-    path: "/risk-register"
+    path: "/risk-register",
+    key: "riskRegister"
   }
 ]

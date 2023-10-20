@@ -49,6 +49,11 @@ const AddRiskSheetButton = ({
   const mutation = trpc.risk.add.useMutation()
   const { user } = useUser()
   const utils = trpc.useContext();
+  const risks = trpc.risk.getAll.useQuery({
+    userId: user?.id
+  }, {
+    enabled: false
+  })
 
   const form = useForm<z.infer<typeof RiskForm>>({
     resolver: zodResolver(RiskForm),
@@ -88,7 +93,7 @@ const AddRiskSheetButton = ({
           utils.risk.getAll.refetch().then(() => {
             setOpen(false)
             form.reset()
-            toast.success("Risk Added successfully")
+            toast.success(dict?.riskAddedSuccessfully || "Risk added successfully")
           })
         }
       }
@@ -106,10 +111,10 @@ const AddRiskSheetButton = ({
           <span>{dict?.addRisk || "Add Risk"}</span>
         </Button>
       </SheetTrigger>
-      <SheetContent >
+      <SheetContent className="w-full" >
         <SheetHeader>
           <SheetTitle className={cn({
-            "text-right mr-3": langStore?.rtl
+            "text-right": langStore?.rtl
           })}>
             {dict?.addRisk || "Add Risk"}
           </SheetTitle>
@@ -122,20 +127,22 @@ const AddRiskSheetButton = ({
             <div className={cn("w-full flex flex-row-reverse gap-2 justify-end", {
               "flex-row": langStore?.rtl
             })}>
-              <Button type="button" variant="ghost" onClick={() => {
-                form.reset()
-                setOpen(false)
-              }}>
+              <Button type="button" variant="ghost"
+                disabled={mutation.isLoading || risks.isFetching || risks.isLoading || risks.isRefetching}
+                onClick={() => {
+                  form.reset()
+                  setOpen(false)
+                }}>
                 {
                   dict?.cancel || "Cancel"
                 }
               </Button>
               <Button type="submit" variant="outline"
-                disabled={mutation.isLoading}
+                disabled={mutation.isLoading || risks.isFetching || risks.isLoading || risks.isRefetching}
                 className="flex flex-row gap-2"
               >
                 <Icons.loader className={cn("animate-spin w-4 h-4", {
-                  hidden: !mutation.isLoading
+                  hidden: !mutation.isLoading && !risks.isFetching && !risks.isLoading && !risks.isRefetching
                 })}
                 />
                 <span>

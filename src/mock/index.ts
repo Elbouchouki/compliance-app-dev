@@ -1926,8 +1926,64 @@ export const KNOWLEDGE_BASE_MOCK: KnowledgeBase[] = [
 ];
 
 export const KNOWLEDGE_BASE_MOCK_AR: KnowledgeBase[] = [
+  {
+    title: "الحساب والفواتير",
+    description: "تتعامل هذه الفئة مع جميع استفسارات العملاء المتعلقة بإنشاء الحساب.",
+    image: "/knowledge/1.png",
+    id: "account_and_billing",
+    data: knowledgeDataExample,
+    lastUpdate: new Date()
+  },
+  {
+    title: "الدعم الفني",
+    description: "يقدم الدعم الفني المساعدة للعملاء في حالة وجود مشاكل تقنية.",
+    image: "/knowledge/2.png",
+    id: "technical_support",
+    data: knowledgeDataExample,
+    lastUpdate: new Date()
+  },
+  {
+    title: "الدعم في التكامل",
+    description: "يتمركز دعم التكامل في مساعدة العملاء على دمج منتج SaaS.",
+    image: "/knowledge/3.png",
+    id: "integration_support",
+    data: knowledgeDataExample,
+    lastUpdate: new Date()
+  },
+  {
+    title: "طلبات الميزات",
+    description: "تتعامل هذه الفئة مع جمع ملاحظات العملاء واقتراحاتهم وميزاتهم.",
+    image: "/knowledge/4.png",
+    id: "feature_requests",
+    data: knowledgeDataExample,
+    lastUpdate: new Date()
+  },
+  {
+    title: "قاعدة المعرفة",
+    description: "دعم الوثائق وقاعدة المعرفة يتضمن إنشاء وصيانة دلائل المستخدم.",
+    image: "/knowledge/5.png",
+    id: "knowledge_base",
+    data: knowledgeDataExample,
+    lastUpdate: new Date()
+  },
+  {
+    title: "دعم الخصوصية",
+    description: "تتناول هذه الفئة مخاوف تتعلق بأمان البيانات والخصوصية والامتثال.",
+    image: "/knowledge/6.png",
+    id: "privacy_support",
+    data: knowledgeDataExample,
+    lastUpdate: new Date()
+  },
+  {
+    title: "إنهاء الحساب",
+    description: "يقدم دعم إنهاء الحساب وإزالة البيانات المساعدة للعملاء في إغلاق الحسابات.",
+    image: "/knowledge/7.png",
+    id: "account_termination",
+    data: knowledgeDataExample,
+    lastUpdate: new Date()
+  }
+]
 
-];
 
 export const GET_KNOWLEDGE_BASE = (lang: "ar" | "en" | undefined) =>
   lang === "ar" ? KNOWLEDGE_BASE_MOCK_AR : KNOWLEDGE_BASE_MOCK;

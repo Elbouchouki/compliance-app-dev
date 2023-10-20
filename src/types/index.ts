@@ -292,7 +292,8 @@ export type Risk = {
 
 export type TabNavItem = {
   name: string,
-  path: string
+  path: string,
+  key?: string,
 }
 
 
@@ -371,6 +372,14 @@ export type Dictionnary = {
   home: string,
   riskManagement: string,
   riskManagementOverview: string,
+
+  intuitive: string,
+  frictionless: string,
+  enterprise: string,
+  outstanding: string,
+  revolutionary: string,
+
+
   riskManagementKPI: string,
   riskAssessment: string,
   riskRegister: string,
@@ -627,6 +636,8 @@ export type Dictionnary = {
   updateRiskScope: string,
   riskAssessmentAddedSuccessfully: string,
   riskAssessmentUpdatedSuccessful: string,
+  riskAddedSuccessfully: string,
+  riskUpdatedSuccessful: string,
   priority: string,
   residualRisk: string,
   actions: string,

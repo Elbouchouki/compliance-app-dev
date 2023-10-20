@@ -29,14 +29,18 @@ const KnowledgeCard = ({ data }: {
         className="rounded-t-lg object-center w-full h-40 group-hover:opacity-80 transition-opacity duration-300 ease-in-out"
       />
       <div className="p-5">
-        <h5 className="mb-2  lg:text-lg font-medium tracking-tight ">
+        <h5 className={cn("mb-2 lg:text-lg font-medium tracking-tight ", {
+          "text-right": langStore?.rtl
+        })}>
           {data.title}
         </h5>
-        <p className="mb-3 font-light text-sm text-muted-foreground">
+        <p className={cn("mb-3 font-light text-sm text-muted-foreground", {
+          "text-right": langStore?.rtl
+        })}>
           {data.description}
         </p>
       </div>
-    </Link>
+    </Link >
 
     // <Card className="group">
     //   <CardHeader className="p-0 m-0">

@@ -8,7 +8,7 @@ type TableSkeletonProps = {
 
 const TableSkeleton = ({ className, elements = 6 }: TableSkeletonProps) => {
   return (
-    <div className={cn("h-full w-full flex border bg-navbar", className)}>
+    <div className={cn("h-full w-full flex border bg-navbar rounded-lg", className)}>
       <div role="status" className="grow flex  flex-col gap-8 rounded shadow animate-pulse dark:divide-gray-700 p-6 dark:border-gray-700">
         {
           Array(elements).fill(0).map((_, index) => (
