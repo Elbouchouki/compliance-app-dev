@@ -305,6 +305,7 @@
   "highRisk": "high risk",
   "period": "Period",
   "riskDeletedSuccessfully": "Risk deleted successfully",
+  "areYouSureYouWantToLogout": "Are you sure you want to logout?",
   "noData": "No Data",
   "riskVulnerabilities": "Risk Vulnerabilities",
   "vulnerabilities": "Vulnerabilities",

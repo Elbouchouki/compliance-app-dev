@@ -305,6 +305,7 @@
   "highRisk": "مخاطرة مرتفعة",
   "period": "الفترة",
   "riskDeletedSuccessfully": "تم حذف المخاطرة بنجاح",
+  "areYouSureYouWantToLogout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
   "noData": "لا يوجد بيانات",
   "riskVulnerabilities": "نقاط الضعف في المخاطر",
   "vulnerabilities": "نقاط الضعف",

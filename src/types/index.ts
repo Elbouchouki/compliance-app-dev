@@ -382,7 +382,7 @@ export type Dictionnary = {
   operationalRiskIsEmpty: string,
   operationalRiskIsEmptyDesc: string,
   riskDeletedSuccessfully: string,
-
+  areYouSureYouWantToLogout: string,
 
   riskManagementKPI: string,
   riskAssessment: string,
