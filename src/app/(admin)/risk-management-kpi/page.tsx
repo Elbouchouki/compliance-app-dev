@@ -1,21 +1,12 @@
 'use client'
-
+import 'chart.js/auto';
 import Footer from "@/components/layout/footer";
-import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/hooks/use-store";
 import useLangStore from "@/store/langagueStore";
-import OperationalRiskTable from "@/components/risk-management-kpi/table";
-import { ControlPerformanceChart } from "@/components/risk-management-kpi/control-performance-chart";
-import { OpenIssueChart } from "@/components/risk-management-kpi/open-issue-chart";
-import RiskMap from "@/components/risk-management-kpi/risk-by-map";
-import { RiskByTypeChart } from "@/components/risk-management-kpi/risk-by-type-chart";
-import Link from "next/link";
 import PageWrapper from "@/components/page-wrapper";
 import { useUser } from "@clerk/nextjs";
 import { trpc } from "@/app/_trpc/client";
-import { Risk } from "@/types";
-import { Skeleton } from "@/components/ui/skeleton";
 import { RiskManagementNavItems } from "@/constants/navs.config";
 import TabNav from "@/components/tab-nav";
 import { Separator } from "@/components/ui/separator";
