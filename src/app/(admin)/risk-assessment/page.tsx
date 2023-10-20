@@ -8,6 +8,8 @@ import useLangStore from "@/store/langagueStore";
 import { useStore } from "@/hooks/use-store";
 import AddAssessmentDialogButton from "@/components/risk-assessment/add-assessment-dialog";
 import { DataTable } from "@/components/risk-assessment/table/data-table";
+import { RiskManagementNavItems } from "@/constants/navs.config";
+import TabNav from "@/components/tab-nav";
 
 
 export default function RiskAssessment() {
@@ -17,7 +19,7 @@ export default function RiskAssessment() {
 
   return (
     <PageWrapper className='flex flex-col h-full max-w-full gap-4 grow' >
-
+      <TabNav navItems={RiskManagementNavItems} />
       <div className={cn("flex border-b py-2 flex-col sm:flex-row gap-2", {
         "sm:flex-row-reverse": langStore?.rtl
       })}>

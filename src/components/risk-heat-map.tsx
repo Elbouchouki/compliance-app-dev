@@ -53,7 +53,7 @@ const RiskHeatMap = () => {
           {
             heatMapHeaders.map((header, index) => {
               return (
-                <div className='text-sm  text-muted-foreground dark:text-foreground w-full'>
+                <div key={index} className='text-sm  text-muted-foreground dark:text-foreground w-full'>
                   {header}
                 </div>
               )
@@ -65,7 +65,7 @@ const RiskHeatMap = () => {
           {
             Object.keys(heatMap).map((key, index) => {
               return (
-                <div className='flex flex-row gap-4 justify-evenly h-14'>
+                <div className='flex flex-row gap-4 justify-evenly h-14' key={index}>
                   <div className='text-sm text-muted-foreground dark:text-foreground  w-full h-full flex justify-center items-center'>
                     <p >
                       {
@@ -75,7 +75,7 @@ const RiskHeatMap = () => {
                   </div>
                   {
                     heatMap[key].map((value, index) => (
-                      <div className={cn('text-sm text-white dark:text-foreground rounded-lg w-full h-full flex justify-center items-center', colorDegree(value))}>
+                      <div key={index} className={cn('text-sm text-white dark:text-foreground rounded-lg w-full h-full flex justify-center items-center', colorDegree(value))}>
                         <p >
                           {value}
                         </p>
