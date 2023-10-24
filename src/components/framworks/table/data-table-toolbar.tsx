@@ -10,6 +10,7 @@ import { useState } from "react"
 import { useStore } from "@/hooks/use-store"
 import useLangStore from "@/store/langagueStore"
 import { cn } from "@/lib/utils"
+import { Input } from "@/components/ui/input"
 
 
 interface DataTableToolbarProps<TData> {
@@ -33,6 +34,16 @@ export function DataTableToolbar<TData>({
       <div className={cn("flex flex-row justify-end w-full gap-2", {
         "flex-row-reverse": langStore?.rtl === true,
       })}>
+
+        <Input
+          placeholder={dict?.search || "Search"}
+          value={globalFilter}
+          onChange={(event) => setGlobalFilter(event.target.value)}
+          className={cn("h-8 w-[250px] text-left ml-auto text-muted-foreground bg-navbar-gray dark:bg-[#2b2d2f] dark:hover:bg-muted-foreground/10", {
+            "mr-auto ml-0 text-right": langStore?.rtl === true,
+          })}
+        />
+
         <div>
           <DataTableViewOptions table={table} />
         </div>

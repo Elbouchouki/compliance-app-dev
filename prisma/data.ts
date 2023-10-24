@@ -7,6 +7,9 @@ import categoriesJson from "./json/categories.json";
 import subcategoriesJson from "./json/sub-categories.json";
 import riskStatusJson from "./json/risk-status.json";
 import { faker } from "@faker-js/faker";
+import sama_framwork from "./json/sama_framwork.json";
+
+export const SAMA_FRAMWORK = sama_framwork
 
 export const FRAMWORKS_SEED: Prisma.FrameworkCreateManyInput[] = frameworksJson.map((framework) => ({
   name: framework.name,
