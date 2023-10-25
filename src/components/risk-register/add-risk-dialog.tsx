@@ -56,13 +56,14 @@ const AddRiskSheetButton = ({
       description: "",
       consequences: "",
       affectedAsset: "",
+      controlCategory: "",
+      control: "",
       riskStatus: "",
       impact: 1,
       likelihood: 1,
       category: undefined,
       subcategory: undefined,
       owner: "",
-      dateRaised: new Date()
     }
   })
 
@@ -75,11 +76,12 @@ const AddRiskSheetButton = ({
         category: data?.category,
         subcategory: data?.subcategory,
         riskStatus: data?.riskStatus,
+        control: data?.control,
         affectedAsset: data?.affectedAsset,
         impact: data?.impact,
         likelihood: data?.likelihood,
         owner: data?.owner,
-        tagId: data.tagId,
+        tagId: data?.tagId,
         userId: user?.id,
       },
       {

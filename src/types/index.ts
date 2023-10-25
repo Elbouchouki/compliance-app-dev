@@ -290,7 +290,7 @@ export type Risk = {
   riskAssessmentScopeId?: string,
   tagId?: string,
   userId?: string
-  control: Control,
+  control?: Control,
 }
 
 export type TabNavItem = {
