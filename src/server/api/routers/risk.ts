@@ -11,6 +11,9 @@ export const riskRouter = router({
       where: {
         userId: input.userId
       },
+      include: {
+        control: true
+      }
 
     })
   }),
