@@ -86,6 +86,7 @@ export function DataTable<TData, TValue>(
     return <Badge key={tag?.id}>{tag?.name}</Badge>
   }
 
+
   const columns: ColumnDef<Risk>[] = [
     {
       id: "riskName",
@@ -95,13 +96,12 @@ export function DataTable<TData, TValue>(
           "text-right": langStore?.rtl
         })} column={column} title={dict?.riskName || "Risk Name"} />
       ),
-      cell: ({ row }) => <div className={cn("text-left whitespace-nowrap", {
+      cell: ({ row }) => <div className={cn("mx-1 text-left whitespace-nowrap", {
         "text-right": langStore?.rtl
       })} >
         {(row.getValue("riskName"))}
       </div>,
       filterFn: "includesStringSensitive"
-
     },
     {
       id: "description",
@@ -134,6 +134,21 @@ export function DataTable<TData, TValue>(
       </div>,
       filterFn: "includesStringSensitive"
 
+    },
+    {
+      id: "control",
+      accessorKey: "control.name",
+      header: ({ column }) => (
+        <DataTableColumnHeader className={cn("text-left whitespace-nowrap", {
+          "text-right": langStore?.rtl
+        })} column={column} title={dict?.control || "Control"} />
+      ),
+      cell: ({ row }) => <div className={cn("text-left whitespace-nowrap", {
+        "text-right": langStore?.rtl
+      })} >
+        {row.getValue("control")}
+      </div>,
+      filterFn: "includesStringSensitive"
     },
     {
       id: "priority",
@@ -169,7 +184,7 @@ export function DataTable<TData, TValue>(
       header: ({ column }) => (
         <DataTableColumnHeader className={cn("text-left whitespace-nowrap", {
           "text-right": langStore?.rtl
-        })} column={column} title={dict?.impact || "Likelihood"} />
+        })} column={column} title={dict?.likelihood || "Likelihood"} />
       ),
       cell: ({ row }) => <div className={"flex justify-center items-center text-center whitespace-nowrap"} >
         {(row.getValue("likelihood"))}
@@ -183,15 +198,15 @@ export function DataTable<TData, TValue>(
       header: ({ column }) => (
         <DataTableColumnHeader className={cn("text-left whitespace-nowrap", {
           "text-right": langStore?.rtl
-        })} column={column} title={dict?.residualRisk || "Residual Risk"} />
+        })} column={column} title={dict?.inherentRiskScore || "Inherent Risk Score"} />
       ),
       cell: ({ row }) => <div className={"flex justify-center items-center text-center whitespace-nowrap"} >
         {(parseInt(row.getValue("likelihood")) * parseInt(row.getValue("impact")) * 4)}
       </div>,
       filterFn: "includesStringSensitive"
 
-    },
-    {
+    }
+    , {
       id: "categoryId",
       accessorKey: "categoryId",
       header: ({ column }) => (
@@ -283,6 +298,7 @@ export function DataTable<TData, TValue>(
         {(new Date(row.getValue("updatedDate"))).toLocaleDateString()}
       </div>,
       filterFn: "includesStringSensitive"
+
     },
     {
       id: "actions",
@@ -301,11 +317,12 @@ export function DataTable<TData, TValue>(
     "select",
     "riskName",
     "description",
+    "control",
     "owner",
     "impact",
     "likelihood",
-    "priority",
     "residualRisk",
+    "priority",
     "categoryId",
     "subCategoryId",
     "riskStatusId",
@@ -348,7 +365,7 @@ export function DataTable<TData, TValue>(
     setGlobalFilter(s)
   }
 
-  if (risks.isLoading) {
+  if (risks.isLoading || tags.isLoading) {
     return <TableSkeleton />
   }
   return (
