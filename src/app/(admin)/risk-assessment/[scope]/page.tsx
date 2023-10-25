@@ -6,18 +6,11 @@ import { useStore } from "@/hooks/use-store";
 import useLangStore from "@/store/langagueStore";
 import { cn } from "@/lib/utils";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Risk, RiskAssessmentScope } from "@/types";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
-import useRiskAssessmentScopeStore from "@/store/riskAssessementScopeStore";
 import { DataTable } from "@/components/risk-assessment-scope/table/data-table";
 import AddRiskDialogButton from "@/components/risk-assessment-scope/add-risk-dialog";
-import { riskStore } from "@/store/riskStore";
-import { useUser } from "@clerk/nextjs";
 import { trpc } from "@/app/_trpc/client";
-import ExportToExcelButton from "@/components/risk-assessment-scope/export-to-excel-btn";
 import PageWrapper from "@/components/page-wrapper";
 import TabNav from "@/components/tab-nav";
 import Link from "next/link";
@@ -32,28 +25,15 @@ export default function RiskAssessmentDetails() {
   const params = useParams()
   const router = useRouter()
 
-  const { user } = useUser()
-
-
   const scope = trpc.riskAssessmentScope.get.useQuery({
     id: params.scope as string
   })
-
-  const risksData = trpc.risk.getByUserId.useQuery({
-    riskScopeId: params.scope as string,
-    userId: user?.id as string
-  })
-
-
-  console.log("scope", scope.data)
-  console.log("risksData", risksData.data)
 
   useEffect(() => {
     if (!scope?.isLoading && !scope?.data) {
       router.push(`/risk-assessment`)
     }
   }, [router, scope?.data, scope?.isLoading])
-
 
   return (
 

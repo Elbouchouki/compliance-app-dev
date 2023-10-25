@@ -19,6 +19,7 @@
   "complianceRemediationProgress": "Compliance Remediation Progress",
   "percentageOfControls": "Percentage Of Controls",
   "total": "Total",
+  "control": "Control",
   "haveCompletedTheTrainingPrograms": "have completed the training programs",
   "leftToCompleteTheTrainingPrograms": "left to complete the training programs",
   "ofThe": "of the",

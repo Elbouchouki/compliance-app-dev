@@ -14,7 +14,7 @@ import useLangStore from "@/store/langagueStore"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
 import { Slider } from "@/components/ui/slider"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CATEGORY, RISK_STATUS } from "@/mock"
 import useTagStore from "@/store/tagStore"
 import { useUser } from "@clerk/nextjs"
@@ -35,14 +35,27 @@ export const RiskRegisterFormBody = (
   }) => {
 
   const langStore = useStore(useLangStore, state => state)
+
   const tagStore = useStore(useTagStore, state => state)
+
   const dict = langStore?.getDictionary()
 
   const [likelihood, setLikelihood] = useState<number>(risk?.likelihood ?? 1)
+
   const [impact, setImpact] = useState<number>(risk?.impact ?? 1)
+
   const [riskScore, setRiskScore] = useState<number>(impact * likelihood)
 
   const cat = CATEGORY(langStore?.lang)
+
+  const controlCategoies = trpc.control.getCategories.useQuery()
+
+  const [controlCategory, setControlCategory] = useState<string | null>(
+    form.getValues("controlCategory")
+  )
+
+  const allControls = trpc.control.getAll.useQuery()
+  const controls = allControls.data?.filter(c => c.category === controlCategory)
 
   const [category, setCategory] = useState<Category | null>(
     cat.filter(c => c.id === form.formState.defaultValues.category)[0]
@@ -209,6 +222,7 @@ export const RiskRegisterFormBody = (
           )}
         />
       </div>
+
       <div>
         <FormField
           control={form.control}
@@ -220,7 +234,7 @@ export const RiskRegisterFormBody = (
               <FormLabel className={cn({
                 "text-right": langStore?.rtl
               })}>
-                {dict?.category || "Categoty"}
+                {dict?.category || "Category"}
               </FormLabel>
               <Select onValueChange={(id) => {
                 setCategory(cat.filter(c => c.id === id)[0])
@@ -242,7 +256,10 @@ export const RiskRegisterFormBody = (
           )}
         />
       </div>
-      {category && <div>
+
+
+
+      <div>
         <FormField
           control={form.control}
           name="subcategory"
@@ -255,7 +272,9 @@ export const RiskRegisterFormBody = (
               })}>
                 {dict?.subcategory || "Subcategoty"}
               </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                disabled={!category?.subCategory || category?.subCategory?.length === 0}
+                onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a subcategory" />
@@ -271,7 +290,94 @@ export const RiskRegisterFormBody = (
             </FormItem>
           )}
         />
-      </div>}
+      </div>
+
+
+      <div>
+        <FormField
+          control={form.control}
+          name="controlCategory"
+          render={({ field, fieldState }) => (
+            <FormItem
+              className="w-full flex flex-col"
+            >
+              <FormLabel className={cn({
+                "text-right": langStore?.rtl
+              })}>
+                {/* //TODO:change */}
+                {/* {dict?.controlCategory || "Control Category"} */}
+                Control Category
+              </FormLabel>
+              <Select
+                disabled={!controlCategoies.data || controlCategoies.data?.length === 0}
+                onValueChange={(e) => {
+                  field.onChange(e)
+                  setControlCategory(e)
+                }}
+                value={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a control category" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className="max-h-72 overflow-y-scroll">
+                  {
+                    controlCategoies.data?.map((c) => (
+                      <SelectItem key={c?.category} value={c?.category}>{c?.category}</SelectItem>
+                    )) || null
+                  }
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+
+
+      <div>
+        <FormField
+          control={form.control}
+          name="control"
+          render={({ field, fieldState }) => (
+            <FormItem
+              className="w-full flex flex-col"
+            >
+              <FormLabel className={cn({
+                "text-right": langStore?.rtl
+              })}>
+                {/* {dict?.control || "Control"} */}
+                Control
+              </FormLabel>
+              <Select
+                disabled={
+                  !controls ||
+                  !controlCategory ||
+                  controlCategory === "" ||
+                  controls?.length === 0
+                }
+                onValueChange={field.onChange} value={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a control" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className="max-h-72 overflow-y-scroll">
+                  {
+                    controls?.map((c) => (
+                      <SelectItem key={c?.id} value={c?.id}>{c?.name}</SelectItem>
+                    )) || null
+                  }
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+
+
+
       <div>
         <FormField
           control={form.control}
@@ -337,7 +443,7 @@ export const RiskRegisterFormBody = (
                             "justify-end": langStore?.rtl
                           })}
                           key={index} value={tag.id}>
-                          {tag.name}
+                          {tag?.name}
                         </SelectItem>
                       ))
                     }
@@ -443,13 +549,15 @@ const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
     affectedAsset: z.string().min(4, {
       message: "Affect Asset must be at least 4 characters."
     }),
+    controlCategory: z.string(),
+    control: z.string(),
     category: z.string(),
     subcategory: z.string(),
     riskStatus: z.string(),
     impact: z.coerce.number(),
     likelihood: z.coerce.number(),
     owner: z.string().min(2, {
-      message: dict?.FromSchemaValidation.name || "Name must be at least 2 characters.",
+      message: dict?.FromSchemaValidation?.name || "Name must be at least 2 characters.",
     }),
     tagId: z.optional(z.string()),
   })
@@ -464,7 +572,6 @@ const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
   })
   const riskStoreTools = useStore(riskStore, state => state);
 
-
   function handleSubmit(data: z.infer<typeof FormSchema>) {
     mutation.mutate(
       {
@@ -474,6 +581,7 @@ const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
         consequences: data?.consequences ?? "",
         affectedAsset: data?.affectedAsset || "",
         category: data?.category ?? undefined,
+        control: data?.control,
         subcategory: data?.subcategory ?? undefined,
         riskStatus: data?.riskStatus ?? "",
         impact: data?.impact ?? 1,
@@ -499,6 +607,8 @@ const AssessmentForm = ({ onSubmit, formType, risk }: RiskFormProps) => {
       description: risk?.description,
       consequences: risk?.consequences,
       affectedAsset: risk?.affectedAsset,
+      controlCategory: risk?.control.category,
+      control: risk?.control.id,
       riskStatus: risk?.riskStatusId,
       dateRaised: new Date(risk?.dateRaised as string) ?? undefined,
       impact: risk?.impact,

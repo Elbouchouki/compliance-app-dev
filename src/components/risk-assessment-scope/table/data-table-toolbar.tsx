@@ -1,6 +1,6 @@
 "use client"
 
-import { Cross2Icon, MixerHorizontalIcon } from "@radix-ui/react-icons"
+import { Cross2Icon } from "@radix-ui/react-icons"
 import { Table } from "@tanstack/react-table"
 
 import { Button } from "@/components/ui/button"
@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input"
 import useLangStore from "@/store/langagueStore"
 import { useStore } from "@/hooks/use-store"
 import { cn } from "@/lib/utils"
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { DataTableFacetedFilter } from "@/components/data-table-faceted-filter"
 import { CATEGORY, IMPACT, RISK_STATUS } from "@/mock"
 import { useUser } from "@clerk/nextjs"
@@ -33,14 +32,12 @@ export function DataTableToolbar<TData>({
   const dict = langStore?.getDictionary()
 
   const categorys = CATEGORY(langStore?.lang).map(c => ({ label: c.value, value: c.id }));
-  // const subc = CATEGORY.map(c => (c.subCategory)).map(c => ({}));
   const riskStatus = RISK_STATUS(langStore?.lang).map(s => ({ label: s.value, value: s.id }))
 
   const { user } = useUser()
   const tagsData = trpc.tag.getAll.useQuery({
     userId: user?.id
   })
-  const TAGS = tagsData?.data?.map(t => ({ label: t.name, value: t.id }))
 
   return (
     <div className={cn("flex flex-col md:flex-row items-start w-full gap-2", {

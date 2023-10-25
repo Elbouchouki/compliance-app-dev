@@ -29,15 +29,16 @@ const RiskHeatMap = () => {
     }
   }
 
-  const heatMapHeaders = ["Negligible", "Low", "Moderate", "Significant", "Catastrophic"]
+  const heatMapHeaders = ["Rare", "Unlikely", "Reasonably", "Possible", "Likely", "Almost Certain"]
   const heatMap: {
     [key: string]: number[]
   } = {
-    "IMPROBABLE": [5, 10, 15, 20, 25],
-    "REMOTE": [5, 10, 15, 20, 25],
-    "OCCASIONAL": [5, 10, 15, 20, 25],
-    "PROBABLE": [5, 10, 15, 20, 25],
-    "FRECUENT": [5, 10, 15, 20, 25]
+    "Rare": [5, 10, 15, 20, 25, 30],
+    "Unlikely": [5, 10, 15, 20, 25, 30],
+    "Reasonably": [5, 10, 15, 20, 25, 30],
+    "Possible": [5, 10, 15, 20, 25, 30],
+    "Likely": [5, 10, 15, 20, 25, 30],
+    "Almost Certain": [5, 10, 15, 20, 25, 30]
   }
 
   return (

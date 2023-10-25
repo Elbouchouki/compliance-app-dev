@@ -249,6 +249,8 @@ export const RiskForm = z.object({
   category: z.string(),
   subcategory: z.string(),
   riskStatus: z.string(),
+  controlCategory: z.string(),
+  control: z.string(),
   impact: z.coerce.number(),
   likelihood: z.coerce.number(),
   riskAssessmentScopeId: z.optional(z.string()),
@@ -288,6 +290,7 @@ export type Risk = {
   riskAssessmentScopeId?: string,
   tagId?: string,
   userId?: string
+  control: Control,
 }
 
 export type TabNavItem = {
@@ -480,6 +483,7 @@ export type Dictionnary = {
   assessmentUpdatedSuccessful: string,
   assessmentDeletedSuccessfully: string,
   addAssessment: string,
+  control: string,
   addAssessmentDescription: string,
   editAssessment: string,
   name: string,

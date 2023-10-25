@@ -4,7 +4,6 @@ import * as React from "react"
 import {
   ColumnDef,
   ColumnFiltersState,
-  Row,
   SortingState,
   VisibilityState,
   flexRender,
@@ -30,7 +29,6 @@ import { DataTablePagination } from "@/components/data-table-pagination"
 import { DataTableToolbar } from "./data-table-toolbar"
 import { DataTableColumnHeader } from "@/components/data-table-column-header"
 import EditAssessmentDialog from "../edit-risk-dialog"
-
 import { useStore } from "@/hooks/use-store"
 import useLangStore from "@/store/langagueStore"
 import { cn } from "@/lib/utils"
@@ -38,7 +36,6 @@ import { Risk } from "@/types"
 import { DataTableRowActions } from "./data-table-row-actions"
 import { CATEGORY, RISK_STATUS } from "@/mock"
 import { Badge } from "@/components/ui/badge"
-import { Checkbox } from "@/components/ui/checkbox"
 import { useUser } from "@clerk/nextjs"
 import { trpc } from "@/app/_trpc/client"
 import TableSkeleton from "@/components/table-skeleton"
@@ -50,13 +47,14 @@ export function DataTable<TData, TValue>(
   const dict = langStore?.getDictionary()
 
   const { user } = useUser()
+
   const tags = trpc.tag.getAll.useQuery({
     userId: user?.id
   })
 
   const risks = trpc.risk.getByUserId.useQuery({
     riskScopeId: scopeId,
-    userId: user?.id as string
+    userId: user?.id ?? ""
   })
 
   const [rowSelection, setRowSelection] = React.useState({})
@@ -102,7 +100,6 @@ export function DataTable<TData, TValue>(
         {(row.getValue("riskName"))}
       </div>,
       filterFn: "includesStringSensitive"
-
     },
     {
       id: "description",
@@ -135,6 +132,21 @@ export function DataTable<TData, TValue>(
       </div>,
       filterFn: "includesStringSensitive"
 
+    },
+    {
+      id: "control",
+      accessorKey: "control.name",
+      header: ({ column }) => (
+        <DataTableColumnHeader className={cn("text-left whitespace-nowrap", {
+          "text-right": langStore?.rtl
+        })} column={column} title={dict?.control || "Control"} />
+      ),
+      cell: ({ row }) => <div className={cn("text-left whitespace-nowrap", {
+        "text-right": langStore?.rtl
+      })} >
+        {row.getValue("control")}
+      </div>,
+      filterFn: "includesStringSensitive"
     },
     {
       id: "priority",
@@ -170,7 +182,7 @@ export function DataTable<TData, TValue>(
       header: ({ column }) => (
         <DataTableColumnHeader className={cn("text-left whitespace-nowrap", {
           "text-right": langStore?.rtl
-        })} column={column} title={dict?.impact || "Likelihood"} />
+        })} column={column} title={dict?.likelihood || "Likelihood"} />
       ),
       cell: ({ row }) => <div className={"flex justify-center items-center text-center whitespace-nowrap"} >
         {(row.getValue("likelihood"))}
@@ -184,15 +196,15 @@ export function DataTable<TData, TValue>(
       header: ({ column }) => (
         <DataTableColumnHeader className={cn("text-left whitespace-nowrap", {
           "text-right": langStore?.rtl
-        })} column={column} title={dict?.residualRisk || "Residual Risk"} />
+        })} column={column} title={dict?.inherentRiskScore || "Inherent Risk Score"} />
       ),
       cell: ({ row }) => <div className={"flex justify-center items-center text-center whitespace-nowrap"} >
         {(parseInt(row.getValue("likelihood")) * parseInt(row.getValue("impact")) * 4)}
       </div>,
       filterFn: "includesStringSensitive"
 
-    },
-    {
+    }
+    , {
       id: "categoryId",
       accessorKey: "categoryId",
       header: ({ column }) => (
@@ -303,11 +315,12 @@ export function DataTable<TData, TValue>(
     "select",
     "riskName",
     "description",
+    "control",
     "owner",
     "impact",
     "likelihood",
-    "priority",
     "residualRisk",
+    "priority",
     "categoryId",
     "subCategoryId",
     "riskStatusId",

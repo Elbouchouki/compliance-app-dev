@@ -125,6 +125,8 @@ model Control {
   assessments                      ControlAssessmentObjective[]
   ControlAssessmentScope           ControlAssessmentScope[]
   ControlAssessmentScopeObjectives ControlAssessmentScopeObjectives[]
+
+  Risk Risk[]
 }
 
 model ControlAssessmentScopeObjectives {
@@ -181,21 +183,25 @@ model AssessmentScope {
 }
 
 model Risk {
-  id                    String               @id @default(uuid())
-  dateRaised            DateTime             @default(now())
-  updatedDate           DateTime             @updatedAt
-  riskName              String
-  description           String               @db.VarChar(1000)
-  consequences          String               @db.VarChar(1000)
-  affectedAsset         String
-  category              Category             @relation(fields: [categoryId], references: [id])
-  categoryId            String
-  subcategory           subCategory          @relation(fields: [subCategoryId], references: [id])
-  subCategoryId         String
-  riskStatus            RiskStatus           @relation(fields: [riskStatusId], references: [id])
-  riskStatusId          String
-  impact                Int
-  likelihood            Int
+  id            String      @id @default(uuid())
+  dateRaised    DateTime    @default(now())
+  updatedDate   DateTime    @updatedAt
+  riskName      String
+  description   String      @db.VarChar(1000)
+  consequences  String      @db.VarChar(1000)
+  affectedAsset String
+  category      Category    @relation(fields: [categoryId], references: [id])
+  categoryId    String
+  subcategory   subCategory @relation(fields: [subCategoryId], references: [id])
+  subCategoryId String
+  riskStatus    RiskStatus  @relation(fields: [riskStatusId], references: [id])
+  riskStatusId  String
+  impact        Int
+  likelihood    Int
+
+  control   Control? @relation(fields: [controlId], references: [id])
+  controlId String?
+
   owner                 String
   RiskAssessmentScope   RiskAssessmentScope? @relation(fields: [riskAssessmentScopeId], references: [id])
   riskAssessmentScopeId String?

@@ -5,9 +5,26 @@ import { prisma } from "@/server/db";
 
 export const controlRouter = router({
 
+
+  getControlsByCategory: publicProcedure.input(
+    z.object({ category: z.string() })
+  ).query(({ input }) => {
+    return prisma.control.findMany({
+      where: {
+        category: input.category
+      }
+    });
+  }),
+  getCategories: publicProcedure.query(() => {
+    return prisma.control.findMany({
+      select: {
+        category: true
+      },
+      distinct: ['category']
+    })
+  }),
   getAll: publicProcedure.query(() => {
-    return prisma.control.findMany(
-    );
+    return prisma.control.findMany();
   }),
 
   updateControlObjective: publicProcedure.input(

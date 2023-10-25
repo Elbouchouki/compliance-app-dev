@@ -271,7 +271,7 @@ export default function RiskManagements() {
           <div className={cn("py-2 px-4 text-sm font-semibold", {
             "text-right": langStore?.rtl
           })}>
-            Risk Rating Breakdown
+            Action Plan Breakdown
           </div>
           <Separator />
           <div className="p-4 flex flex-col gap-2">

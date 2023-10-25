@@ -10,7 +10,8 @@ export const riskRouter = router({
     return prisma.risk.findMany({
       where: {
         userId: input.userId
-      }
+      },
+
     })
   }),
 
@@ -42,6 +43,9 @@ export const riskRouter = router({
       where: {
         riskAssessmentScopeId: input.riskScopeId,
         userId: input.userId,
+      },
+      include: {
+        control: true
       }
     })
   }),
@@ -67,6 +71,7 @@ export const riskRouter = router({
       subcategory: z.string(),
       riskStatus: z.string(),
       impact: z.coerce.number(),
+      control: z.string(),
       likelihood: z.coerce.number(),
       owner: z.string(),
       riskAssessmentScope: z.optional(z.string()),
@@ -86,6 +91,7 @@ export const riskRouter = router({
           affectedAsset: input.affectedAsset,
           categoryId: input.category,
           subCategoryId: input.subcategory,
+          controlId: input.control,
           riskStatusId: input.riskStatus,
           impact: input.impact,
           likelihood: input.likelihood,
@@ -103,6 +109,7 @@ export const riskRouter = router({
           consequences: input.consequences,
           affectedAsset: input.affectedAsset,
           categoryId: input.category,
+          controlId: input.control,
           subCategoryId: input.subcategory,
           riskStatusId: input.riskStatus,
           impact: input.impact,
@@ -124,6 +131,7 @@ export const riskRouter = router({
       affectedAsset: z.string(),
       category: z.string(),
       subcategory: z.string(),
+      control: z.string(),
       riskAssessmentScopeId: z.optional(z.string()),
       riskStatus: z.string(),
       impact: z.coerce.number(),
@@ -140,6 +148,7 @@ export const riskRouter = router({
         consequences: input.consequences,
         affectedAsset: input.affectedAsset,
         categoryId: input.category,
+        controlId: input.control,
         subCategoryId: input.subcategory,
         riskStatusId: input.riskStatus,
         riskAssessmentScopeId: input.riskAssessmentScopeId,

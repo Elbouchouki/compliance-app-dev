@@ -302,6 +302,7 @@
   "riskRatingBreakdown": "تقييم المخاطر المنفصل",
   "lowRisk": "مخاطرة ضعيفة",
   "medRisk": "مخاطرة متوسطة",
+  "control": "التحكم",
   "highRisk": "مخاطرة مرتفعة",
   "period": "الفترة",
   "riskDeletedSuccessfully": "تم حذف المخاطرة بنجاح",

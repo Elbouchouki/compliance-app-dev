@@ -20,7 +20,7 @@ export const RiskManagementNavItems: TabNavItem[] = [
   {
     name: "Overview",
     path: "/risk-management",
-    key: "complianceOverview"
+    key: "riskManagementOverview"
   }, {
     name: "Risk Assessment",
     path: "/risk-assessment",
