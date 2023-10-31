@@ -20,6 +20,7 @@ import { Icons } from "@/components/icons";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import { toast } from "sonner";
 
 
 export default function GapAssessmentDetails() {
@@ -90,6 +91,7 @@ export default function GapAssessmentDetails() {
     }, {
       onSuccess: () => {
         controlAssessmentScope.refetch()
+        toast.success("Data saved successfully")
       }
     })
   }
@@ -337,7 +339,14 @@ export default function GapAssessmentDetails() {
                 {
                   objectives?.map((objective, index) => {
                     const item_index = `item-${index}`
-                    return <ObjectiveItem checkChanged={checkChanged} key={index} objective={objective} item_index={item_index} openedCollapsible={openedCollapsible} setOpenedCollapsible={setOpenedCollapsible} />
+                    return <ObjectiveItem
+                      assessmentScopeId={params.scope as string}
+                      id={params.id as string}
+                      checkChanged={checkChanged}
+                      key={index}
+                      objective={objective}
+                      item_index={item_index}
+                      openedCollapsible={openedCollapsible} setOpenedCollapsible={setOpenedCollapsible} />
                   })
                 }
               </Accordion>

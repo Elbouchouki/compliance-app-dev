@@ -23,10 +23,12 @@ type ObjectiveItemProps = {
   openedCollapsible: string
   setOpenedCollapsible: (value: string) => void
   checkChanged: () => void
+  assessmentScopeId: string
+  id: string
 }
 
 const ObjectiveItem = ({
-  objective, item_index, openedCollapsible, setOpenedCollapsible, checkChanged
+  objective, item_index, openedCollapsible, setOpenedCollapsible, checkChanged, assessmentScopeId, id
 }: ObjectiveItemProps) => {
 
   const [choice, setChoice] = useState<ObjectiveTypes | undefined>(objective.choices as ObjectiveTypes | undefined)
@@ -36,6 +38,13 @@ const ObjectiveItem = ({
   const choiceMutation = trpc.control.updateControlObjective.useMutation()
 
   const dict = langStore?.getDictionary()
+
+  const controlAssessmentScope = trpc.control.getControlsByAssessmentScopeAndId.useQuery({
+    assessmentScopeId: assessmentScopeId,
+    id: id,
+  }, {
+    enabled: false
+  })
 
   const [editorState, setEditorState] = useState<EditorState>(
     () => EditorState.createWithContent(ContentState.createFromText(objective.explination || ""))
@@ -59,7 +68,6 @@ const ObjectiveItem = ({
   const handleEditorChange = (value: EditorState) => {
     setEditorState(value)
     objective.explination = value.getCurrentContent().getPlainText()
-    checkChanged()
   }
 
 
@@ -102,19 +110,22 @@ const ObjectiveItem = ({
               setEditorState={handleEditorChange}
             />
             <div>
-              <Button onClick={() => {
-                choiceMutation.mutate({
-                  assessmentObjectiveId: objective.assessmentObjectiveId,
-                  assessmentScopeId: objective.assessmentScopeId,
-                  controlId: objective.controlId,
-                  choice: choice as string,
-                  explaination: editorState.getCurrentContent().getPlainText()
-                }, {
-                  onSuccess: () => {
-                    checkChanged()
-                  }
-                })
-              }} variant="outline" className="w-full">
+              <Button
+
+                disabled={controlAssessmentScope.isLoading || choiceMutation.isLoading}
+                onClick={() => {
+                  choiceMutation.mutate({
+                    assessmentObjectiveId: objective.assessmentObjectiveId,
+                    assessmentScopeId: objective.assessmentScopeId,
+                    controlId: objective.controlId,
+                    choice: choice as string,
+                    explaination: editorState.getCurrentContent().getPlainText()
+                  }, {
+                    onSuccess: () => {
+                      checkChanged()
+                    }
+                  })
+                }} className="w-full">
                 {
                   dict?.save || "Save"
                 }

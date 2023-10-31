@@ -114,7 +114,9 @@ const AddAssessmentSheetButton = ({
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
+
+
+
     mutation.mutate({
       name: data?.name,
       description: data?.description,
@@ -213,6 +215,25 @@ const AddAssessmentSheetButton = ({
                         !form.getFieldState("reportingFrom")?.invalid &&
                         !form.getFieldState("reportingTo")?.invalid
                       ) {
+
+                        const dateFrom = form.getValues("reportingFrom") as Date
+                        const dateTo = form.getValues("reportingTo") as Date
+                        const currentDate = new Date()
+                        if (dateFrom > dateTo) {
+                          form.setError("reportingFrom", {
+                            type: "manual",
+                            message: "Reporting from must be less than reporting to"
+                          })
+                          return
+                        }
+                        if (dateFrom < currentDate) {
+                          form.setError("reportingFrom", {
+                            type: "manual",
+                            message: "Reporting from must be greater or equal than current date"
+                          })
+                          return
+                        }
+
                         form.clearErrors()
                         setStepper("frameworks")
                       }
